@@ -1,0 +1,47 @@
+footer {
+    background-color: #212022 ;
+    color: white;
+    margin-top: 5vh;
+}
+
+
+.SocialMedia {
+    background-color: #3a373d;
+    margin: 0;
+    font-size: 25px;
+}
+
+hr {
+    width: 50%;
+    height: 1%;
+}
+
+.SocialMedia a, 
+.LinksCol a {
+    text-decoration: none;
+    color: white;
+}
+
+.SocialMedia a:hover,
+.LinksCol a:hover {
+    text-decoration: none;
+    color: lightgrey;
+}
+
+.ContactCol i {
+    font-size: 18px;
+}
+
+.NewsletterCol button {
+    background-color: #b93e42;
+    color: white;
+}
+
+.NewsletterCol button:hover {
+    background-color: #9b3538;
+}
+
+.FooterCopyright {
+    background-color: #191719;
+    font-size: small;
+}

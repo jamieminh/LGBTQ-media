@@ -1,0 +1,141 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    cursor: pointer;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.pagination li {
+    padding-top: 11px;
+}
+
+.pagination li.active a{
+    color: #CA5E9D;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.pagination a {
+    padding: 1.6vw;
+    color: white;
+    outline: none;
+}
+
+.pagination a:hover {
+    text-decoration: none;
+    opacity: 0.8;
+    outline: none;
+}
+
+.pagination .next, .pagination .previous {
+    /* background: white; */
+    /* color: black; */
+    border-radius: 3px;
+    padding: 2px 7px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.pagination .next:hover, .pagination .previous:hover {
+    opacity: 0.9;
+}
+
+.pagination .next {
+    padding-left: 9px;
+}
+
+.pagination .previous {
+    padding-right: 9px;
+}
+
+.pagination .next a, .pagination .previous a {
+    color: white;
+    font-size: 30px;
+}
+
+.pagination__link {
+    font-weight: bold;
+}
+
+.pagination__link--active a {
+    color: #fff;
+}
+
+/* .pagination__link--disabled a {
+    color: rgb(198, 197, 202);
+    border: 1px solid rgb(198, 197, 202);
+} */
+
+.PageJump {
+    display: flex;
+    width: 160px;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-bottom: -20px;
+}
+
+.PageJump > select {
+    height: 25px;
+    width: 50px;
+}
+
+@media (min-width: 481px) {
+    .pagination {
+        margin-top: 50px;
+    }
+
+}
+
+@media (min-width: 769px) {
+    .pagination a {
+        padding: 1.8vw;
+    }
+
+    .PageJump {
+        margin: 0;
+        margin-left: auto;
+        margin-bottom: -20px;
+        margin-right: calc(4vw + 2%);
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .pagination a {
+        padding: 1.3vw;
+    }
+
+    .PageJump {
+        margin-right: calc(9vw + 4%);
+    }
+}
+
+@media (min-width: 1280px) {
+    .pagination a {
+        padding: 1.1vw;
+    }
+
+    .PageJump {
+        margin-right: calc(9vw + 4%);
+    }
+}
+
+@media (min-width: 1440px) {
+    .PageJump {
+        margin-right: calc(10vw + 4%);
+    }
+}
+
+
+@media (min-width: 1600px) {
+    .pagination a {
+        padding: 1.1vw;
+    }
+
+    .PageJump {
+        margin-right: calc(10vw + 12%);
+    }
+}

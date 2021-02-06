@@ -1,0 +1,15 @@
+.Home {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.RandomTitles {
+    margin-top: 35px;
+}
+
+
+@media (min-width: 1440px) {
+    .Home {
+        width: 80%;
+    }
+}

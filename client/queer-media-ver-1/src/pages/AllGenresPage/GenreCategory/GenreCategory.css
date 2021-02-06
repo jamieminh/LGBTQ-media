@@ -1,0 +1,73 @@
+.Genre {
+    position: relative;
+}
+
+.GenreText {
+    position: absolute;
+    width: fit-content;
+    text-align: center;
+    background-color: salmon;
+    border-radius: 10px;
+    text-decoration: none !important;
+
+    padding: 5px 10px; 
+    bottom: -33px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: black;
+    font-weight: bold;
+    text-transform: capitalize;
+
+    /* box-shadow: 0 0 6px grey; */
+}
+
+.GenreText:hover {
+    background-color: rgb(233, 94, 78);
+    color: black;
+}
+
+
+.GenreImage {
+    background-color: black;
+}
+
+.GenreImage img {
+    width: 200px;
+    height: 295px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.GenreImage:hover {
+    opacity: 0.8;
+}
+
+/* xs devices */
+@media (max-width: 575px) {      
+    .GenreImage img {
+        width: 150px;
+        height: 221px;
+        margin: auto;
+    }
+
+}
+
+/* sm devices */
+@media (max-width: 767px) {      
+    
+}
+
+/* md devices 768->991 */    
+@media (min-width: 768px) and (max-width: 991px) {      
+    .GenreImage img {
+        width: 170px;
+        height: 251px;
+        margin: auto;
+    }
+}
+
+/* lg devices */
+@media (max-width: 1119px) {      
+    
+}

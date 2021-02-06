@@ -1,0 +1,55 @@
+.SingleTitle {
+    margin: 0 12%
+}
+
+.GeneralInfo {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.GeneralInfo .GeneralInfoImg > img {
+    width: 240px;
+    height: 100%;
+}
+
+.GeneralInfoText {
+    width: 290px;
+}
+
+.GeneralInfoText > h3 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.GeneralInfoText > p {
+    margin-bottom: 5px
+}
+
+.GeneralInfoRatings {
+    margin-bottom: 20px;
+}
+
+.SingleTitleReviewer {
+    position: relative;
+}
+
+.SingleTitleReviewer span {
+    text-transform: capitalize;
+    margin-right: 5px;
+}
+
+.SingleTitleReviewer img {
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    right: 40px;
+}
+
+@media(min-width: 481px) {
+    .GeneralInfo .GeneralInfoImg > img {
+        width: 260px;
+    }
+}
+
+@media(min-width: 576px) {}

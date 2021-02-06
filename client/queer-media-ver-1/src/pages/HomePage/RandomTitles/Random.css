@@ -1,0 +1,57 @@
+.Random {
+    overflow: auto;
+    height: 100vh;
+}
+
+.Random p {
+    margin-bottom: 5px;
+}
+
+.RandomMedia {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.RandomInfo{
+    display: block;
+}
+
+.RandomScore {
+    background-color: #F1B722;
+    width: 50px;
+    border-radius: 20px;
+    text-align: center;
+    color: black;
+}
+
+
+.RandomImage{
+    display: block;
+    height: 150px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 3px;
+    margin-right: 20px;
+}
+
+.RandomGenres > p {
+    background-color: salmon;
+    text-align: center;
+    width: fit-content;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+.Random::-webkit-scrollbar-track {
+    background-color: #3b6faa;
+}
+  
+.Random::-webkit-scrollbar {
+    width: 10px;
+}
+  
+.Random::-webkit-scrollbar-thumb {
+    height: 20px;
+    border-radius: 3px;
+    background-color: lightgrey;
+}

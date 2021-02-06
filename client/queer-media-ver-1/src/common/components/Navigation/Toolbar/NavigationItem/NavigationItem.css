@@ -1,0 +1,46 @@
+
+.NavbarLink, .NavbarLink:hover {
+    -webkit-backface-visibility:hidden;
+            backface-visibility:hidden;
+    position:relative;
+
+}
+.NavbarLink {
+    color: rgb(221, 221, 221);
+}
+
+.NavbarLink:hover {
+    transition:0.3s color ease;
+    color: white;
+}
+
+.NavbarLink.NavItemActive::after,
+.NavbarLink::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+}
+
+.NavbarLink::after{
+    transition:0.3s all ease;
+    -webkit-backface-visibility:hidden;
+            backface-visibility:hidden;
+    width:0;
+    left:50%;
+   -webkit-transform:translateX(-50%);
+          transform:translateX(-50%);
+}
+
+.NavbarLink:hover::after,
+.NavbarLink.NavItemActive::after{
+    width: 100%;
+}
+
+.NavbarLink.NavItemActive {
+    color: white;
+}
+
+

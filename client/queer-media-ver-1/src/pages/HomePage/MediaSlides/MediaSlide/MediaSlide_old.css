@@ -1,0 +1,173 @@
+.CarouselWrapper {
+    width: 100%;
+    margin: 25px auto;  
+    height: 420px;
+}
+
+.CarouselGenre {
+    background-color: #0d3046 !important; 
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 90%;
+}
+
+.CarouselTitle {
+    margin-left: 35px;
+}
+
+.carousel-inner {
+    height: 100%;
+    padding: 0 20px;
+}
+
+.carousel-item {
+    width: 95%;
+    height: 100%;
+    margin: auto;
+}
+
+.CarouselMedia {
+    text-align: center;
+    height: 300px;   
+    position: relative;
+}
+
+.MediaScore {
+    position: absolute;
+    background-color: #F1B722;
+    color: black;
+    width: 50px;
+    border-radius: 20px;
+    margin: auto;
+    top: 15px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.MediaImage {
+    width: 100%;
+    height: 95%;
+    margin-top: 15px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.carousel-control-next {
+    right: -5%;
+}
+
+.carousel-control-prev {
+    left: -5%;
+}
+
+.fa {
+    color: rgb(255, 255, 255);
+}
+
+.SeeMore {
+    margin: 0 auto;
+    margin-top: 22%;
+}
+
+.CarouselHeader {
+    position: relative;
+}
+
+.CarouselHeader h2 {
+    position: absolute;
+    bottom: 5px;
+}
+
+.CarouselHeader a {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+@media (min-width: 1580px) {
+    .CarouselWrapper {
+        height: 460px;
+    }
+    .MediaImage {
+        height: 110%;
+        width: 90%;
+    }
+    .Home {
+        width: 80%;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .CarouselWrapper {
+        height: 390px;
+    }
+    .MediaImage {
+        height: 75%;
+    }
+}
+
+@media (max-width: 991px) {
+    .CarouselWrapper {
+        height: 400px;
+    }
+    .MediaImage {
+        height: 80%;
+    }
+    
+}
+
+@media (max-width: 767px) {
+    .CarouselWrapper {
+        height: 330px;
+    }
+
+    .MediaImage {
+        width: 100%;
+        height: 60%;
+    }
+
+}
+
+@media (max-width: 576px) {
+    .CarouselWrapper {
+        height: 500px;
+    }
+
+    .CarouselMedia {
+        /* padding: 0 50px; */
+        /* margin-left: 40px; */
+        margin: auto;
+        /* padding-left: 20px; */
+        width: 70%;
+        height: 100%;
+        /* background-color: red; */
+    }
+
+    .MediaImage {
+        height: 90%;
+        object-fit: cover;
+    }
+
+}
+
+@media (max-width: 375px) {
+    .carousel {
+        width: 300px;
+    }
+
+    .CarouselMedia  {
+        margin: auto;
+        width: 90%;
+        margin: auto;
+    }
+
+    .MediaImage {
+        height: 80%;
+    }
+
+    
+}

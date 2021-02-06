@@ -1,0 +1,78 @@
+{/* <li className="nav-item NavbarItem">
+                        <NavLink className="nav-link m-2 NavbarLink" to="/" exact activeClassName="NavItemActive" >Some Link</NavLink>
+                    </li>
+                    <li className="nav-item NavbarItem">
+                        <NavLink className="nav-link m-2 NavbarLink" to="/" exact activeClassName="NavItemActive" >Some Link</NavLink>
+                    </li>
+                    <li className="nav-item NavbarItem">
+                        <NavLink className="nav-link m-2 NavbarLink" to="/" exact activeClassName="NavItemActive" >Some Link</NavLink>
+                    </li>
+                    <li className="nav-item NavbarItem">
+                        <NavLink className="nav-link m-2 NavbarLink" to="/" exact activeClassName="NavItemActive" >Some Link</NavLink>
+                    </li> */}
+
+                    {/* <a className="mr-2 someLink" href="">link1</a>
+                    <a className="mr-2 someLink" href="">link2</a>
+                    <a className="mr-2 someLink" href="">link3</a>
+                    <a className="mr-2 someLink" href="">link4</a> */}
+
+                    {/* <li className="nav-item dropdown m-2 NavbarItem">
+                        <NavLink className="nav-link dropdown-toggle" to="/genres" id="navbarDropdown" role="button">
+                            Genres
+                        </NavLink>
+                            
+                        <div className="dropdown-menu dropdown-menu-right">
+                            <div className="row DropdownMenuRow">
+                                <div className="col-6 col-sm-4">
+                                    <div className="MultiCol">
+                                        <NavLink className="dropdown-item" to='/action'>Action</NavLink>
+                                        <NavLink className="dropdown-item" to='/adventure'>Adventure</NavLink>
+                                        <NavLink className="dropdown-item" to='/animation'>Animation</NavLink>
+                                        <NavLink className="dropdown-item" to='/biography'>Biography</NavLink>
+                                        <NavLink className="dropdown-item" to='/comedy'>Comedy</NavLink>
+                                        <NavLink className="dropdown-item" to='/crime'>Crime</NavLink>
+                                        <NavLink className="dropdown-item" to='/documentary'>Documentary</NavLink>
+                                        <NavLink className="dropdown-item" to='/drama'>Drama</NavLink>
+                                        <NavLink className="dropdown-item" to='/family'>Family</NavLink>
+                                        
+                                        <NavLink className="dropdown-item d-sm-none" to='/thriller'>Thriller</NavLink>
+                                        <NavLink className="dropdown-item d-sm-none" to='/scifi'>Sci-Fi</NavLink>
+                                        <NavLink className="dropdown-item d-sm-none" to='/short'>Short</NavLink>
+                                        <NavLink className="dropdown-item d-sm-none" to='/talk-show'>Talk-Show</NavLink>
+                                    </div>
+                                </div>
+                                    
+                                <div className="col-6 col-sm-4">
+                                    <div className="MultiCol">
+                                        <NavLink className="dropdown-item" to='/fantasy'>Fantasy</NavLink>
+                                        <NavLink className="dropdown-item" to='/game-show'>Game Show</NavLink>
+                                        <NavLink className="dropdown-item" to='/history'>History</NavLink>
+                                        <NavLink className="dropdown-item" to='/horror'>Horror</NavLink>
+                                        <NavLink className="dropdown-item" to='/musical'>Musical</NavLink>
+                                        <NavLink className="dropdown-item" to='/mystery'>Mystery</NavLink>
+                                        <NavLink className="dropdown-item" to='/news'>News</NavLink>
+                                        <NavLink className="dropdown-item" to='/reality-tv'>Reality-TV</NavLink>
+                                        <NavLink className="dropdown-item" to='/romance'>Romance</NavLink>
+
+                                        <NavLink className="dropdown-item d-sm-none" to='/war'>War</NavLink>
+                                        <NavLink className="dropdown-item d-sm-none" to='/western'>Western</NavLink>
+                                        <NavLink className="dropdown-item d-sm-none" to='/adult'>Adult</NavLink>
+                                        <NavLink className="dropdown-item d-sm-none" to='/others'>Others</NavLink>
+                                    </div>
+                                </div>
+                                
+                                <div className="d-none d-sm-block col-sm-4">
+                                    <div className="MultiCol">
+                                        <NavLink className="dropdown-item" to='/scifi'>Sci-Fi</NavLink>
+                                        <NavLink className="dropdown-item" to='/short'>Short</NavLink>
+                                        <NavLink className="dropdown-item" to='/talk-show'>Talk-Show</NavLink>
+                                        <NavLink className="dropdown-item" to='/thriller'>Thriller</NavLink>
+                                        <NavLink className="dropdown-item" to='/war'>War</NavLink>
+                                        <NavLink className="dropdown-item" to='/western'>Western</NavLink>
+                                        <NavLink className="dropdown-item" to='/adult'>Adult</NavLink>
+                                        <NavLink className="dropdown-item" to='/others'>Others</NavLink>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li> */}
