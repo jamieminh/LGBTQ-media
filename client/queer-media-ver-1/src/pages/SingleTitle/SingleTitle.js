@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import GSR from ''
+
+
 import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import './SingleTitle.css'
@@ -45,7 +48,7 @@ class SingleTitle extends Component {
                 }
             })
             .then(res => {
-                if (isExist) {
+                if (this.state.isExist) {
                     axios.get
                 }
             })
