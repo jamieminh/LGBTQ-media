@@ -10,6 +10,9 @@ import rating_3_5   from '../../assets/images/ratings/rating_3_5.png'
 import rating_4     from '../../assets/images/ratings/rating_4.png'
 import rating_4_5   from '../../assets/images/ratings/rating_4_5.png'
 import rating_5     from '../../assets/images/ratings/rating_5.png'
+import imdb         from '../../assets/images/ratings/imdb.png'
+import metacritic   from '../../assets/images/ratings/metacritic.png'
+import tomato       from '../../assets/images/ratings/tomato.png'
 
 export { not_applicable, rating_0, rating_0_5, rating_1, rating_1_5, rating_2, rating_2_5, 
-    rating_3, rating_3_5, rating_4, rating_4_5, rating_5 }
+    rating_3, rating_3_5, rating_4, rating_4_5, rating_5, imdb, metacritic, tomato }

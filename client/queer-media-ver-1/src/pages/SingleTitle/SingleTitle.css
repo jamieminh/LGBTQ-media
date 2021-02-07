@@ -1,5 +1,5 @@
 .SingleTitle {
-    margin: 0 12%
+    margin: 0 8%
 }
 
 .GeneralInfo {
@@ -8,30 +8,39 @@
     align-items: center;
 }
 
-.GeneralInfo .GeneralInfoImg > img {
-    width: 240px;
+.GeneralInfo .GeneralInfoImg>img {
+    width: 220px;
     height: 100%;
+    border-radius: 5px;
 }
 
 .GeneralInfoText {
     width: 290px;
 }
+.GeneralInfoText p span {
+    font-weight: 600;
+}
 
-.GeneralInfoText > h3 {
+.MediaTitleSm {
     text-align: center;
     margin: 20px 0;
 }
 
-.GeneralInfoText > p {
+.MediaTitle {
+    display: none;
+}
+
+.GeneralInfoText>p {
     margin-bottom: 5px
 }
 
 .GeneralInfoRatings {
-    margin-bottom: 20px;
+    margin: 10px 0;
 }
 
 .SingleTitleReviewer {
     position: relative;
+    margin-bottom: 10px;
 }
 
 .SingleTitleReviewer span {
@@ -39,17 +48,175 @@
     margin-right: 5px;
 }
 
-.SingleTitleReviewer img {
+.SingleTitleReviewer img:first-child {
+    height: 22px;
+}
+
+.SingleTitleReviewer img:nth-child(2) {
     height: 20px;
     position: absolute;
     top: 2px;
-    right: 40px;
+    left: 80px;
 }
 
+.SingleTitleArtists {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.SingleTitleArtist {
+    width: 50%;
+    height: 190px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.SingleTitleArtist>img {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.SingleTitleTrailer > div {
+    height: 46.5vw;
+}
+
+.TitleMainContent > div {
+    margin-top: 40px;
+}
+
+
 @media(min-width: 481px) {
-    .GeneralInfo .GeneralInfoImg > img {
+    .GeneralInfo .GeneralInfoImg>img {
         width: 260px;
+    }
+    .GeneralInfoText {
+        width: 380px;
+    }
+    .SingleTitleArtist {
+        width: 33%;
+    }
+    .MediaTitle {
+        width: 400px;
+    }
+
+
+}
+
+@media(min-width: 576px) {
+    .GeneralInfoText {
+        width: 350px;
+    }
+    .SingleTitleArtist {
+        width: 33%;
     }
 }
 
-@media(min-width: 576px) {}
+@media(min-width: 768px) {
+    .GeneralInfo .GeneralInfoImg>img {
+        width: 220px;
+    }
+
+    .SingleTitle {
+        margin: 0 7%;
+    }
+
+    .GeneralInfo {
+        display: flex;
+        flex-flow: row;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .GeneralInfoText {
+        width: fit-content;
+        margin-left: 40px;
+        width: 45%;
+    }
+
+    .SingleTitleArtists {
+        margin-top: 40px;
+        justify-content: space-evenly;
+    }
+
+    .SingleTitleArtist {
+        width: 130px;
+    }
+
+    .SingleTitleArtist>img {
+        width: 90px;
+        height: 130px;
+    }
+
+    .MediaTitleSm {
+        display: none;
+    }
+
+    .MediaTitle {
+        display: contents;
+    }
+
+    .GeneralInfoText p {
+        font-size: 18px;
+    }
+}
+
+@media(min-width: 1024px) {
+    .SingleTitle {
+        margin: 0 10%;
+    }
+
+    .GeneralInfo .GeneralInfoImg>img {
+        width: 250px;
+    }
+
+    .GeneralInfoText {
+        margin-left: 70px;
+        height: 350px;
+        width: 350px;
+    }
+
+    .MediaTitle {
+        width: 450px;
+    }
+
+    .SingleTitleArtist {
+        width: 16%;
+    }
+
+    .TitleMainContent {
+        margin: 0 5%;
+    }
+}
+
+
+@media(min-width: 1281px) {
+    .TitleMainContent {
+        margin: 0 8%;
+    }
+
+    .SingleTitleArtist {
+        width: 15%;
+    }
+
+    .SingleTitleTrailer > div {
+        height: 37vw;
+    }
+
+    .GeneralInfo .GeneralInfoImg>img {
+        width: 270px;
+    }
+}
+
+@media(min-width: 1601px) {
+
+    .SingleTitleArtist {
+        width: 13%;
+    }
+
+
+
+}

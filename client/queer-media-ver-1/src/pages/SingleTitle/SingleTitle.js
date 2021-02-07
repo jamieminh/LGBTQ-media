@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import GSR from ''
-
+import { config_1 } from '../../config'
+import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
 
 import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
-import './SingleTitle.css'
-import { not_applicable, rating_0, rating_0_5, rating_1, 
-        rating_1_5, rating_2, rating_2_5, rating_3, 
-        rating_3_5, rating_4, rating_4_5, rating_5 } from './ratings'
+import blank_user from '../../assets/images/blank_user.png'
 
+import { not_applicable, rating_0, rating_0_5, rating_1,
+        rating_1_5, rating_2, rating_2_5, rating_3,
+        rating_3_5, rating_4, rating_4_5, rating_5,
+        imdb, metacritic, tomato } from './ratings'
+import './SingleTitle.css'
+
+
+
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = proxyurl + "https://serpapi.com/search.json?"
+const API_KEY = config_1.KEY
+
+axios.defaults.headers.common['Content-Type'] = 'application/json'
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+
+console.log(axios.defaults.headers);
+
+
+let params = [
+    ['api_key', API_KEY].join('='),
+    ['tbm', "isch"].join('='),    // image search
+    ['ijn', '0'].join('='),       // first page
+    ['gl', 'us'].join('='),
+    ['hl', 'en'].join('=')
+].join('&')
 
 class SingleTitle extends Component {
     state = {
@@ -25,33 +47,73 @@ class SingleTitle extends Component {
         languages: null,        // a list of languages as Strings
         genres: null,           // a list of genres as Strings
         reviewers: null,        // a list of reviewers {reviewer, score}
-        artists: null,          // a list of artists {artist name, artist id}
+        // artists: null,          // a list of artists {artist name, artist id}
+        artists: [
+            {name: 'Charlize Theron', id: 12, img_url: blank_user},
+            {name: 'Sofia Boutella', id: 344, img_url: blank_user},
+            {name: 'James McAvoy', id: 444, img_url: blank_user},
+            {name: 'John Something Goodman', id: 124, img_url: blank_user},
+            {name: 'Scarlett Johansson', id: 112, img_url: blank_user}
+        ],
         directors: null         // a list of directors {director name, director id}
     }
 
 
     componentDidMount() {
+        let artists_names = []
+        let artists_info = []
         axios.get('http://localhost:4000/media/full/' + this.props.match.params.media_id)
             .then(res => {
                 if (res.data === "")
                     this.setState({ isExist: false })
                 else {
                     const media = res.data.media
+                    artists_names = (res.data.artists)
                     this.setState({
-                        isExist: true, media_id: media.media_id, title: media.title, 
-                        rated: media.rated, released: media.released, plot: media.plot, 
-                        poster_url: media.poster_url, type: media.type, year_end: media.year_end, 
+                        isExist: true, media_id: media.media_id, title: media.title,
+                        rated: media.rated, released: media.released, plot: media.plot,
+                        poster_url: media.poster_url, type: media.type, year_end: media.year_end,
                         languages: media.languages, genres: res.data.genres, 
-                        reviewers: res.data.reviewers, artists: res.data.artists, 
-                        directors: res.data.directors
+                        reviewers: res.data.reviewers, directors: res.data.directors
                     })
                 }
             })
-            .then(res => {
-                if (this.state.isExist) {
-                    axios.get
-                }
-            })
+            //  get artists images
+            // .then(res => {
+            //     if (this.state.isExist) {
+            //         const requests = []
+            //         artists_names.forEach(artist => {
+            //             const request = url + params + '&q=' + encodeURIComponent(artist.name + " imdb")
+            //             requests.push(axios.get(request))
+            //         })
+
+            //         let artists_images = []
+
+            //         axios.all(requests)
+            //             .then(responses => {
+            //                 responses.forEach(res => {
+            //                     console.log(res);
+            //                     if (res.data.error == null)   // no error
+            //                         artists_images.push(res.data.images_results[0].original);
+            //                     else
+            //                         artists_images.push(blank_user)
+            //                 })
+            //             })
+            //             .then(res => {
+            //                 console.log(artists_images);
+            //                 for (let i = 0; i < artists_names.length; i++) {
+            //                     const artist = { ...artists_names[i], img_url: artists_images[i] }
+            //                     artists_info.push(artist)
+            //                 }
+            //                 this.setState({ artists: artists_info })
+            //             })
+            //             .catch(err => console.error(err))
+            //     }
+            // })
+            // .then(res => {
+            //     this.setState({ artists: artists_info })
+            // })
+            .catch(err => console.error(err))
     }
 
     getRatingStars = (score, decimal = false) => {
@@ -72,6 +134,7 @@ class SingleTitle extends Component {
             case 8: return rating_4
             case 9: return rating_4_5
             case 10: return rating_5
+            default: return not_applicable
         }
     }
 
@@ -86,17 +149,19 @@ class SingleTitle extends Component {
             var directors = []
             this.state.directors.map(director => directors.push(director.name))
             var review_scores = this.state.reviewers.map(review => {
+                console.log(review.name);
+                let review_img = (review.name === "imdb") ? imdb : (review.name === "metacritic") ? metacritic : tomato
                 return (
                     <div className="SingleTitleReviewer" key={this.state.media_id + "-" + review.name}>
-                        <span>{review.name}</span>
+                        {/* <span>{review.name}</span> */}
+                        <img src={review_img} alt={review.name + " logo"}></img>
                         <img
                             src={this.getRatingStars(review.score, review.name === "imdb")}
-                            alt={review.name + "rating"}></img>
+                            alt={review.name + " rating"}></img>
                     </div>
                 )
 
             })
-            console.log(review_scores);
 
             content = (
                 <div className="SingleTitle">
@@ -111,23 +176,45 @@ class SingleTitle extends Component {
                                 alt={this.state.title + " poster"} />
                         </div>
 
+                        <h2 className="MediaTitleSm">{this.state.title}</h2>
+
+
                         <div className="GeneralInfoText">
-                            <h3>{this.state.title}</h3>
+                            <h2 className="MediaTitle">{this.state.title}</h2>
                             <div className="GeneralInfoRatings">
                                 {review_scores}
                             </div>
-                            <p>Type: {this.state.type}</p>
-                            <p>Rated: {this.state.rated}</p>
-                            <p>Year: {this.state.released} - {this.state.year_end}</p>
-                            <p>Directors: {directors.join(", ")}</p>
-                            <p>Genres: {this.state.genres.join(", ")}</p>
-                            <p>Languages: {this.state.languages.join(", ")}</p>
+                            <p><span>Type</span>: {this.state.type}</p>
+                            <p><span>Rated</span>: {this.state.rated}</p>
+                            <p><span>Year</span>: {this.state.released} - {this.state.year_end}</p>
+                            <p><span>Directors</span>: {directors.join(", ")}</p>
+                            <p><span>Genres</span>: {this.state.genres.join(", ")}</p>
+                            <p><span>Languages</span>: {this.state.languages.join(", ")}</p>
                         </div>
                     </div>
 
                     <div className="TitleMainContent">
 
-                        {this.state.artists.map(artist => <p>{artist.name}</p>)}
+                        <div className="SingleTitleArtists">
+                            {this.state.artists.map(artist =>
+                                <div className="SingleTitleArtist" key={artist.name}>
+                                    <img src={artist.img_url} alt={artist.name + " profile picture"}></img>
+                                    <p>{artist.name}</p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="SingleTitlePlot">
+                            <h3>Plot Summary</h3>
+                            <p>{this.state.plot}</p>
+                        </div>
+
+                        <div className="SingleTitleTrailer">
+                            <h3>Trailer</h3>
+                            <TrailerEmbed titleName={this.state.title}/>
+                        </div>
+
+
 
                     </div>
                 </div>
