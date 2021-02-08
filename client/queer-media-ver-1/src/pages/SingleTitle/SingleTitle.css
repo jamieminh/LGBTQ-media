@@ -117,7 +117,7 @@
 
 @media(min-width: 768px) {
     .GeneralInfo .GeneralInfoImg>img {
-        width: 220px;
+        width: 250px;
     }
 
     .SingleTitle {
@@ -132,9 +132,9 @@
     }
 
     .GeneralInfoText {
-        width: fit-content;
         margin-left: 40px;
         width: 45%;
+        height: 350px;
     }
 
     .SingleTitleArtists {
@@ -169,13 +169,8 @@
         margin: 0 10%;
     }
 
-    .GeneralInfo .GeneralInfoImg>img {
-        width: 250px;
-    }
-
     .GeneralInfoText {
         margin-left: 70px;
-        height: 350px;
         width: 350px;
     }
 
@@ -212,9 +207,16 @@
 }
 
 @media(min-width: 1601px) {
+    .TitleMainContent {
+        margin: 0 15%;
+    }
 
     .SingleTitleArtist {
         width: 13%;
+    }
+
+    .SingleTitleTrailer > div {
+        height: 30vw;
     }
 
 
