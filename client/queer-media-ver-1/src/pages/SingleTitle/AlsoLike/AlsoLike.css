@@ -1,0 +1,82 @@
+.AlsoLikeItem {
+    width: 200px;
+    text-align: center;
+    margin: 0 auto 8%;
+    position: relative;
+}
+
+.AlsoLike {
+    margin-top: 20px;
+}
+
+.AlsoLikeItem > a {
+    color: white;
+}
+
+.AlsoLikeItem > a:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.AlsoLikeItem > a > img.AlsoLikeImage {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+p.AlsoLikeScore {
+    position: absolute;
+    background-color: #F1B722;
+    left: 50%;
+    top: -10px;
+    color: black;
+    border-radius: 20px;
+    width: 50px;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.AlsoLikeItem p.title {
+    margin-top: 5px;
+}
+
+@media(min-width: 600px) {
+    .AlsoLike {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .AlsoLikeItem {
+        margin: 0 auto 5%;
+        width: 240px;
+        padding: 0 20px;
+    }
+}
+
+@media(min-width: 768px) {
+    .AlosLike {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .AlsoLikeItem {
+        margin: 0 auto 5%;
+        width: 240px;
+        padding: 0 20px;
+    }
+}
+
+@media(min-width: 1024px) {
+    .AlsoLikeItem {
+        width: 220px;
+    }
+
+    .AlsoLikeItem > a > img.AlsoLikeImage {
+        height: 240px;
+    }
+}
+
+@media(min-width: 1281px) {
+
+}

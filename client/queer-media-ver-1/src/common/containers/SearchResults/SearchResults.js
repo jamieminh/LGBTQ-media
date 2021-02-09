@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, { Component } from 'react';
 import Spinner from '../../components/UI/Spinner/Spinner'
 import ListItem from '../../components/ListItem/ListItem'
@@ -36,7 +35,7 @@ class SearchResults extends Component {
 
         let displayTitles = ""
         let searchStatus = <p>Sorry, we couldn't find anything looking on "<strong>{this.props.match.params.query}</strong>"</p>
-        if (this.state.search_results && this.state.search_results.length != 0) {
+        if (this.state.search_results && this.state.search_results.length !== 0) {
             searchStatus = <p>Search Results for "<strong>{this.props.match.params.query}</strong>"</p>
             displayTitles = this.state.search_results.map(item => {
                 return <ListItem key={item.media_id} mediaInfo={item} />

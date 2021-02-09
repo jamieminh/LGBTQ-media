@@ -7,15 +7,19 @@ import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import blank_user from '../../assets/images/blank_user.png'
 
-import { not_applicable, rating_0, rating_0_5, rating_1,
-        rating_1_5, rating_2, rating_2_5, rating_3,
-        rating_3_5, rating_4, rating_4_5, rating_5,
-        imdb, metacritic, tomato } from './ratings'
+import {
+    not_applicable, rating_0, rating_0_5, rating_1,
+    rating_1_5, rating_2, rating_2_5, rating_3,
+    rating_3_5, rating_4, rating_4_5, rating_5,
+    imdb, metacritic, tomato
+} from './ratings'
 import './SingleTitle.css'
+import AlsoLike from './AlsoLike/AlsoLike';
 
 
 
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
+let proxyurl = "https://cors-anywhere.herokuapp.com/";
+proxyurl = ""
 const url = proxyurl + "https://serpapi.com/search.json?"
 const API_KEY = config_1.KEY
 
@@ -25,13 +29,22 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 console.log(axios.defaults.headers);
 
 
-let params = [
-    ['api_key', API_KEY].join('='),
-    ['tbm', "isch"].join('='),    // image search
-    ['ijn', '0'].join('='),       // first page
-    ['gl', 'us'].join('='),
-    ['hl', 'en'].join('=')
-].join('&')
+// let params = [
+//     ['api_key', API_KEY].join('='),
+//     ['tbm', "isch"].join('='),    // image search
+//     ['ijn', '0'].join('='),       // first page
+//     ['gl', 'us'].join('='),
+//     ['hl', 'en'].join('=')
+// ].join('&')
+
+let params = {
+    api_key: API_KEY,
+    tbm: "isch",    // image search
+    ijn: '0',       // first page
+    gl: 'us',
+    hl: 'en',
+    q: 'superman'
+}
 
 class SingleTitle extends Component {
     state = {
@@ -49,11 +62,11 @@ class SingleTitle extends Component {
         reviewers: null,        // a list of reviewers {reviewer, score}
         // artists: null,          // a list of artists {artist name, artist id}
         artists: [
-            {name: 'Charlize Theron', id: 12, img_url: blank_user},
-            {name: 'Sofia Boutella', id: 344, img_url: blank_user},
-            {name: 'James McAvoy', id: 444, img_url: blank_user},
-            {name: 'John Something Goodman', id: 124, img_url: blank_user},
-            {name: 'Scarlett Johansson', id: 112, img_url: blank_user}
+            { name: 'Charlize Theron', id: 12, img_url: blank_user },
+            { name: 'Sofia Boutella', id: 344, img_url: blank_user },
+            { name: 'James McAvoy', id: 444, img_url: blank_user },
+            { name: 'John Something Goodman', id: 124, img_url: blank_user },
+            { name: 'Scarlett Johansson', id: 112, img_url: blank_user }
         ],
         directors: null         // a list of directors {director name, director id}
     }
@@ -73,7 +86,7 @@ class SingleTitle extends Component {
                         isExist: true, media_id: media.media_id, title: media.title,
                         rated: media.rated, released: media.released, plot: media.plot,
                         poster_url: media.poster_url, type: media.type, year_end: media.year_end,
-                        languages: media.languages, genres: res.data.genres, 
+                        languages: media.languages, genres: res.data.genres,
                         reviewers: res.data.reviewers, directors: res.data.directors
                     })
                 }
@@ -82,32 +95,41 @@ class SingleTitle extends Component {
             // .then(res => {
             //     if (this.state.isExist) {
             //         const requests = []
-            //         artists_names.forEach(artist => {
-            //             const request = url + params + '&q=' + encodeURIComponent(artist.name + " imdb")
-            //             requests.push(axios.get(request))
+            // artists_names.forEach(artist => {
+            //     const request = url + params + '&q=' + encodeURIComponent(artist.name + " imdb")
+            //     requests.push(axios.get(request))
+            // })
+
+            // console.log(this.state.artists);
+
+            // let artists_images = []
+
+            // request({url: url, qs: params}, (err, res, body) => {
+            //     if (err) return console.log(err);
+            //     console.log(body.url);
+            //     console.log(body);
+            //     console.log(res);
+            // })
+
+            // axios.all(requests)
+            //     .then(responses => {
+            //         responses.forEach(res => {
+            //             console.log(res);
+            //             if (res.data.error == null)   // no error
+            //                 artists_images.push(res.data.images_results[0].original);
+            //             else
+            //                 artists_images.push(blank_user)
             //         })
-
-            //         let artists_images = []
-
-            //         axios.all(requests)
-            //             .then(responses => {
-            //                 responses.forEach(res => {
-            //                     console.log(res);
-            //                     if (res.data.error == null)   // no error
-            //                         artists_images.push(res.data.images_results[0].original);
-            //                     else
-            //                         artists_images.push(blank_user)
-            //                 })
-            //             })
-            //             .then(res => {
-            //                 console.log(artists_images);
-            //                 for (let i = 0; i < artists_names.length; i++) {
-            //                     const artist = { ...artists_names[i], img_url: artists_images[i] }
-            //                     artists_info.push(artist)
-            //                 }
-            //                 this.setState({ artists: artists_info })
-            //             })
-            //             .catch(err => console.error(err))
+            //     })
+            //     .then(res => {
+            //         console.log(artists_images);
+            //         for (let i = 0; i < artists_names.length; i++) {
+            //             const artist = { ...artists_names[i], img_url: artists_images[i] }
+            //             artists_info.push(artist)
+            //         }
+            //         this.setState({ artists: artists_info })
+            //     })
+            //     .catch(err => console.error(err))
             //     }
             // })
             // .then(res => {
@@ -163,6 +185,7 @@ class SingleTitle extends Component {
 
             })
 
+            const year = this.state.released + (this.state.year_end == 0 ? '' : ' - ' + this.state.year_end)
             content = (
                 <div className="SingleTitle">
                     <div className="GeneralInfo">
@@ -186,7 +209,7 @@ class SingleTitle extends Component {
                             </div>
                             <p><span>Type</span>: {this.state.type}</p>
                             <p><span>Rated</span>: {this.state.rated}</p>
-                            <p><span>Year</span>: {this.state.released} - {this.state.year_end}</p>
+                            <p><span>Year</span>: {year}</p>
                             <p><span>Directors</span>: {directors.join(", ")}</p>
                             <p><span>Genres</span>: {this.state.genres.join(", ")}</p>
                             <p><span>Languages</span>: {this.state.languages.join(", ")}</p>
@@ -211,11 +234,17 @@ class SingleTitle extends Component {
 
                         <div className="SingleTitleTrailer">
                             <h3>Trailer</h3>
-                            <TrailerEmbed titleName={this.state.title}/>
+                            <TrailerEmbed titleName={this.state.title} />
                         </div>
 
+                        <div className="RelatedTitles">
+                            <h3>You may also like</h3>
+                            <AlsoLike genres={this.state.genres} />
+                        </div>
 
-
+                        <div className="Comments">
+                            <h3>Comments</h3>
+                        </div>
                     </div>
                 </div>
 
@@ -227,6 +256,9 @@ class SingleTitle extends Component {
         ) : (
                 <React.Fragment>
                     {content}
+
+
+
                 </React.Fragment>
             );
     }

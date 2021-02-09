@@ -88,6 +88,14 @@
     margin-top: 40px;
 }
 
+.AlsoLike h3 {
+    margin-bottom: 25px;
+}
+
+.Comments {
+    border: 2px solid coral;
+    height: 500px;
+}
 
 @media(min-width: 481px) {
     .GeneralInfo .GeneralInfoImg>img {
@@ -102,8 +110,6 @@
     .MediaTitle {
         width: 400px;
     }
-
-
 }
 
 @media(min-width: 576px) {
@@ -134,7 +140,7 @@
     .GeneralInfoText {
         margin-left: 40px;
         width: 45%;
-        height: 350px;
+        height: 370px;
     }
 
     .SingleTitleArtists {
@@ -166,12 +172,15 @@
 
 @media(min-width: 1024px) {
     .SingleTitle {
-        margin: 0 10%;
+        margin: 0;
+        margin-right: 27%;
+        padding-left: 3%;
+        padding-right: 6%;
     }
 
     .GeneralInfoText {
-        margin-left: 70px;
-        width: 350px;
+        margin-left: 45px;
+        width: 300px;
     }
 
     .MediaTitle {
@@ -185,10 +194,27 @@
     .TitleMainContent {
         margin: 0 5%;
     }
+
+    .RelatedTitles {
+        position: absolute;
+        flex-flow: column;
+        width: 300px;
+        top: 20%;
+        right: 5%;
+        text-align: center;
+    }
+
+    .SingleTitleTrailer > div {
+        height: 36.5vw;
+    }   
+
 }
 
 
 @media(min-width: 1281px) {
+    .SingleTitle {
+        padding-left: 5%;
+    }
     .TitleMainContent {
         margin: 0 8%;
     }
@@ -198,7 +224,7 @@
     }
 
     .SingleTitleTrailer > div {
-        height: 37vw;
+        height: 29vw;
     }
 
     .GeneralInfo .GeneralInfoImg>img {
@@ -208,7 +234,11 @@
 
 @media(min-width: 1601px) {
     .TitleMainContent {
-        margin: 0 15%;
+        margin-left: 20%;
+    }
+
+    .SingleTitle {
+        padding-left: 0;
     }
 
     .SingleTitleArtist {
@@ -216,9 +246,13 @@
     }
 
     .SingleTitleTrailer > div {
-        height: 30vw;
+        height: 27vw;
     }
 
-
-
+    .RelatedTitles {
+        right: 10%;
+    }
+    .GeneralInfoText {
+        height: 400px;
+    }
 }

@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from 'react';
+import React, {Component} from 'react';
 import MediaSlides from './MediaSlides/MediaSlides';
 import Random from './RandomTitles/Random';
 import './Home.css';

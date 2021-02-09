@@ -13,7 +13,7 @@ const ListItem = (props) => {
 
     console.log(notFound);
 
-    const year = "(" + result.released + (result.year_end == 0 ? ")" : " - " + result.year_end + ")")
+    const year = "(" + result.released + (result.year_end === 0 ? ")" : " - " + result.year_end + ")")
 
     return (
         <div className="ListItem">

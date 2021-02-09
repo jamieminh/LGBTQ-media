@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import './GenreCategory.css'
-import Home from '../../HomePage/Home';
-
 
 class GenreCategory extends Component {
     constructor(props) {

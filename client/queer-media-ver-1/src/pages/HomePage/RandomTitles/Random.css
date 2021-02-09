@@ -7,9 +7,15 @@
     margin-bottom: 5px;
 }
 
-.RandomMedia {
+.RandomMedia > a {
     display: flex;
     margin-bottom: 20px;
+    color: white;
+}
+
+.RandomMedia > a:hover {
+    text-decoration: none;
+    opacity: 0.8;
 }
 
 .RandomInfo{
@@ -23,7 +29,6 @@
     text-align: center;
     color: black;
 }
-
 
 .RandomImage{
     display: block;

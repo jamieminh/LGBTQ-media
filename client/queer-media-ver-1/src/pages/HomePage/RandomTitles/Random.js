@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 import Spinner from "../../../common/components/UI/Spinner/Spinner";
 import notFound from "../../../assets/images/notfound.jpg";
 
@@ -46,7 +47,7 @@ class Random extends Component {
                 });
         }
         else {
-            this.setState({titles: JSON.parse(randomTitles)})
+            this.setState({ titles: JSON.parse(randomTitles) })
             console.log(this.state.titles);
         }
     }
@@ -58,26 +59,28 @@ class Random extends Component {
                 <div className="Random">
                     {this.state.titles.map((item) => (
                         <div className="RandomMedia" key={item.id}>
-                            <img
-                                className="RandomImage"
-                                src={item.poster}
-                                onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = notFound;
-                                }}
-                                alt={item.title + " poster"}
-                            />
-                            <div className="RandomInfo">
-                                <p className="RandomTitle">
-                                    {item.title + " (" + item.released + ")"}
-                                </p>
-                                <p className="RandomScore">{item.score}</p>
-                                <div className="RandomGenres">
-                                    {item.genres.map((genre) => (
-                                        <p key={genre}>{genre}</p>
-                                    ))}
+                            <Link to={'/media/' + item.id}>
+                                <img
+                                    className="RandomImage"
+                                    src={item.poster}
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = notFound;
+                                    }}
+                                    alt={item.title + " poster"}
+                                />
+                                <div className="RandomInfo">
+                                    <p className="RandomTitle">
+                                        {item.title + " (" + item.released + ")"}
+                                    </p>
+                                    <p className="RandomScore">{item.score}</p>
+                                    <div className="RandomGenres">
+                                        {item.genres.map((genre) => (
+                                            <p key={genre}>{genre}</p>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </div>

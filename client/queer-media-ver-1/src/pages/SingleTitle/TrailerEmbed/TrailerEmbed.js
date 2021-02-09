@@ -42,10 +42,8 @@ class TrailerEmbed extends Component {
                 <div className="YoutubeEmbedded">
                     <ReactPlayer
                         url={'https://www.youtube.com/watch?v=' + this.state.trailerId}
-                        // width='300px'
-                        // height='169px'
-                        volume='0.3'
-                        controls='true'
+                        volume={0.1}
+                        controls={true}
                         config={{
                             youtube: {
                                 playerVars: { rel: 0 },
