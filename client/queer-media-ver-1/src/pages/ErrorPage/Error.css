@@ -25,8 +25,31 @@
     font-weight: bold;
 }
 
-.Error-Des {
-    /* border: 1px solid black; */
+.Error-Des p {
+    margin-bottom: 5vh;
+}
+
+.Error-Des a {
+    background-color: #27A243;
+    color: white;
+    font-weight: 500;
+    opacity: 0.9;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.Error-Des a:hover {
+    opacity: 1;
+    color: white;
+    text-decoration: none;
+}
+
+.Error-Des a:active {
+    opacity: 0.8;
 }
 
 

@@ -1,5 +1,7 @@
 import React from 'react';
-import errorImg from '../../assets/images/radar.png';
+import { Link } from 'react-router-dom'
+// import errorImg from '../../assets/images/radar.png';
+import errorImg from '../../assets/images/no_signal_tv.png';
 import './Error.css';
 
 const Error = () => {
@@ -14,7 +16,8 @@ const Error = () => {
                     <h1>404</h1>
                     <h2>Oh No! This place is not Fruity</h2>
                     <p>Sorry, the Gaydar couldn't pickup anything here</p>
-                    <button className="btn green">Return Home</button>
+                    <Link to="/">Return Home</Link>
+
                 </div>
             </div>
         </div>
