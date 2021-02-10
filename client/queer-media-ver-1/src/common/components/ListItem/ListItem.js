@@ -11,12 +11,11 @@ const ListItem = (props) => {
         poster: props.mediaInfo.poster_url
     }
 
-    console.log(notFound);
 
     const year = "(" + result.released + (result.year_end === 0 ? ")" : " - " + result.year_end + ")")
 
     return (
-        <div className="ListItem">
+        <div className="ListItem" key={props.key}>
             <Link to={"/media/" + props.mediaInfo.media_id}>
                 <img className="ListItemImg"
                     src={result.poster}

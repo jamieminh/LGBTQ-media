@@ -23,12 +23,12 @@ class TrailerEmbed extends Component {
             videoEmbeddable: 'true'
         }
 
-        // axios.get(url, { params: params })
-        //     .then(res => {
-        //         const vidId = res.data.items[0].id.videoId
-        //         this.setState({ trailerId: vidId })
-        //     })
-        //     .catch(err => console.log(err))
+        axios.get(url, { params: params })
+            .then(res => {
+                const vidId = res.data.items[0].id.videoId
+                this.setState({ trailerId: vidId })
+            })
+            .catch(err => console.log(err))
 
     }
 

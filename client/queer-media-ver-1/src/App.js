@@ -5,7 +5,7 @@ import Home from './pages/HomePage/Home'
 import AllGenres from './pages/AllGenresPage/AllGenresPage'
 import GenrePage from './pages/GenrePage/GenrePage'
 import ErrorPage from './pages/ErrorPage/Error'
-import SearchResults from './common/containers/SearchResults/SearchResults'
+import SearchResults from './common/containers/SearchBar/SearchResults/SearchResults'
 
 import './App.css';
 import Layout from './hoc/Layout/Layout';
@@ -31,7 +31,9 @@ function App() {
               component={(props) => <SearchResults {...props} key={window.location.pathname} />} 
             />
 
-            <Route path="/media/:media_id" exact component={SingleTitle}/>
+            <Route path="/media/:media_id" exact 
+            component={(props) => <SingleTitle {...props} key={window.location.pathname}/>}
+            />
 
             <Route path="/" exact component={Home} />
 

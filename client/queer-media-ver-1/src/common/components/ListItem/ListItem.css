@@ -4,7 +4,7 @@
     text-align: center;
     margin: 0 auto;
     margin-top: 30px;
-    height: 330px;
+    height: 350px;
 }
 
 .ListItem > a {
@@ -67,7 +67,7 @@
         height: 250px;
     }
     .ListItem p {
-        top: 82%;
+        top: 77%;
     }
 }
 
