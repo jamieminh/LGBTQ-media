@@ -1,31 +1,26 @@
-import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import './GenreCategory.css'
 
-class GenreCategory extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { module: null };
-    }
+const GenreCategory = (props) => {
+    const [module, setModule] = useState(null)
 
-    componentDidMount() {
-        const name = this.props.genre.toLowerCase();
+    useEffect(() => {
+        const name = props.genre.toLowerCase();
         import(`../../../assets/images/genres/${name}.jpg`)
-        .then(image => {
-            this.setState({ module: image.default })
-        })
-    }
+            .then(image => {
+                setModule(image.default)
+            })
+    }, [])
 
-    render() {
-        const { module: image } = this.state; 
-        const genre = this.props.genre;
-        return(
-            <div className="Genre">
-                <Link className="GenreImage" to={ this.props.match.url + '/' + genre}> <img src={image} alt={genre + " poster"}/> </Link>
-                <Link className="GenreText" to={this.props.match.url + '/' + genre}>{genre}</Link>
-            </div>
-        )
-    }
+    // const { module: image } = module;
+    const genre = props.genre;
+    return (
+        <div className="Genre">
+            <Link className="GenreImage" to={props.match.url + '/' + genre}> <img src={module} alt={genre + " poster"} /> </Link>
+            <Link className="GenreText" to={props.match.url + '/' + genre}>{genre}</Link>
+        </div>
+    )
 }
 
 export default withRouter(GenreCategory);

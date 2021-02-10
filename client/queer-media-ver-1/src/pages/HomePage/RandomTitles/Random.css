@@ -11,11 +11,13 @@
     display: flex;
     margin-bottom: 20px;
     color: white;
+    opacity: 0.9;
 }
 
 .RandomMedia > a:hover {
     text-decoration: none;
-    opacity: 0.8;
+    opacity: 1;
+    color: white;
 }
 
 .RandomInfo{

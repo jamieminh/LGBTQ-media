@@ -5,8 +5,8 @@ import Logo from '../../Logo/Logo';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import NavigationItem from './NavigationItem/NavigationItem'
 
-class Toolbar extends Component { 
-
+// class Toolbar extends Component { 
+const Toolbar = (props) => {
     // state = {
     //     show: true
     // }
@@ -17,7 +17,7 @@ class Toolbar extends Component {
     //     })
     // }
 
-    render() {
+    // render() {
     //     const isShow = (this.state.show) ? "show" : '';        
 
     
@@ -82,6 +82,6 @@ class Toolbar extends Component {
     )
 
                 };
-}
+// }
  
 export default Toolbar;

@@ -1,17 +1,15 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import Spinner from "../../../common/components/UI/Spinner/Spinner";
 import notFound from "../../../assets/images/notfound.jpg";
 
 import "./Random.css";
 
-class Random extends Component {
-    state = {
-        titles: null,
-    };
+const Random = (props) => {
+    const [titles, setTitles] = useState(null)
 
-    componentDidMount() {
+    useEffect(() => {
         let randomTitles = sessionStorage.getItem("randomTitles");
         // console.log(randomTitles);
         if (randomTitles === null) {
@@ -42,50 +40,48 @@ class Random extends Component {
                 })
                 .then((res) => {
                     sessionStorage.setItem('randomTitles', JSON.stringify(tts))
-                    this.setState({ titles: tts });
+                    setTitles(tts)
                     // console.log(this.state.titles);
                 });
         }
         else {
-            this.setState({ titles: JSON.parse(randomTitles) })
-            console.log(this.state.titles);
+            setTitles(JSON.parse(randomTitles))
         }
-    }
+    }, [])
 
-    render() {
-        return !this.state.titles ? (
-            <Spinner />
-        ) : (
-                <div className="Random">
-                    {this.state.titles.map((item) => (
-                        <div className="RandomMedia" key={item.id}>
-                            <Link to={'/media/' + item.id}>
-                                <img
-                                    className="RandomImage"
-                                    src={item.poster}
-                                    onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = notFound;
-                                    }}
-                                    alt={item.title + " poster"}
-                                />
-                                <div className="RandomInfo">
-                                    <p className="RandomTitle">
-                                        {item.title + " (" + item.released + ")"}
-                                    </p>
-                                    <p className="RandomScore">{item.score}</p>
-                                    <div className="RandomGenres">
-                                        {item.genres.map((genre) => (
-                                            <p key={genre}>{genre}</p>
-                                        ))}
-                                    </div>
+
+    return !titles ? (
+        <Spinner />
+    ) : (
+            <div className="Random">
+                {titles.map((item) => (
+                    <div className="RandomMedia" key={item.id}>
+                        <Link to={'/media/' + item.id}>
+                            <img
+                                className="RandomImage"
+                                src={item.poster}
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = notFound;
+                                }}
+                                alt={item.title + " poster"}
+                            />
+                            <div className="RandomInfo">
+                                <p className="RandomTitle">
+                                    {item.title + " (" + item.released + ")"}
+                                </p>
+                                <p className="RandomScore">{item.score}</p>
+                                <div className="RandomGenres">
+                                    {item.genres.map((genre) => (
+                                        <p key={genre}>{genre}</p>
+                                    ))}
                                 </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-            );
-    }
+                            </div>
+                        </Link>
+                    </div>
+                ))}
+            </div>
+        );
 }
 
 export default Random;

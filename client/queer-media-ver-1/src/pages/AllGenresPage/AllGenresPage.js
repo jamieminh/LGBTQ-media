@@ -10,7 +10,6 @@ const genres = (props) => {
                     'news','reality-TV', 'romance', 'sci-fi', 'short', 
                     'talk-show', 'thriller', 'war', 'western', 'adult', 'others']
 
-    // console.log(props.match);
     return (
         <div className="container">
             <div className="row GenresRow">
