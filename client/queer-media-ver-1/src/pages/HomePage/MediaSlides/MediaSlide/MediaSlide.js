@@ -12,7 +12,7 @@ const MediaSlide = (props) => {
     useEffect(() => {
         let url = '';
         if (props.rank === 'latest')
-            url = 'http://localhost:4000/media/latest/' + props.type
+            url = 'http://localhost:4000/media/latest/' + props.type + '/12'
         else
             url = 'http://localhost:4000/reviewers/highest/' + props.type
 
@@ -35,11 +35,11 @@ const MediaSlide = (props) => {
             <div className="row">
                 {[...titles].splice(startPos, range).map(item => {
                     return (
-                        <div className="col-sm-3 CarouselMedia" key={item.id}>
-                            <Link to={"/media/" + item.id}>
+                        <div className="col-sm-3 CarouselMedia" key={'mediaSlide-' + item.media_id}>
+                            <Link to={"/media/" + item.media_id}>
                                 <p className="MediaScore">{(item.score === 'N/A') ? '__' : item.score}</p>
                                 <img className="MediaImage"
-                                    src={item.poster}
+                                    src={item.poster_url}
                                     onError={(e) => {
                                         e.target.onerror = null;
                                         e.target.src = notFound
@@ -58,9 +58,9 @@ const MediaSlide = (props) => {
 
     const carouseSlideXS = (item) => {
         return (
-            <div className="carousel-item" key={item.id}>
+            <div className="carousel-item" key={item.media_id}>
                 <div className="CarouselMedia">
-                    <Link to={"/media/" + item.id}>
+                    <Link to={"/media/" + item.media_id}>
                         <p className="MediaScore">{(item.score === 'N/A') ? '__' : item.score}</p>
                         <img className="MediaImage"
                             src={item.poster}
@@ -114,7 +114,7 @@ const MediaSlide = (props) => {
                             {carouseSlide(4, 4)}
                         </div>
                         <div className="carousel-item">
-                            {carouseSlide(8, 3)}
+                            {carouseSlide(8, 4)}
                         </div>
                         {carouselControls(false)}
                     </div>
@@ -125,7 +125,7 @@ const MediaSlide = (props) => {
                     <div className="carousel-inner">
                         <div className="carousel-item active">
                             <div className="CarouselMedia">
-                                <Link to={"/media/" + firstItem.id}>
+                                <Link to={"/media/" + firstItem.media_id}>
                                     <p className="MediaScore">{(firstItem.score === 'N/A') ? '__' : firstItem.score}</p>
                                     <img className="MediaImage"
                                         src={firstItem.poster}

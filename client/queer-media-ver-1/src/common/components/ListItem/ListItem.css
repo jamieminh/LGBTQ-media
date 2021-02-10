@@ -4,25 +4,27 @@
     text-align: center;
     margin: 0 auto;
     margin-top: 30px;
-    height: 350px;
+    height: 320px;
 }
 
 .ListItem > a {
     text-decoration: none;
     color: white;
+    opacity: 0.92;
 }
 
 .ListItem > a:hover {
     text-decoration: none;
-    opacity: 0.8;
+    opacity: 1;
+    color: white;
 }
 
 
 .ListItemImg {
-    width: 200px;
-    height: 290px;
+    width: 180px;
+        height: 260px;
     margin-top: 15px;
-    border-radius: 10px;
+    border-radius: 5px;
     object-fit: cover;
 }
 
@@ -45,8 +47,8 @@
     }
 
     .ListItemImg {
-        width: 160px;
-        height: 235px;
+        width: 150px;
+        height: 225px;
     }
 
     .ListItem p {
@@ -54,20 +56,19 @@
         left: 50%;
         transform: translateX(-50%);
         width: 70%;
-        top: 78%;
+        top: 75%;
+        font-size: 15px;
     }
 }
 
 @media (min-width: 1024px) {
-    .ListItem {
-        width: 22%;
-    }
+
     .ListItemImg {
         width: 170px;
         height: 250px;
     }
     .ListItem p {
-        top: 77%;
+        top: 84%;
     }
 }
 

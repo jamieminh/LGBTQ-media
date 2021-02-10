@@ -18,8 +18,10 @@ const Op = Sequelize.Op;
 
 
 // get latest animation
-router.get('/latest/animation', (req, res) => {
-    Media.findAll({
+router.get('/latest/animation/:limit', (req, res) => {
+    const limit = req.params.limit;
+
+    const findAllParams = {
         include: [{
             model: Genre,
             attributes: [],
@@ -29,22 +31,27 @@ router.get('/latest/animation', (req, res) => {
             attributes: ['score'],
             where: { reviewer_id: 'im' }
         }],
-        attributes: ['media_id', 'title', 'released', 'poster_url'],
+        attributes: ['media_id', 'title', 'released', 'poster_url', 'year_end'],
         where: {
             released: { [Op.ne]: 2021 },
             poster_url: { [Op.ne]: "N/A" },
         },
-        order: [['released', 'DESC']],
-        limit: 11
-    })
+        order: [['released', 'DESC']]
+    }
+
+    if (limit!=='all') findAllParams.limit = parseInt(limit)
+
+    Media.findAll(findAllParams)
         .then(result => {
             const titles = result.map(item => {
                 return {
-                    id: item.media_id,
+                    media_id: item.media_id,
                     title: item.title,
                     released: item.released,
-                    poster: item.poster_url,
-                    score: item.Media_Reviewers[0].score
+                    poster_url: item.poster_url,
+                    score: item.Media_Reviewers[0].score,
+                    year_end: item.year_end
+
                 }
             })
             res.send(titles)
@@ -54,8 +61,9 @@ router.get('/latest/animation', (req, res) => {
 
 
 // get latest movies or series
-router.get('/latest/:type', (req, res) => {
-    let type = req.params.type;
+router.get('/latest/:type/:limit', (req, res) => {
+    const type = req.params.type;
+    const limit = req.params.limit;
 
     // FIRST: find all media ids with genre animation
     Media_Genre.findAll({
@@ -64,10 +72,8 @@ router.get('/latest/:type', (req, res) => {
     })
         .then(result => {
             const ids = result.map(item => item.media_id);
-
-            // SECOND: get 11 titles that's not of genre animation
-            Media.findAll({
-                attributes: ['media_id', 'title', 'released', 'poster_url'],
+            let findAllParams = {
+                attributes: ['media_id', 'title', 'released', 'poster_url', 'year_end'],
                 include: {
                     model: Media_Reviewer,
                     attributes: ['score'],
@@ -79,16 +85,20 @@ router.get('/latest/:type', (req, res) => {
                     poster_url: { [Op.ne]: "N/A" },
                 },
                 order: [['released', 'DESC']],
-                limit: 11
-            })
+            }        
+            if (limit!=='all') findAllParams.limit = parseInt(limit)
+
+            // SECOND: get 11 titles that's not of genre animation
+            Media.findAll(findAllParams)
                 .then(medias => {
                     const titles = medias.map(item => {
                         return {
                             id: item.media_id,
                             title: item.title,
                             released: item.released,
-                            poster: item.poster_url,
-                            score: item.Media_Reviewers[0].score
+                            poster_url: item.poster_url,
+                            score: item.Media_Reviewers[0].score,
+                            year_end: item.year_end
                         }
                     })
                     res.send(titles)
@@ -188,6 +198,7 @@ router.get("/full/:id", (req, res) => {
         })
         .catch(err => console.log(err))
 })
+
 
 
 

@@ -6,12 +6,11 @@ import AllGenres from './pages/AllGenresPage/AllGenresPage'
 import GenrePage from './pages/GenrePage/GenrePage'
 import ErrorPage from './pages/ErrorPage/Error'
 import SearchResults from './common/containers/SearchBar/SearchResults/SearchResults'
+import TypePage from './pages/TypePage/TypePage'
 
 import './App.css';
 import Layout from './hoc/Layout/Layout';
 import SingleTitle from './pages/SingleTitle/SingleTitle';
-// import Movies from './containers/Movies/Movies';
-// import TvShows from './containers/TVShows/TvShows';
 
 function App() {
   return (
@@ -19,8 +18,9 @@ function App() {
       <div className="App">
         <Layout>
           <Switch>
-            <Route path="/movies" exact component={Home} />   {/* implement later */}
-            <Route path="/series" exact component={Home} />   {/* implement later */}
+            <Route path="/movies" exact component={() => <TypePage type="movie" key="movies"/>} />   
+            <Route path="/series" exact component={() => <TypePage type="series" key="series"/>} />   
+            <Route path="/animation" exact component={() => <TypePage type="animation" key="animation"/>} />   
 
             <Route path="/genres" exact component={AllGenres} />
             <Route path="/genres/:genre"
@@ -32,8 +32,9 @@ function App() {
             />
 
             <Route path="/media/:media_id" exact 
-            component={(props) => <SingleTitle {...props} key={window.location.pathname}/>}
+              component={(props) => <SingleTitle {...props} key={window.location.pathname}/>}
             />
+
 
             <Route path="/" exact component={Home} />
 

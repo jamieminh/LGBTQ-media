@@ -30,7 +30,7 @@ router.get('/highest/animation', (req, res) => {
     .then(result => {
         const titles = result.map(item => {
             return {
-                id: item.media_id, title: item.title, released: item.released,
+                media_id: item.media_id, title: item.title, released: item.released,
                 poster: item.poster_url, score: item.Media_Reviewers[0].score
             }
         })
@@ -65,8 +65,8 @@ router.get('/highest/:type', (req, res) => {
     .then(result => {
         const titles = result.map(item => {
             const media = item.Media;
-            return { score: item.score, id: media.media_id, released: media.released,
-                title: media.title, poster: media.poster_url}
+            return { score: item.score, media_id: media.media_id, released: media.released,
+                title: media.title, poster_url: media.poster_url}
         })
         res.send(titles)
     })

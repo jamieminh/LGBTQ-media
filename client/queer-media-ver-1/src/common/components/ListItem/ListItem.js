@@ -15,7 +15,7 @@ const ListItem = (props) => {
     const year = "(" + result.released + (result.year_end === 0 ? ")" : " - " + result.year_end + ")")
 
     return (
-        <div className="ListItem" key={props.key}>
+        <div className="ListItem" key={props.mediaInfo.media_id}>
             <Link to={"/media/" + props.mediaInfo.media_id}>
                 <img className="ListItemImg"
                     src={result.poster}

@@ -73,6 +73,7 @@ const Toolbar = (props) => {
                     <NavigationItem link="/">Home</NavigationItem>
                     <NavigationItem link="/movies">Movies</NavigationItem>
                     <NavigationItem link="/series">Series</NavigationItem>
+                    <NavigationItem link="/animation">Animation</NavigationItem>
                     <NavigationItem link="/genres">Genres</NavigationItem>                                                         
                                 
                 </ul>

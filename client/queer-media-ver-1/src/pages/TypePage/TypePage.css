@@ -1,0 +1,24 @@
+.TypePage {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.TypePage > h1 {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 40px;
+    text-transform: capitalize;
+}
+
+@media (min-width: 1280px) {
+    .TypePage {
+        width: 83%;
+    }
+
+}
+
+@media (min-width: 1600px) {
+    .TypePage {
+        width: 70%;
+    }
+}
