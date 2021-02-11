@@ -7,3 +7,4 @@
 - Or use ```$ npm run server``` to run only the server
 
 ## Authentication and Authorization are done with Auth0
+- New branch test
