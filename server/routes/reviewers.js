@@ -25,13 +25,13 @@ router.get('/highest/animation', (req, res) => {
         }],
         attributes: ['media_id', 'title', 'poster_url', 'released'],
         order: [[Media_Reviewer, 'score', 'DESC']],
-        limit: 11
+        limit: 12
     })
     .then(result => {
         const titles = result.map(item => {
             return {
                 media_id: item.media_id, title: item.title, released: item.released,
-                poster: item.poster_url, score: item.Media_Reviewers[0].score
+                poster_url: item.poster_url, score: item.Media_Reviewers[0].score
             }
         })
         res.send(titles)
@@ -60,7 +60,7 @@ router.get('/highest/:type', (req, res) => {
             score: {[Op.ne]: 'N/A'}
         },
         order: [ ['score', 'DESC'] ],
-        limit: 11
+        limit: 12
     })
     .then(result => {
         const titles = result.map(item => {

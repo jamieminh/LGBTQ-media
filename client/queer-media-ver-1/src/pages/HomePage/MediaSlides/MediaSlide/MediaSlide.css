@@ -27,7 +27,7 @@
 .carousel-item {
     width: 95%;
     height: 100%;
-    margin: 8px;
+    margin-top: 10px;
 }
 
 .CarouselMedia {
@@ -116,7 +116,10 @@
 
 @media (min-width: 576px) {
     .carousel {
-        width: 90%;
+        width: 95%;
+    }
+    .carousel-inner {
+        padding: 0 40px;
     }
     .CarouselWrapper {
         height: 400px;
@@ -130,10 +133,10 @@
         height: 100%;
     }
     .carousel-control-next {
-        right: -5%;
+        right: -4.5%  !important; 
     }
     .carousel-control-prev {
-        left: -5%;
+        left: -4.5% !important;
     }
     .CarouselHeader {
         width: 90%;

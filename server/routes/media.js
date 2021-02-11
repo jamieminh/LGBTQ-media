@@ -93,7 +93,7 @@ router.get('/latest/:type/:limit', (req, res) => {
                 .then(medias => {
                     const titles = medias.map(item => {
                         return {
-                            id: item.media_id,
+                            media_id: item.media_id,
                             title: item.title,
                             released: item.released,
                             poster_url: item.poster_url,
