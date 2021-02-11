@@ -1,0 +1,33 @@
+.AuthBtn {
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.AuthBtn:hover {
+    outline: none;
+}
+
+.AuthBtn:active {
+    outline: none;
+}
+
+.LogoutBtn{
+    color: #df4d52;    
+}
+
+.LogoutBtn:hover{
+    color: #ff5d5d;    
+}
+
+
+.LoginBtn{
+    color: #4be285;    
+}
+
+.LoginBtn:hover{
+    color: #47ff8d;    
+}

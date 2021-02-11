@@ -4,6 +4,7 @@ import './Toolbar.css';
 import Logo from '../../Logo/Logo';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import NavigationItem from './NavigationItem/NavigationItem'
+import AuthenticationButton from '../../Buttons/Entry/AuthenticationBtn'
 
 // class Toolbar extends Component { 
 const Toolbar = (props) => {
@@ -75,7 +76,8 @@ const Toolbar = (props) => {
                     <NavigationItem link="/series">Series</NavigationItem>
                     <NavigationItem link="/animation">Animation</NavigationItem>
                     <NavigationItem link="/genres">Genres</NavigationItem>                                                         
-                                
+                    <AuthenticationButton />                                                         
+
                 </ul>
             </div>
         </nav>

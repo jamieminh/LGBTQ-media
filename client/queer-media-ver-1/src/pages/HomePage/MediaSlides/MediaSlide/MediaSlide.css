@@ -182,4 +182,11 @@
     .MediaImage {
         width: 100%
     }
+
+    .carousel-control-next {
+        right: -5.2%  !important; 
+    }
+    .carousel-control-prev {
+        left: -5.2% !important;
+    }
 }
