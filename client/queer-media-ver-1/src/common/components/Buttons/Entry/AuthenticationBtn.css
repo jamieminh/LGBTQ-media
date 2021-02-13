@@ -1,10 +1,11 @@
 .AuthBtn {
     background-color: transparent;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 20px;
     outline: none;
     border: none;
     cursor: pointer;
+    width: 90px;
 }
 
 .AuthBtn:hover {
