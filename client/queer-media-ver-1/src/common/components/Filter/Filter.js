@@ -1,0 +1,167 @@
+import React, { useState, useEffect } from 'react';
+import { rating_0, rating_1, rating_2, rating_3, rating_4, not_applicable }
+    from '../Lists/ratings'
+
+import allGenres from '../Lists/genres'
+import './Filter.css'
+
+
+const Filter = () => {
+
+    const [selectedGenres, setSelectedGenres] = useState([])
+    const [selectedRatings, setSelectedRatings] = useState(null)
+    const [sortBy, setSortBy] = useState(null)
+
+    
+    const updateSelectedGenres = (cb) => {
+        const genre = cb.target.value;
+        const index = selectedGenres.indexOf(genre)
+        let genres = [...selectedGenres]
+
+        if (index === -1)
+            genres.push(genre)
+        else 
+            genres.splice(index, 1)
+
+        setSelectedGenres(genres)
+    }
+
+    const updateSelectedRadio = (rd) => {
+        const radioName = rd.target.name;
+        const id = rd.target.id;
+
+        // sort by
+        if (radioName === 'sort') {
+            const [type, order] = id.split("_")
+            setSortBy({type: type, order: order})
+        }
+        // filter by rating
+        else {
+            const score = id.split("_")[2]
+            setSelectedRatings(score)
+        }
+    }
+
+    const toggleHandler = (type) => {
+        let toggler = ''
+        let togglee = ''
+        let rotateSibling = ''
+
+        switch (type) {
+            case 'rating':
+                toggler = document.getElementById("RatingTogglerIcon");
+                togglee = document.getElementById("FilterByRating")
+                rotateSibling = document.getElementById("RatingRotateSibling")
+                break
+            case 'genre':
+                toggler = document.getElementById("GenreTogglerIcon");
+                togglee = document.getElementById("FilterByGenre")
+                rotateSibling = document.getElementById("GenreRotateSibling")
+                break
+            default:
+                toggler = document.getElementById("SortTogglerIcon");
+                togglee = document.getElementById("SortBy")
+                rotateSibling = document.getElementById("SortRotateSibling")
+        }
+
+        toggler.classList.toggle('rotate')
+        togglee.classList.toggle('show')
+        rotateSibling.classList.toggle('on')
+    }
+
+    const genresFilter = allGenres.map(genre => (
+        <div className="FiterGenre" key={"filter-by-" + genre}>
+            <input type="checkbox" id={"filter-genre-" + genre} value={genre} onClick={updateSelectedGenres}/>
+            <label htmlFor={"filter-genre-" + genre}>{genre}</label>
+        </div>
+    ))
+
+
+    return (
+        <div className="TitlesFilter">
+
+            <div className="FilterToggler" onClick={() => toggleHandler('sort')}>
+                <h5 id="SortRotateSibling">Sort by</h5>
+                <i className="fas fa-caret-right icon-rotates" id="SortTogglerIcon"></i>
+            </div>
+
+            <div id="SortBy">
+                <div>
+                    <input type="radio" name="sort" id="date_asc" onClick={updateSelectedRadio}/>
+                    <label for="date_asc">Release Date - Latest</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort" id="date_desc" onClick={updateSelectedRadio}/>
+                    <label for="date_desc">Release Date - Oldest</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort" id="rating_asc" onClick={updateSelectedRadio}/>
+                    <label for="rating_asc">IMDB Score - Highest</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort" id="rating_desc" onClick={updateSelectedRadio}/>
+                    <label for="rating_desc">IMDB Score - Lowest</label>
+                </div>
+            </div>
+
+            <div className="FilterToggler" onClick={() => toggleHandler('rating')}>
+                <h5 id="RatingRotateSibling">Filter by Rating</h5>
+                <i className="fas fa-caret-right icon-rotates" id="RatingTogglerIcon"></i>
+            </div>
+
+            <div id="FilterByRating">
+                <div className="RatingStars">
+                    <input type="radio" value="4" name="rating" id="filter_rating_4" onClick={updateSelectedRadio} />
+                    <label for="filter_rating_4" >
+                        <img src={rating_4} alt="filter-by-rating-4-starts"></img>
+                        <span> & up</span>
+                    </label>
+                </div>
+                <div className="RatingStars">
+                    <input type="radio" value="3" name="rating" id="filter_rating_3" onClick={updateSelectedRadio} />
+                    <label for="filter_rating_3">
+                        <img src={rating_3} alt="filter-by-rating-3-starts"></img>
+                        <span> & up</span>
+                    </label>
+                </div>
+                <div className="RatingStars">
+                    <input type="radio" value="2" name="rating" id="filter_rating_2" onClick={updateSelectedRadio} />
+                    <label htmlFor="filter_rating_2">
+                        <img src={rating_2} alt="filter-by-rating-2-starts"></img>
+                        <span> & up</span>
+                    </label>
+                </div>
+                <div className="RatingStars">
+                    <input type="radio" value="1" name="rating" id="filter_rating_1" onClick={updateSelectedRadio} />
+                    <label htmlFor="filter_rating_1">
+                        <img src={rating_1} alt="filter-by-rating-1-starts"></img>
+                        <span> & up</span>
+                    </label>
+                </div>
+                <div className="RatingStars">
+                    <input type="radio" value="0" name="rating-radio" id="filter_rating_0" onClick={updateSelectedRadio} />
+                    <label htmlFor="filter_rating_0">
+                        <img src={rating_0} alt="filter-by-rating-0-starts"></img>
+                        <span> & up</span>
+                    </label>
+                </div>
+                <div className="RatingStars">
+                    <input type="radio" value="na" name="rating-radio" id="filter_rating_na" onClick={updateSelectedRadio} />
+                    <label htmlFor="filter_rating_na">
+                        <img src={not_applicable} alt="filter-by-rating-na"></img>
+                    </label>
+                </div>
+            </div>
+
+            <div className="FilterToggler" onClick={() => toggleHandler('genre')}>
+                <h5 id="GenreRotateSibling">Filter by Genre</h5>
+                <i className="fas fa-caret-right icon-rotates" id="GenreTogglerIcon"></i>
+            </div>
+            <div id="FilterByGenre">
+                {genresFilter}
+            </div>
+        </div>
+    );
+}
+
+export default Filter;

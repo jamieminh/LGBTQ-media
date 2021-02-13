@@ -3,11 +3,31 @@
     margin: 0 auto;
 }
 
+.TypePageContent {
+    display: flex;
+    flex-flow: column;
+}
+
+.TypePageContent > .ListPaginate { order: 2 }
+.TypePageContent > .TitlesFilter { order: 1 } 
+
+
+
 .TypePage > h1 {
     text-align: center;
     font-size: 50px;
     margin-bottom: 40px;
     text-transform: capitalize;
+}
+
+@media (min-width: 769px) {
+    .TypePageContent {
+        flex-flow: row;
+    }
+
+    .TypePageContent > .ListPaginate { order: 1 }
+    .TypePageContent > .TitlesFilter { order: 2 } 
+
 }
 
 @media (min-width: 1280px) {

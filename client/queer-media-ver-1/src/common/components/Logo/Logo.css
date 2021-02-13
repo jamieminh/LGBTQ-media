@@ -18,22 +18,29 @@
 
 .Logo {
     width: 50px;
-    margin-right: 10px;
     padding-bottom: 10px;
 }
-
 .Logo img {
     width: 100%;
 }
 
-@media (max-width: 992px) {
+@media (min-width: 576px) {
     .logo {
-        width: 45px;
+        margin-right: 0;
+        width: 40px;
     }
 }
 
-@media (max-width: 578px) {
-    .logo {
-        width: 40px;
+@media(min-width: 610px) {
+    .Logo {
+        display: none;
+    }
+}
+
+@media(min-width: 700px) {
+    .Logo {
+        margin-right: 10px;
+        width: 45px;
+        display: block;
     }
 }

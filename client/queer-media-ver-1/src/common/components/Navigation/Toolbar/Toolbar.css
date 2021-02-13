@@ -18,9 +18,8 @@
     font-family: 'Gilbert';
     font-size: 25px;
 }
-
-.DropdownMenuRow {
-    margin-right: 20px;
+.ToggleNavbarBtn {
+    margin-right: 10px;
 }
 
 /* .MultiCol a {
@@ -34,19 +33,9 @@
 } */
 
 .custom-toggler.navbar-toggler, .custom-toggler-inside.navbar-toggler {
-    border: 2px solid rgb(255, 255, 255);
     outline: none;
     color: rgb(255, 255, 255);
     font-size: 30px;
-}
-
-.dropdown-menu {
-    background-color: #164461 !important;
-    width: 450px;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
 }
 
 @font-face {
@@ -95,18 +84,30 @@
         height: 100%;
     }
     .navbar-collapse.collapsing {
-        right: -100px;
-        transition: right 200ms ease;
+        right: -110%;
+        transition: right 500ms ease;
     }
     .navbar-collapse.show {
         right: 0;
-        transition: right 200ms ease-in-out;
+        transition: right 500ms ease-in-out;
     }
 }
 
-@media (min-width: 576px) and (max-width:660px) {
-    .navbar-expand-sm .navbar-nav .nav-link {
-        padding-right: 0 !important;
-        padding-left: 0 !important;
+.navbar-expand-sm .navbar-nav .nav-link {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+@media (max-width: 610px) {
+    .m-2 {
+        margin: .5rem 0.3rem !important;
     }
 }
+
+@media (min-width: 720px) {
+    .navbar-expand-sm .navbar-nav .nav-link {
+        padding-right: 0.2rem !important;
+        padding-left: 0.2rem !important;
+    }
+}
+

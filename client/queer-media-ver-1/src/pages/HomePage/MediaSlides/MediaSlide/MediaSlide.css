@@ -65,6 +65,10 @@
     object-fit: cover;
 }
 
+.CarouselMedia a:hover {
+    text-decoration: none;
+}
+
 .CarouselMedia .title {
     margin-top: 10px;
     color: white;

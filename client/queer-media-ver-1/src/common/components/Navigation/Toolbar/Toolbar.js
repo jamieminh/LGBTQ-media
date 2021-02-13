@@ -5,6 +5,7 @@ import Logo from '../../Logo/Logo';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import NavigationItem from './NavigationItem/NavigationItem'
 import AuthenticationButton from '../../Buttons/Entry/AuthenticationBtn'
+import AdminNav from './AdminNavItem/AdminNavItem'
 
 // class Toolbar extends Component { 
 const Toolbar = (props) => {
@@ -41,7 +42,7 @@ const Toolbar = (props) => {
             </NavLink>
 
           
-            <div className="text-right">
+            <div className="text-right ToggleNavbarBtn" >
                 <button className="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
                     <i className="fa fa-bars" ></i>
                 </button>
@@ -51,18 +52,6 @@ const Toolbar = (props) => {
                 <div className="ml-auto"></div>
                 
                 <ul className="navbar-nav flex-nowrap">
-                    {/* <li>
-                        <form className="d-sm-none d-lg-block mx-2 my-auto form-inline">
-                            <div className="input-group">
-                                <input type="text" className="form-control border border-right-0" placeholder="Search..."/>
-                                <span className="input-group-append">
-                                    <button className="btn btn-outline-secondary border border-left-0 bg-dark" type="button">
-                                        <i className="fa fa-search" style={{color: 'white'}}></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-                    </li> */}
                     <li>
                         <div className="TogglerInside">
                             <button className="navbar-toggler custom-toggler-inside" type="button" data-toggle="collapse" data-target="#myNavbar">
@@ -76,8 +65,8 @@ const Toolbar = (props) => {
                     <NavigationItem link="/series">Series</NavigationItem>
                     <NavigationItem link="/animation">Animation</NavigationItem>
                     <NavigationItem link="/genres">Genres</NavigationItem>                                                         
-                    <AuthenticationButton />                                                         
-
+                    {/* <AuthenticationButton />                                                          */}
+                    <AdminNav />
                 </ul>
             </div>
         </nav>

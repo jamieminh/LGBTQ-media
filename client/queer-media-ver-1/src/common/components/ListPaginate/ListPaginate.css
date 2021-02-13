@@ -121,6 +121,10 @@
         margin-bottom: -20px;
         margin-right: 10px;
     }
+
+    .ListPaginate {
+        width: 75%;
+    }
 }
 
 
@@ -141,6 +145,10 @@
 
     .PageJump {
         margin-right: 20px
+    }
+
+    .ListPaginate {
+        width: 80%;
     }
 }
 
