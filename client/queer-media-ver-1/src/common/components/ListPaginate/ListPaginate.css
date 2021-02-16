@@ -108,12 +108,14 @@
         margin-top: 50px;
     }
 
+
 }
 
 @media (min-width: 769px) {
     .pagination a {
         padding: 1.8vw;
     }
+
 
     .PageJump {
         margin: 0;
@@ -150,6 +152,7 @@
     .ListPaginate {
         width: 80%;
     }
+
 }
 
 @media (min-width: 1440px) {

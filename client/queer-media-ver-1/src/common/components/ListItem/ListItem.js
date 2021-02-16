@@ -27,7 +27,7 @@ const ListItem = (props) => {
                         e.target.src = notFound
                     }}
                     alt={result.title + "-poster"} />
-                <p>{result.title} {year}</p>
+                <p className="ListItemTitle">{result.title} {year}</p>
             </Link>
         </div>
 

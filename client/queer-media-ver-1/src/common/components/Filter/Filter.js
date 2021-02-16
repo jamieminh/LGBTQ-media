@@ -1,31 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import * as actionCreators from '../../../store/actions/index'
 import { rating_0, rating_1, rating_2, rating_3, rating_4, not_applicable }
     from '../Lists/ratings'
 
 import allGenres from '../Lists/genres'
 import './Filter.css'
+import { useDispatch } from 'react-redux';
 
 
 const Filter = () => {
-
-    const [selectedGenres, setSelectedGenres] = useState([])
-    const [selectedRatings, setSelectedRatings] = useState(null)
-    const [sortBy, setSortBy] = useState(null)
-
+    const dispatch = useDispatch()
     
+    // function to handle genres filter by dispatching actions to the store
     const updateSelectedGenres = (cb) => {
-        const genre = cb.target.value;
-        const index = selectedGenres.indexOf(genre)
-        let genres = [...selectedGenres]
-
-        if (index === -1)
-            genres.push(genre)
-        else 
-            genres.splice(index, 1)
-
-        setSelectedGenres(genres)
+        const genre = cb.target.value
+        const checked = cb.target.checked
+        if (checked)    // true means user has selected it
+            dispatch(actionCreators.addGenreFilter(genre))
+        else            // de-select
+            dispatch(actionCreators.removeGenreFilter(genre))
     }
 
+    // function to handle rating filter and sort by dispatching actions to the store
     const updateSelectedRadio = (rd) => {
         const radioName = rd.target.name;
         const id = rd.target.id;
@@ -33,15 +29,16 @@ const Filter = () => {
         // sort by
         if (radioName === 'sort') {
             const [type, order] = id.split("_")
-            setSortBy({type: type, order: order})
+            dispatch(actionCreators.sortBy(type, order))
         }
         // filter by rating
         else {
             const score = id.split("_")[2]
-            setSelectedRatings(score)
+            dispatch(actionCreators.setRatingFilter(score))
         }
     }
 
+    //function to add classes to handle css of dropdowns
     const toggleHandler = (type) => {
         let toggler = ''
         let togglee = ''
@@ -80,6 +77,7 @@ const Filter = () => {
     return (
         <div className="TitlesFilter">
 
+{/* Sort Titles by Release Date (asc/desc) or IMDB score (asc/desc) */}
             <div className="FilterToggler" onClick={() => toggleHandler('sort')}>
                 <h5 id="SortRotateSibling">Sort by</h5>
                 <i className="fas fa-caret-right icon-rotates" id="SortTogglerIcon"></i>
@@ -87,23 +85,24 @@ const Filter = () => {
 
             <div id="SortBy">
                 <div>
-                    <input type="radio" name="sort" id="date_asc" onClick={updateSelectedRadio}/>
-                    <label for="date_asc">Release Date - Latest</label>
-                </div>
-                <div>
                     <input type="radio" name="sort" id="date_desc" onClick={updateSelectedRadio}/>
-                    <label for="date_desc">Release Date - Oldest</label>
+                    <label for="date_desc">Release Date - Latest</label>
                 </div>
                 <div>
-                    <input type="radio" name="sort" id="rating_asc" onClick={updateSelectedRadio}/>
-                    <label for="rating_asc">IMDB Score - Highest</label>
+                    <input type="radio" name="sort" id="date_asc" onClick={updateSelectedRadio}/>
+                    <label for="date_asc">Release Date - Oldest</label>
                 </div>
                 <div>
                     <input type="radio" name="sort" id="rating_desc" onClick={updateSelectedRadio}/>
-                    <label for="rating_desc">IMDB Score - Lowest</label>
+                    <label for="rating_desc">IMDB Score - Highest</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort" id="rating_asc" onClick={updateSelectedRadio}/>
+                    <label for="rating_asc">IMDB Score - Lowest</label>
                 </div>
             </div>
 
+{/* Filter Titles by Ratings  */}
             <div className="FilterToggler" onClick={() => toggleHandler('rating')}>
                 <h5 id="RatingRotateSibling">Filter by Rating</h5>
                 <i className="fas fa-caret-right icon-rotates" id="RatingTogglerIcon"></i>
@@ -139,20 +138,21 @@ const Filter = () => {
                     </label>
                 </div>
                 <div className="RatingStars">
-                    <input type="radio" value="0" name="rating-radio" id="filter_rating_0" onClick={updateSelectedRadio} />
+                    <input type="radio" value="0" name="rating" id="filter_rating_0" onClick={updateSelectedRadio} />
                     <label htmlFor="filter_rating_0">
                         <img src={rating_0} alt="filter-by-rating-0-starts"></img>
                         <span> & up</span>
                     </label>
                 </div>
                 <div className="RatingStars">
-                    <input type="radio" value="na" name="rating-radio" id="filter_rating_na" onClick={updateSelectedRadio} />
+                    <input type="radio" value="na" name="rating" id="filter_rating_na" onClick={updateSelectedRadio} />
                     <label htmlFor="filter_rating_na">
                         <img src={not_applicable} alt="filter-by-rating-na"></img>
                     </label>
                 </div>
             </div>
 
+{/* Filter titles by genres */}
             <div className="FilterToggler" onClick={() => toggleHandler('genre')}>
                 <h5 id="GenreRotateSibling">Filter by Genre</h5>
                 <i className="fas fa-caret-right icon-rotates" id="GenreTogglerIcon"></i>

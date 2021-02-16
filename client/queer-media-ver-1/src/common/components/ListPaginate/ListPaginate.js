@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import ListItem from '../../../common/components/ListItem/ListItem';
 import './ListPaginate.css'
 
-const PER_PAGE = 20;
+const PER_PAGE = 24;        // 24 is divisible by 3 and 4
 
 // props include only titles
 const ListPaginate = (props) => {
@@ -51,10 +51,12 @@ const ListPaginate = (props) => {
             <div className="ListContainer">
                 {/* {goClicked==true ? goToPage() :  */}
                 {currentPageData(currentPage * PER_PAGE)}
+
+                {/* add empty space fill so the last item line wont be cented */}
                 <div className="EmptySpaceFill"></div>
                 <div className="EmptySpaceFill"></div>
                 <div className="EmptySpaceFill"></div>
-                <div className="EmptySpaceFill"></div>
+                {/* <div className="EmptySpaceFill"></div> */}
             </div>
 
             <ReactPaginate

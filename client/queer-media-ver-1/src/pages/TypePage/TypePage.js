@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actionCreators from '../../store/actions/index'
 import ListPaginate from '../../common/components/ListPaginate/ListPaginate'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import Filter from '../../common/components/Filter/Filter'
@@ -8,15 +10,18 @@ import './TypePage.css'
 
 
 const TypePage = (props) => {
-    const [titles, setTitles] = useState(null)
+
+    const titles = useSelector(state => state.media.titles)
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
+        dispatch(actionCreators.resetTitles())
         const url = 'http://localhost:4000/media/latest/' + props.type + '/all'
         axios.get(url)
             .then(res => {
-                const titles = res.data
-                setTitles(titles)
+                const fetchedTitles = res.data
+                dispatch(actionCreators.setTitles(fetchedTitles))
             })
             .catch(err => console.error(err))
     }, [])

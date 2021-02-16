@@ -23,10 +23,6 @@
         display: flex;
         flex-flow: wrap;
     }
-    .EmptySpaceFill {
-        width: 25%;
-        height: 0;
-    }
 }
 
 
@@ -35,9 +31,6 @@
         width: 85%;
     }
 
-    .EmptySpaceFill {
-        width: 20%;
-    }
 }
 
 @media (min-width: 1440px) {
