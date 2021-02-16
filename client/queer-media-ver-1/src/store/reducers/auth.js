@@ -1,0 +1,5 @@
+
+
+const initState = {
+    role: null,
+}

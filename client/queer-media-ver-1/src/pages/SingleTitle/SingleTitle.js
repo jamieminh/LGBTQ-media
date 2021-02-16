@@ -12,7 +12,7 @@ import {
     rating_1_5, rating_2, rating_2_5, rating_3,
     rating_3_5, rating_4, rating_4_5, rating_5,
     imdb, metacritic, tomato
-} from './ratings'
+} from '../../common/components/Lists/ratings'
 import './SingleTitle.css'
 import AlsoLike from './AlsoLike/AlsoLike';
 

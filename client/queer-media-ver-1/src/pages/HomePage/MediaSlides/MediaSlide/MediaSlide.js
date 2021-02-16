@@ -25,12 +25,6 @@ const MediaSlide = (props) => {
     }, [])
 
     const carouseSlide = (startPos, range) => {
-        let seeMore = <div></div>
-        if (range === 3) {
-            seeMore = <div className="col-sm-3 CarouselMedia SeeMore">
-                <p>See More</p>
-            </div>
-        }
         return (
             <div className="row">
                 {[...titles].splice(startPos, range).map(item => {
@@ -51,19 +45,18 @@ const MediaSlide = (props) => {
                         </div>
                     )
                 })}
-                {seeMore}
             </div>
         )
     }
 
-    const carouseSlideXS = (item) => {
+    const carouseSlideXS = (item, active="") => {
         return (
-            <div className="carousel-item" key={item.media_id}>
+            <div className={"carousel-item " + active} key={item.media_id}>
                 <div className="CarouselMedia">
                     <Link to={"/media/" + item.media_id}>
                         <p className="MediaScore">{(item.score === 'N/A') ? '__' : item.score}</p>
                         <img className="MediaImage"
-                            src={item.poster}
+                            src={item.poster_url}
                             onError={(e) => {
                                 e.target.onerror = null;
                                 e.target.src = notFound
@@ -94,7 +87,6 @@ const MediaSlide = (props) => {
         )
     }
 
-    let firstItem = (!titles) ? '' : { ...titles[0] };
     return (
         (!titles) ? <Spinner /> :
 
@@ -123,21 +115,7 @@ const MediaSlide = (props) => {
                 {/* Carousel for xs screens */}
                 <div className="carousel slide CarouselGenre d-sm-none" id={props.rank + props.type + "xs"}>
                     <div className="carousel-inner">
-                        <div className="carousel-item active">
-                            <div className="CarouselMedia">
-                                <Link to={"/media/" + firstItem.media_id}>
-                                    <p className="MediaScore">{(firstItem.score === 'N/A') ? '__' : firstItem.score}</p>
-                                    <img className="MediaImage"
-                                        src={firstItem.poster}
-                                        onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = notFound
-                                        }}
-                                        alt={firstItem.title + "-poster"} />
-                                    <p className="title">{firstItem.title + " (" + firstItem.released + ") "}</p>
-                                </Link>
-                            </div>
-                        </div>
+                        {carouseSlideXS({ ...titles[0] }, "active")}
                         {[...titles].splice(1, 11).map(item => carouseSlideXS(item))}
 
                         {carouselControls(true)}

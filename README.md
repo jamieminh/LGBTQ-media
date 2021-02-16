@@ -6,3 +6,5 @@
 - Still at server folder, use ```$ npm run dev``` to run both client (port 3000) and server (port 4000)
 - Or use ```$ npm run server``` to run only the server
 
+## Authentication and Authorization are done with Auth0
+- New branch test

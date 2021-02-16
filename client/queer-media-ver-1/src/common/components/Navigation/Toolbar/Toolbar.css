@@ -1,5 +1,3 @@
-
-
 .Navbar {
     background-color: #1d5477 !important;
     height: 80px;
@@ -16,14 +14,12 @@
     width: 100%;
 }
 
-
 .NavbarText {
     font-family: 'Gilbert';
     font-size: 25px;
 }
-
-.DropdownMenuRow {
-    margin-right: 20px;
+.ToggleNavbarBtn {
+    margin-right: 10px;
 }
 
 /* .MultiCol a {
@@ -35,24 +31,12 @@
 	text-decoration: none;
 	background-color: #0a3753;
 } */
-  
-.custom-toggler.navbar-toggler, 
-.custom-toggler-inside.navbar-toggler {
-    border: 2px solid rgb(255, 255, 255);
+
+.custom-toggler.navbar-toggler, .custom-toggler-inside.navbar-toggler {
     outline: none;
     color: rgb(255, 255, 255);
     font-size: 30px;
-} 
-
-.dropdown-menu {
-    background-color: #164461 !important;
-    width: 450px;
 }
-
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
 
 @font-face {
     font-family: "Gilbert";
@@ -61,25 +45,34 @@
     font-style: normal;
 }
 
+#queer-1, #queer-6 {
+    color: #D344B0;
+}
 
-#queer-1, #queer-6 { color: #D344B0; }
-#queer-2, #queer-7 { color: #08B4E4; }
-#queer-3, #queer-8 { color: #30C979; }
-#queer-4, #queer-9 { color: #FBBF47; }
-#queer-5, #queer-10 { color: #FA7015; }
+#queer-2, #queer-7 {
+    color: #08B4E4;
+}
 
+#queer-3, #queer-8 {
+    color: #30C979;
+}
+
+#queer-4, #queer-9 {
+    color: #FBBF47;
+}
+
+#queer-5, #queer-10 {
+    color: #FA7015;
+}
 
 @media (max-width: 575px) {
-
     .TogglerInside {
         height: 80px;
     }
-
     .custom-toggler-inside.navbar-toggler {
         margin-top: 20px;
         margin-left: 10px;
     }
-
     .navbar-collapse {
         background-color: #1d5477;
         position: fixed;
@@ -90,15 +83,31 @@
         width: 100px;
         height: 100%;
     }
-
     .navbar-collapse.collapsing {
-        right: -100px;
-        transition: right 200ms ease;
+        right: -110%;
+        transition: right 500ms ease;
     }
-    
     .navbar-collapse.show {
         right: 0;
-        transition: right 200ms ease-in-out;
+        transition: right 500ms ease-in-out;
     }
-    
 }
+
+.navbar-expand-sm .navbar-nav .nav-link {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+@media (max-width: 610px) {
+    .m-2 {
+        margin: .5rem 0.3rem !important;
+    }
+}
+
+@media (min-width: 720px) {
+    .navbar-expand-sm .navbar-nav .nav-link {
+        padding-right: 0.2rem !important;
+        padding-left: 0.2rem !important;
+    }
+}
+

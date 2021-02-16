@@ -1,0 +1,6 @@
+export const SET_TITLES = 'SET_TITLES'
+export const RESET_TITLES = 'RESET_TITLES'
+export const ADD_GENRE_FILTER = 'ADD_GENRE_FILTER'
+export const REMOVE_GENRE_FILTER = 'REMOVE_GENRE_FILTER'
+export const SET_RATING_FILTER = 'SET_RATING_FILTER'
+export const SORT_BY = 'SORT_BY'
