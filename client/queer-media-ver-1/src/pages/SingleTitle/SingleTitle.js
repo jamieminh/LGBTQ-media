@@ -6,6 +6,7 @@ import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
 import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import blank_user from '../../assets/images/blank_user.png'
+import Error from '../ErrorPage/Error'
 
 import {
     not_applicable, rating_0, rating_0_5, rating_1,
@@ -164,7 +165,7 @@ class SingleTitle extends Component {
 
     render() {
 
-        var content = <p>We cannot find any information for whatever you are looking for</p>
+        var content = <Error />
 
 
         if (this.state.isExist) {

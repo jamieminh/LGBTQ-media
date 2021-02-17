@@ -146,7 +146,7 @@
     }
 
     .PageJump {
-        margin-right: 20px
+        margin-right: 15px
     }
 
     .ListPaginate {
@@ -157,10 +157,9 @@
 
 @media (min-width: 1440px) {
     .PageJump {
-        margin-right: calc(10vw + 4%);
+        margin-right: 20px;
     }
 }
-
 
 @media (min-width: 1600px) {
     .pagination a {
@@ -168,6 +167,6 @@
     }
 
     .PageJump {
-        margin-right: calc(10vw + 12%);
+        margin-right: 12px;
     }
 }

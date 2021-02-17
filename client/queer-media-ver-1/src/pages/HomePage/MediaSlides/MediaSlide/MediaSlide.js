@@ -8,6 +8,7 @@ import notFound from '../../../../assets/images/notfound.jpg'
 
 const MediaSlide = (props) => {
     const [titles, setTitles] = useState(null)
+    const state = props.rank === 'latest' ? { seeMore: true } : null     // this only applies to seemore of 'Highest...' since the data fetched at the Type Page is already sorted
 
     useEffect(() => {
         let url = '';
@@ -23,6 +24,7 @@ const MediaSlide = (props) => {
             })
             .catch(err => console.log(err))
     }, [])
+
 
     const carouseSlide = (startPos, range) => {
         return (
@@ -49,7 +51,7 @@ const MediaSlide = (props) => {
         )
     }
 
-    const carouseSlideXS = (item, active="") => {
+    const carouseSlideXS = (item, active = "") => {
         return (
             <div className={"carousel-item " + active} key={item.media_id}>
                 <div className="CarouselMedia">
@@ -93,7 +95,15 @@ const MediaSlide = (props) => {
             <div className=" CarouselWrapper">
                 <div className="CarouselHeader">
                     <h3 className="CarouselTitle">{props.title}</h3>
-                    <Link to='/' className="SeeMoreOut">View more &gt;</Link>
+
+                    <Link to={{
+                        pathname: '/' + (props.type === 'movie' ? 'movies' : props.type),
+                        state: (props.rank === 'highest') ? { seeMore: true } : null     // this only applies to seemore of 'Highest...' since the data fetched at the Type Page is already sorted
+                    }} className="SeeMoreOut">
+                        <button className="SeeMoreButton">
+                            See More <i class="fas fa-angle-right"></i>
+                        </button>
+                    </Link>
                 </div>
 
                 {/* Carousel for sm and larger screens */}

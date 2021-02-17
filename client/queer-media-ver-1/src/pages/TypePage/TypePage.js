@@ -8,7 +8,6 @@ import Filter from '../../common/components/Filter/Filter'
 import './TypePage.css'
 
 
-
 const TypePage = (props) => {
 
     const titles = useSelector(state => state.media.titles)
@@ -16,12 +15,19 @@ const TypePage = (props) => {
 
 
     useEffect(() => {
-        dispatch(actionCreators.resetTitles())
+        const state = props.location.state
+        dispatch(actionCreators.resetTitles())  // reset store titles because when this function fires, user likely came from another page
+
         const url = 'http://localhost:4000/media/latest/' + props.type + '/all'
         axios.get(url)
             .then(res => {
                 const fetchedTitles = res.data
                 dispatch(actionCreators.setTitles(fetchedTitles))
+
+                // if the page is prompted from the See More links in Home page
+                if (state !== null) {
+                    dispatch(actionCreators.sortBy('rating', 'desc'))
+                }
             })
             .catch(err => console.error(err))
     }, [])

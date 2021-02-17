@@ -1,5 +1,10 @@
 /* Mobile First */
 
+
+.carousel {
+    width: 300px;
+}
+
 .CarouselWrapper {
     width: 100%;
     margin: 25px auto;
@@ -33,7 +38,8 @@
 .CarouselMedia {
     text-align: center;
     position: relative;
-    margin: 20px auto;
+    margin: 10px auto;
+    width: 90%;
 }
 
 .CarouselMedia a {
@@ -41,8 +47,18 @@
 }
 
 .CarouselMedia a:hover{
+    text-decoration: none;
     opacity: 0.9;
     z-index: -1;
+}
+
+.CarouselMedia .title {
+    margin-top: 10px;
+    color: white;
+}
+
+.CarouselMedia .title:hover {
+    color: rgb(223, 223, 223);
 }
 
 .MediaScore {
@@ -65,26 +81,8 @@
     object-fit: cover;
 }
 
-.CarouselMedia a:hover {
-    text-decoration: none;
-}
-
-.CarouselMedia .title {
-    margin-top: 10px;
-    color: white;
-}
-
-.CarouselMedia .title:hover {
-    color: rgb(223, 223, 223);
-}
-
 .fa {
     color: rgb(255, 255, 255);
-}
-
-.SeeMore {
-    margin: 0 auto;
-    margin-top: 22%;
 }
 
 .CarouselHeader {
@@ -99,24 +97,39 @@
     left: -30px;
 }
 
-.CarouselHeader a {
+.SeeMoreOut{
     position: absolute;
     right: 0;
-    bottom: -420px;
+    bottom: -435px;
     text-decoration: none;
     color: white;
 }
 
-.carousel {
-    width: 300px;
+.SeeMoreOut button {
+    position: relative;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 3px 25px 3px 12px;
+    background-color: #17a2b8;
+    color: white;
+    font-weight: 500;
 }
 
-.CarouselMedia {
-    margin: auto;
-    width: 90%;
+.SeeMoreOut button:hover {
+    outline: none;
+    opacity: 0.9;
 }
 
-@media (min-width: 481px) {}
+.SeeMoreOut i {
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    font-size: 17px;
+}
+
 
 @media (min-width: 576px) {
     .carousel {
@@ -148,7 +161,7 @@
     }
     .CarouselHeader a {
         bottom: 10px;
-        right: 5px;
+        right: -15px;
     }
 }
 

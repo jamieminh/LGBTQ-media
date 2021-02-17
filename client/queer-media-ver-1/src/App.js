@@ -29,9 +29,9 @@ function App() {
       <div className="App">
         <Layout>
           <Switch>
-            <Route path="/movies" exact component={() => <TypePage type="movie" key="movies" />} />
-            <Route path="/series" exact component={() => <TypePage type="series" key="series" />} />
-            <Route path="/animation" exact component={() => <TypePage type="animation" key="animation" />} />
+            <Route path="/movies" exact component={(props) => <TypePage {...props} type="movie" key="movies" />} />
+            <Route path="/series" exact component={(props) => <TypePage {...props} type="series" key="series" />} />
+            <Route path="/animation" exact component={(props) => <TypePage {...props} type="animation" key="animation" />} />
 
             <Route path="/login" exact component={Home} />
 
