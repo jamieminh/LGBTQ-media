@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { config_1 } from '../../config'
-import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
+import { Link } from 'react-router-dom'
 
+import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
 import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import blank_user from '../../assets/images/blank_user.png'
@@ -58,17 +59,18 @@ class SingleTitle extends Component {
         rated: null,
         type: null,
         year_end: null,
+        imdb_url: null,
         languages: null,        // a list of languages as Strings
         genres: null,           // a list of genres as Strings
         reviewers: null,        // a list of reviewers {reviewer, score}
-        // artists: null,          // a list of artists {artist name, artist id}
-        artists: [
-            { name: 'Charlize Theron', id: 12, img_url: blank_user },
-            { name: 'Sofia Boutella', id: 344, img_url: blank_user },
-            { name: 'James McAvoy', id: 444, img_url: blank_user },
-            { name: 'John Something Goodman', id: 124, img_url: blank_user },
-            { name: 'Scarlett Johansson', id: 112, img_url: blank_user }
-        ],
+        artists: null,          // a list of artists {artist name, artist id}
+        // artists: [
+        //     { name: 'Charlize Theron', id: 12, img_url: blank_user },
+        //     { name: 'Sofia Boutella', id: 344, img_url: blank_user },
+        //     { name: 'James McAvoy', id: 444, img_url: blank_user },
+        //     { name: 'John Something Goodman', id: 124, img_url: blank_user },
+        //     { name: 'Scarlett Johansson', id: 112, img_url: blank_user }
+        // ],
         directors: null         // a list of directors {director name, director id}
     }
 
@@ -87,8 +89,8 @@ class SingleTitle extends Component {
                         isExist: true, media_id: media.media_id, title: media.title,
                         rated: media.rated, released: media.released, plot: media.plot,
                         poster_url: media.poster_url, type: media.type, year_end: media.year_end,
-                        languages: media.languages, genres: res.data.genres,
-                        reviewers: res.data.reviewers, directors: res.data.directors
+                        languages: media.languages, imdb_url: media.imdb_url, genres: res.data.genres,
+                        artists: res.data.artists, reviewers: res.data.reviewers, directors: res.data.directors
                     })
                 }
             })
@@ -169,15 +171,12 @@ class SingleTitle extends Component {
 
 
         if (this.state.isExist) {
-            var directors = []
-            this.state.directors.map(director => directors.push(director.name))
-            var review_scores = this.state.reviewers.map(review => {
-                console.log(review.name);
+            var directors = this.state.directors.map(director => director.name)     // get directors' names
+            var review_scores = this.state.reviewers.map(review => {        // format the ratings
                 let review_img = (review.name === "imdb") ? imdb : (review.name === "metacritic") ? metacritic : tomato
                 return (
                     <div className="SingleTitleReviewer" key={this.state.media_id + "-" + review.name}>
-                        {/* <span>{review.name}</span> */}
-                        <img src={review_img} alt={review.name + " logo"}></img>
+                        <a href={this.state.imdb_url} target="_blank"><img src={review_img} alt={review.name + " logo"}></img></a>
                         <img
                             src={this.getRatingStars(review.score, review.name === "imdb")}
                             alt={review.name + " rating"}></img>
@@ -187,6 +186,7 @@ class SingleTitle extends Component {
             })
 
             const year = this.state.released + (this.state.year_end == 0 ? '' : ' - ' + this.state.year_end)
+
             content = (
                 <div className="SingleTitle">
                     <div className="GeneralInfo">
@@ -222,8 +222,11 @@ class SingleTitle extends Component {
                         <div className="SingleTitleArtists">
                             {this.state.artists.map(artist =>
                                 <div className="SingleTitleArtist" key={artist.name}>
-                                    <img src={artist.img_url} alt={artist.name + " profile picture"}></img>
-                                    <p>{artist.name}</p>
+                                    {/* <img src={artist.img_url} alt={artist.name + " profile picture"}></img> */}
+                                    <Link to={'/artist/' + artist.artist_id}>
+                                        <img src={blank_user} alt={artist.name + " profile picture"}></img>
+                                        <p>{artist.name}</p>
+                                    </Link>
                                 </div>
                             )}
                         </div>

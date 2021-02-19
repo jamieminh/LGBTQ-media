@@ -32,6 +32,9 @@ const Media = db.define('Media', {
     year_end: {
         type: DataTypes.STRING
     },
+    imdb_url: {
+        type: DataTypes.STRING
+    },
     language: {
         type: DataTypes.STRING
     }

@@ -1,0 +1,66 @@
+.ArtistPage {
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.ArtistPage h2 {
+    margin-bottom: 40px;
+}
+
+.ArtistPage > .ListPaginate {
+    margin: 0 auto;
+}
+
+@media (min-width: 481px) {
+    .ArtistPage > .ListPaginate > .PageJump {
+        margin-right: 5vw;
+    }
+
+    .ArtistPage {
+        width: 90%;
+    }
+}
+
+@media (min-width: 769px) {
+
+}
+
+@media (min-width: 840px) {
+    .ArtistPage > .ListPaginate > .PageJump {
+        margin-right: 3vw;
+    }
+}
+
+@media (min-width: 1024px) {
+    .ArtistPage {
+        width: 82%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .ArtistPage {
+        width: 88%;
+    }
+
+    .ArtistPage > .ListPaginate > .PageJump {
+        margin-right: 1.5vw;
+    }
+}
+
+@media (min-width: 1440px) {
+    .ArtistPage {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .ArtistPage {
+        width: 1200px;
+    }
+
+    .ArtistPage > .ListPaginate > .PageJump {
+        margin-right: 1vw;
+    }
+
+}

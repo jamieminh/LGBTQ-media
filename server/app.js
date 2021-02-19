@@ -33,6 +33,8 @@ app.use('/media', require('./routes/media'))
 // access /reviewers pages
 app.use('/reviewers', require('./routes/reviewers'))
 
+// access /artist pages
+app.use('/artist', require('./routes/artists'))
 
 app.listen(PORT, () => console.log("Server started on Port " + PORT))
 

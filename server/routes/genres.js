@@ -39,79 +39,67 @@ router.get('/:genre', (req, res) => {
 router.get('/multiple/:genres', (req, res) => {
     const genres = req.params.genres.split("+")
     let len = genres.length
-    let limit = len * 300
-    let offset = Math.round(Math.random() * 50)
-    const query_in = []
-    let same_genres = []
+    let limit = len * 100       // get 100 titles for each genre
+    let offset = Math.round(Math.random() * 500)
+    let query_in = []
+    let same_genres_titles = []
+    const suggestionNums = 6
 
-    
-
-    // if drama is the only genre
-    if (len == 1 && genres[0] === 'drama') {
-        query_in.push({ genre_id: genre_ids['drama']})
-        offset += 100
-    }
 
     // if there's only 1 genre
-    if (len == 1) 
-        limit = 5
-    else {
-        genres.map(genre => {
-            if (genre !== 'drama')      // omit drama because there're too many (nearly 3200)
-                query_in.push({ genre_id: genre_ids[genre.replace('-', '_')] })
-            else if (genre === 'drama' && len != 1)
-                len -= 1
-            if (genre === 'romance' && genres.length !=1)
-                limit += 500
-        })
-    }
-
-
-    console.log(query_in);
-
+    if (len == 1)
+        limit = suggestionNums
+    
+    query_in = genres.map(genre => ({ genre_id: genre_ids[genre.replace('-', '_')] }))
 
     Media_Genre.findAll({
         where: { [Op.or]: query_in },
         attributes: ['media_id'],
         offset: offset,
+        order: [['media_id', 'ASC']],
         limit: limit
     })
         .then(results => {
-            let count = {}
             // res.send(results)
-            // count the appearance of each id
-            for (let i = 0; i < results.length; i++) {
-                const media_id = results[i].media_id
-                if (count[media_id] == null)        // if not visited, add it
-                    count[media_id] = 1
-                else {                              // update value of a visited genre
-                    const update = count[media_id] + 1
-                    count[media_id] = update
-                }
-            }
-
-
-            for (let target = len; target > 0; target--) {
-                for (const media_id in count) {
-                    if (same_genres.length === 4)
-                        break
-
-                    if (count[media_id] === target) {
-                        same_genres.push(media_id)
-                        delete count[media_id]
+            if (len != 1) {
+                let count = {}                
+                // count the appearance of each id
+                for (let i = 0; i < results.length; i++) {
+                    const media_id = results[i].media_id
+                    if (count[media_id] == null)        // if not visited, add it
+                        count[media_id] = 1
+                    else {                              // update value of a visited genre
+                        const update = count[media_id] + 1
+                        count[media_id] = update
                     }
                 }
 
-                if (same_genres.length === 4)
-                    break
+
+                for (let target = len; target > 0; target--) {
+                    for (const media_id in count) {
+                        if (same_genres_titles.length === suggestionNums)
+                            break
+
+                        if (count[media_id] === target) {
+                            same_genres_titles.push(media_id)
+                            delete count[media_id]
+                        }
+                    }
+
+                    if (same_genres_titles.length === suggestionNums)
+                        break
+                }
             }
+            else {
+                same_genres_titles = results.map(item => item.media_id)
+            }
+
 
             // res.send(count)
         })
         .then(r => {
             // find information of ids found
-            console.log(same_genres.length);
-            // res.send(same_genres)
+            console.log(same_genres_titles);
 
             Media.findAll({
                 include: [{
@@ -120,16 +108,19 @@ router.get('/multiple/:genres', (req, res) => {
                     where: { reviewer_id: 'im' }
                 }],
                 where: {
-                    media_id: { [Op.in]: same_genres }
+                    media_id: { [Op.in]: same_genres_titles }
                 },
-                attributes: ['media_id', 'title', 'released', 'poster_url'],
+                attributes: ['media_id', 'title', 'released', 'poster_url', 'year_end'],
             })
                 .then(results => {
                     const titles = results.map(item => {
-                        return {media_id: item.media_id, title: item.title, released: item.released,
-                            poster_url: item.poster_url, score_imdb: item.Media_Reviewers[0].score}
+                        return {
+                            media_id: item.media_id, title: item.title, 
+                            released: item.released, year_end: item.year_end,
+                            poster_url: item.poster_url, score_imdb: item.Media_Reviewers[0].score
+                        }
                     })
-                    res.send(titles) 
+                    res.send(titles)
                 })
                 .catch(err => console.error(err))
         })

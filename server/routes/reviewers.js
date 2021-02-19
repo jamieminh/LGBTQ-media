@@ -34,7 +34,7 @@ const getHighest = (type, res) => {
                 include: {
                     model: Media,
                     as: 'Media',
-                    attributes: ['media_id', 'title', 'poster_url', 'released'],
+                    attributes: ['media_id', 'title', 'poster_url', 'released', 'year_end'],
                     // 'where' to be added conditionally 
                     include: { model: Genre, attributes: ['name'] }
                 },
@@ -61,7 +61,7 @@ const getHighest = (type, res) => {
                         const media = item.Media;
                         return {
                             score: item.score, media_id: media.media_id, released: media.released,
-                            title: media.title, poster_url: media.poster_url,
+                            title: media.title, poster_url: media.poster_url, year_end: media.year_end,
                             genres: media.Genres.map(genre => genre.name)
                         }
                     })

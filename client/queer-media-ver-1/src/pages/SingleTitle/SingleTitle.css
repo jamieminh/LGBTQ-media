@@ -72,7 +72,20 @@
     margin-bottom: 20px;
 }
 
-.SingleTitleArtist>img {
+.SingleTitleArtist a {
+    color: white;
+}
+
+.SingleTitleArtist a:hover {
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+.SingleTitleArtist a:hover p {
+    color: white;
+}
+
+.SingleTitleArtist img {
     width: 100px;
     height: 140px;
     object-fit: cover;
@@ -80,15 +93,19 @@
     border-radius: 4px;
 }
 
+.SingleTitlePlot p {
+    text-align: justify;
+}
+
 .SingleTitleTrailer > div {
     height: 46.5vw;
 }
 
 .TitleMainContent > div {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
-.AlsoLike h3 {
+.TitleMainContent h3 {
     margin-bottom: 25px;
 }
 
@@ -118,6 +135,12 @@
     }
     .SingleTitleArtist {
         width: 33%;
+    }
+}
+
+@media (min-width: 660px) {
+    .SingleTitleArtist {
+        width: 25%;
     }
 }
 
@@ -152,7 +175,7 @@
         width: 130px;
     }
 
-    .SingleTitleArtist>img {
+    .SingleTitleArtist img {
         width: 90px;
         height: 130px;
     }

@@ -9,7 +9,7 @@ import './TrailerEmbed.css'
 class TrailerEmbed extends Component {
     state = {
         // trailerId: null,
-        trailerId: 'YJVLNt2ZNmM'
+        trailerId: null
     }
 
     componentDidMount() {

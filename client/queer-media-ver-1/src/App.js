@@ -15,6 +15,7 @@ import CreateMedia from './pages/AdminPages/CreateMediaPage/CreateMedia'
 import './App.css';
 import Layout from './hoc/Layout/Layout';
 import SingleTitle from './pages/SingleTitle/SingleTitle';
+import ArtistPage from './pages/ArtistPage/ArtistPage';
 
 function App() {
 
@@ -38,6 +39,10 @@ function App() {
             <Route path="/genres" exact component={AllGenres} />
             <Route path="/genres/:genre"
               component={(props) => <GenrePage {...props} genre={props.match.params.genre} key={window.location.pathname} />}
+            />
+
+            <Route path="/artist/:artist_id"
+              component={(props) => <ArtistPage {...props} artist={props.match.params.artist_id} key={window.location.pathname} />}
             />
 
             <Route path="/search/:query"

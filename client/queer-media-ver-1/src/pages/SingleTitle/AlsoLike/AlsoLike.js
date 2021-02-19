@@ -12,7 +12,6 @@ class AlsoLike extends Component {
 
     componentDidMount() {
         const genres = this.props.genres.join('+')
-        console.log('http://localhost:4000/genres/multiple/' + genres);
         axios.get('http://localhost:4000/genres/multiple/' + genres)
             .then(res => {
                 const titles = res.data;
@@ -27,6 +26,7 @@ class AlsoLike extends Component {
         let content = ''
         if (this.state.titles) {
             content = this.state.titles.map(item => {
+                let year = item.released + (item.year_end == 0 ? '' :  ' - ' + item.year_end)
                 return (
                 <div className="AlsoLikeItem" key={item.media_id}>
                     <Link to={"/media/" + item.media_id}>
@@ -38,7 +38,7 @@ class AlsoLike extends Component {
                                 e.target.src = notFound
                             }}
                             alt={item.title + "-poster"} />
-                        <p className="title">{item.title + " (" + item.released + ") "}</p>
+                        <p className="title">{item.title + "(" + year + ")"}</p>
                     </Link>
                 </div>)
             })

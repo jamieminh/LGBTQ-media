@@ -97,9 +97,11 @@ router.get("/full/:id", (req, res) => {
                 res.send(null)
             else {
                 const media = {
-                    media_id: result.media_id, title: result.title, released: result.released,
-                    plot: result.plot, poster_url: result.poster_url, rated: result.rated,
-                    type: result.type, year_end: result.year_end, languages: result.language.split(", ")
+                    media_id: result.media_id, title: result.title, 
+                    released: result.released, plot: result.plot, 
+                    poster_url: result.poster_url, rated: result.rated, 
+                    imdb_url: result.imdb_url, type: result.type, 
+                    year_end: result.year_end, languages: result.language.split(", ")
                 }
 
                 const genres = result.Genres.map(item => item.name)
@@ -162,7 +164,7 @@ const getLatest = (type, limit, res) => {
         include: { model: Genre, attributes: [], where: { name: 'animation' } },
     })
         .then(result => {
-            const ids = result.map(item => item.media_id);
+            const ids = result.map(item => item.media_id);      // ids of animations 
             let findAllParams = {
                 include: [{
                     model: Media_Reviewer,
@@ -194,7 +196,7 @@ const getLatest = (type, limit, res) => {
                             poster_url: item.poster_url,
                             score: item.Media_Reviewers[0].score,
                             genres: item.Genres.map(genre => genre.name),
-                            year_end: item.year_end
+                            year_end: item.year_end,
                         }
                     })
                     res.send(titles)
