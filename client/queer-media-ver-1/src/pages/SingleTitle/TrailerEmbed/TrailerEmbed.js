@@ -1,58 +1,48 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player'
 import axios from 'axios'
 import { config_3 } from '../../../config'
 import Spinner from '../../../common/components/UI/Spinner/Spinner'
 import './TrailerEmbed.css'
 
+const TrailerEmbed = (props) => {
 
-class TrailerEmbed extends Component {
-    state = {
-        // trailerId: null,
-        trailerId: null
-    }
+    const [trailerId, setTrailerId] = useState(null)
 
-    componentDidMount() {
+    useEffect(() => {
         let url = 'https://www.googleapis.com/youtube/v3/search'
         let params = {
             key: config_3.KEY,
-            q: this.props.titleName + ' trailer',
+            q: props.titleName + ' trailer',
             type: "video",
             order: 'relevance',
             maxResults: 1,
             videoEmbeddable: 'true'
         }
 
-        axios.get(url, { params: params })
+        axios.get(url, { params: params, withCredentials: false })
             .then(res => {
                 const vidId = res.data.items[0].id.videoId
-                this.setState({ trailerId: vidId })
+                setTrailerId(vidId)
             })
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
-    }
+    }, [])
 
-
-    render() {
-
-
-        return (this.state.trailerId == null) ? (
-            <Spinner />
-        ) : (
-                <div className="YoutubeEmbedded">
-                    <ReactPlayer
-                        url={'https://www.youtube.com/watch?v=' + this.state.trailerId}
-                        volume={0.1}
-                        controls={true}
-                        config={{
-                            youtube: {
-                                playerVars: { rel: 0 },
-                            }
-                        }}
-                    />
-                </div>
-            );
-    }
+    return (!trailerId) ? <Spinner /> : (
+            <div className="YoutubeEmbedded">
+                <ReactPlayer
+                    url={'https://www.youtube.com/watch?v=' + trailerId}
+                    volume={0.1}
+                    controls={true}
+                    config={{
+                        youtube: {
+                            playerVars: { rel: 0 },
+                        }
+                    }}
+                />
+            </div>
+        );
 }
 
 export default TrailerEmbed;

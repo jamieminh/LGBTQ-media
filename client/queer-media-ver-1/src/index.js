@@ -4,16 +4,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import Auth0ProviderWithHistory from './auth/Auth0ProviderWithHistory'
-
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import MediaReducer from './store/reducers/mediaFilters'
+import AuthReducer from './store/reducers/auth'
 
 const rootReducer = combineReducers({
-  media: MediaReducer
+  media: MediaReducer,
+  auth: AuthReducer
 })
 
 // redux dev tools in chrome
@@ -28,9 +28,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Auth0ProviderWithHistory>
           <App />
-        </Auth0ProviderWithHistory>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

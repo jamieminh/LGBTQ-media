@@ -5,9 +5,10 @@ import * as actionCreators from '../../store/actions/index'
 import ListPaginate from '../../common/components/ListPaginate/ListPaginate'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import Filter from '../../common/components/Filter/Filter'
+// import Axios from '../../axios'
 import './TypePage.css'
 
-
+// axios.defaults.withCredentials = true
 const TypePage = (props) => {
 
     const titles = useSelector(state => state.media.titles)

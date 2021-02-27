@@ -87,7 +87,7 @@ const Filter = () => {
             <div id="SortBy">
                 <div>
                     <input type="radio" name="sort" id="date_desc" onClick={updateSelectedRadio}
-                    checked={(sortBy.type === 'date' && sortBy.order === 'desc')} />
+                    checked={(sortBy.type === 'date' && sortBy.order === 'desc')} readOnly/>
                     <label for="date_desc">Release Date - Latest</label>
                 </div>
                 <div>

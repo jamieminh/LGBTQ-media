@@ -1,36 +1,35 @@
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-const UserProfile = () => {
-    const { user } = useAuth0()
-    const { name, picture, email } = user
+const UserProfile = (props) => {
 
-    const role = user['http://user.net/roles']
+    const email = useSelector(state => state.auth.email)
+    const token = localStorage.getItem('token')
 
-    console.log(user);
+    const [content, setContent] = useState(null)
+
+    useEffect(() => {
+        console.log(email);
+        console.log(token);
+        axios.get('http://localhost:4000/user/' + email, {
+            headers: {"x-access-token": token}
+        })
+        .then(res => {
+            console.log(res.data);
+            setContent(res.data)
+        })
+        .catch(err => console.log(err))
+    }, [])
+
 
     return (
         <div>
-            <div className="row align-items-center profile-header">
-                <div className="col-md-2 mb-3">
-                    <img
-                        src={picture}
-                        alt="Profile"
-                        className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
-                    />
-                </div>
-                <div className="col-md text-center text-md-left">
-                    <h2>{name}</h2>
-                    <p className="lead text-muted">{email} {role}</p>
-                </div>
-            </div>
-            <div className="row">
-                <pre className="col-12 text-light bg-dark p-4">
-                    {JSON.stringify(user, null, 2)}
-                </pre>
-            </div>
+            <h1>User Profile</h1>
+            {content ? <h2>{content.user_id}</h2> : <h2>null</h2>}
+            {content ? <h2>{content.role}</h2> : <h2>null</h2>}
         </div>
     );
 }
-
-export default UserProfile
+ 
+export default UserProfile;

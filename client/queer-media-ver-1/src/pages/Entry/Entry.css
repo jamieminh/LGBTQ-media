@@ -1,0 +1,129 @@
+main#EntryMain {
+    min-height: 100vh;
+    position: relative;
+}
+
+.EntryBox {
+    position: absolute;
+    width: 90% !important;
+    min-height: 600px;
+    max-height: 750px;
+    background-color: white;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 70vw;
+    color: black;
+}
+
+.EntryLogo {
+    margin: 20px;
+    background-color: #51a1e6;
+    padding: 30px 35px;
+    border-radius: 50%;
+}
+
+.EntryLogo > img {
+   width: 110px;
+   padding-bottom: 5px;
+}
+
+.EntryForm {
+    margin: 30px;
+    width: 90%;
+}
+
+.EntryForm h2 {
+    margin-bottom: 30px;
+}
+
+.EntryForm .FormInput {
+    position: relative;
+    height: 50px;
+    margin-bottom: 15px;
+
+}
+
+.EntryForm input, 
+.EntryForm button{
+    height: 100%;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+    padding: 7px 60px;
+    width: 100%;
+    background-color: #E6E6E6;
+    transition: all 0.3s ease;
+}
+
+.EntryForm input:focus,
+.EntryForm button:focus {
+    outline: none;
+    transform: scale(1.04);
+}
+  
+
+.EntryForm input:focus + .InputSymbol  {
+    padding-left: 15px; 
+}
+
+.EntryForm input:focus ~ .Eye {
+    padding-right: 10px; 
+}
+
+.EntryForm button {
+    margin-top: 30px;
+    background-color: #57B846;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    transition: all .4s;
+}
+
+.EntryForm button:hover {
+    outline: none;
+    background-color: black;
+}
+
+
+.EntryForm .InputSymbol {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    padding-left: 25px ;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+
+.EntryForm .InputSymbol.Eye {
+    right: 0;
+    padding-right: 20px ;
+}
+
+.ErrorMessage, .SuccessMessage {
+    color: red;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.SuccessMessage {
+    color: #41a32f;
+}
+
+.entryLink {
+    margin-top: 50px;
+}
+
+.entryLink a:hover{
+    text-decoration: none;
+}

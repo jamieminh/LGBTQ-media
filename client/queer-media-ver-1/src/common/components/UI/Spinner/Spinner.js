@@ -1,9 +1,9 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import './Spinner.css'
 
 const Spinner = () => {
     return (
-        <Fragment>
+        <div className="Spinner">
             <div className="spinner spinner-1">
                 <div className="spinner spinner-2">
                     <div className="spinner spinner-3" >
@@ -16,8 +16,8 @@ const Spinner = () => {
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </div>
     );
 }
- 
+
 export default Spinner;

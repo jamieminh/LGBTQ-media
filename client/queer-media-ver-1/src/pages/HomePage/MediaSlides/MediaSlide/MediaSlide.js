@@ -101,7 +101,7 @@ const MediaSlide = (props) => {
                         state: (props.rank === 'highest') ? { seeMore: true } : null     // this only applies to seemore of 'Highest...' since the data fetched at the Type Page is already sorted
                     }} className="SeeMoreOut">
                         <button className="SeeMoreButton">
-                            See More <i class="fas fa-angle-right"></i>
+                            See More <i className="fas fa-angle-right"></i>
                         </button>
                     </Link>
                 </div>

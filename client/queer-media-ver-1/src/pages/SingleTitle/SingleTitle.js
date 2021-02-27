@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { config_1 } from '../../config'
+import { config_1, config_3 } from '../../config'
 import { Link } from 'react-router-dom'
 
 import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
@@ -25,8 +25,8 @@ proxyurl = ""
 const url = proxyurl + "https://serpapi.com/search.json?"
 const API_KEY = config_1.KEY
 
-axios.defaults.headers.common['Content-Type'] = 'application/json'
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+// axios.defaults.headers.common['Content-Type'] = 'application/json'
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 console.log(axios.defaults.headers);
 
@@ -71,7 +71,8 @@ class SingleTitle extends Component {
         //     { name: 'John Something Goodman', id: 124, img_url: blank_user },
         //     { name: 'Scarlett Johansson', id: 112, img_url: blank_user }
         // ],
-        directors: null         // a list of directors {director name, director id}
+        directors: null,         // a list of directors {director name, director id}
+        refreshTrailer: false
     }
 
 
@@ -140,7 +141,7 @@ class SingleTitle extends Component {
             // })
             .catch(err => console.error(err))
     }
-
+   
     getRatingStars = (score, decimal = false) => {
         if (score.toUpperCase === "N/A")
             return not_applicable

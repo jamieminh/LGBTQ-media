@@ -39,3 +39,12 @@
 .NavbarLink.NavItemActive {
     color: white;
 }
+
+.LoginNavLink {
+    color: yellow;
+    font-size: 17px;
+}
+
+.LoginNavLink:hover {
+    color: rgb(251, 255, 0);
+}
