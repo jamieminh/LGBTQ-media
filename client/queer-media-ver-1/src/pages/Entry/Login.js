@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'
-import { InputEmail, InputPw } from './Inputs'
+import React, { useState } from 'react';
+import axios from '../../axios'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import * as actionCreators from '../../store/actions/index'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
 
 
@@ -28,7 +27,7 @@ const Login = (props) => {
         event.preventDefault()
         console.log(emailLogin, pwLogin);
         // dispatch(actionCreators.login(emailLogin, pwLogin))
-        axios.post('http://localhost:4000/entry/login/', {
+        axios.post('entry/login/', {
             email: emailLogin,
             password: pwLogin
         })

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 import './GenrePage.css'
 import ListPaginate from '../../common/components/ListPaginate/ListPaginate';
 import Spinner from '../../common/components/UI/Spinner/Spinner'
@@ -13,7 +13,7 @@ const Genre = (props) => {
     useEffect(() => {
         const genre = props.genre
         let titles = []
-        const search_url = 'http://localhost:4000/genres/' + genre;
+        const search_url = 'genres/' + genre;
 
         axios.get(search_url)
             .then(res => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { config_1, config_3 } from '../../config'
+import axios from '../../axios';
+import { config_1 } from '../../config'
 import { Link } from 'react-router-dom'
 
 import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
@@ -8,15 +8,14 @@ import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import blank_user from '../../assets/images/blank_user.png'
 import Error from '../ErrorPage/Error'
+import AlsoLike from './AlsoLike/AlsoLike';
 
-import {
-    not_applicable, rating_0, rating_0_5, rating_1,
+import { not_applicable, rating_0, rating_0_5, rating_1,
     rating_1_5, rating_2, rating_2_5, rating_3,
     rating_3_5, rating_4, rating_4_5, rating_5,
     imdb, metacritic, tomato
 } from '../../common/components/Lists/ratings'
 import './SingleTitle.css'
-import AlsoLike from './AlsoLike/AlsoLike';
 
 
 
@@ -79,7 +78,7 @@ class SingleTitle extends Component {
     componentDidMount() {
         let artists_names = []
         let artists_info = []
-        axios.get('http://localhost:4000/media/full/' + this.props.match.params.media_id)
+        axios.get('media/full/' + this.props.match.params.media_id)
             .then(res => {
                 if (res.data === "")
                     this.setState({ isExist: false })

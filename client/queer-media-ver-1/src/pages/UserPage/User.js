@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -12,7 +12,7 @@ const UserProfile = (props) => {
     useEffect(() => {
         console.log(email);
         console.log(token);
-        axios.get('http://localhost:4000/user/' + email, {
+        axios.get('user/' + email, {
             headers: {"x-access-token": token}
         })
         .then(res => {

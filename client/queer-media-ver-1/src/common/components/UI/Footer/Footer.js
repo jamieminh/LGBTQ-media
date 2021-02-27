@@ -55,13 +55,13 @@ const footer = () => {
 
                             <ul className="list-unstyled">
                                 <li className="my-2">
-                                    <i className="fa fa-map-marked-alt mr-3"></i>Address
+                                    <i className="fas fa-map-marked-alt mr-3"></i>Address
                                 </li>
                                 <li className="my-2">
-                                    <i className="fa fa-envelope mr-3"></i>Mail
+                                    <i className="fas fa-envelope mr-3"></i>Mail
                                 </li>
                                 <li className="my-2">
-                                    <i className="fa fa-phone mr-3"></i>Phone number
+                                    <i className="fas fa-phone mr-3"></i>Phone number
                                 </li>
                                 
                             </ul>

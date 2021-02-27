@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { InputEmail, InputPw, InputPwRep } from './Inputs';
+import React, { useState } from 'react';
+import axios from '../../axios';
 import Spinner from '../../common/components/UI/Spinner/Spinner'
-import { Link, useHistory, withRouter } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const Register = (props) => {
 
@@ -24,7 +23,7 @@ const Register = (props) => {
         else {
             setIsLoading(true)
 
-            axios.post('http://localhost:4000/entry/register/', {
+            axios.post('entry/register/', {
                 email: emailReg,
                 password: pwReg
             })

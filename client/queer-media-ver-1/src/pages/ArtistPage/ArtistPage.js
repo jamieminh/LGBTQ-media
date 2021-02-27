@@ -21,7 +21,7 @@ const ArtistPage = (props) => {
             setTitles(res[1].data)
         })
         .catch(err => console.error(err))
-    })
+    }, [])
 
     return ( !(name && titles) ) ? (<Spinner />) : (
         <div className="ArtistPage">
