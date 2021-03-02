@@ -4,8 +4,6 @@ const { Users } = require('../models/Users')
 const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv');
-const session = require('express-session');
-
 
 dotenv.config();
 const router = express.Router();
@@ -53,25 +51,21 @@ router.post('/login', async (req, res) => {
         where: { email: email }
     })
         .then(async (result) => {
-            // console.log(result);
             if (result !== null) {  // there's a user with that email
                 const user = result.dataValues
                 const hashedPw = user.password
                 const verify = await argon2.verify(hashedPw, pw);
-                // console.log(verify);
                 if (verify) {
-                    // const userData = {user_id: user.user_id, email: email, role: user.role}
 
                     const id = user.user_id
                     const token = (user.role === 'admin') ?
-                        jwt.sign({ id }, process.env.JWT_SECRET_ADMIN, { expiresIn: 200 })
-                        : jwt.sign({ id }, process.env.JWT_SECRET_USER, { expiresIn: 200 })
+                        jwt.sign({ id }, process.env.JWT_SECRET_ADMIN, { expiresIn: 60 * 60 * 60 * 24 * 5 })
+                        : jwt.sign({ id }, process.env.JWT_SECRET_USER, { expiresIn: 60 * 60 * 60 * 24 * 5 })
 
                     req.session.user = {user_id: result.user_id, role: result.role, email: result.email}
-                    // req.session.user = { email: result.email }
-                    console.log(req.session.user);
+                    req.session.token = token
 
-                    res.send({ token: token, user_id: user.user_id, email: email, role: user.role })
+                    res.send({ user_id: user.user_id, email: email, role: user.role })
                 }
                 else
                     res.send({ message: "Wrong email/password combination!" })
@@ -81,8 +75,11 @@ router.post('/login', async (req, res) => {
 
         })
         .catch(err => res.send(err))
+})
 
-
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.send({isLoggedOut: true})
 })
 
 
@@ -90,7 +87,7 @@ router.post('/login', async (req, res) => {
 router.get('/login', (req, res) => {
     if (req.session.user) {
         res.send({ isLoggedIn: true, user: req.session.user })
-    }
+    }    
     else {
         res.send({ isLoggedIn: false })
     }

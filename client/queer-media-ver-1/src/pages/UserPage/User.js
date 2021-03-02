@@ -12,9 +12,10 @@ const UserProfile = (props) => {
     useEffect(() => {
         console.log(email);
         console.log(token);
-        axios.get('user/' + email, {
-            headers: {"x-access-token": token}
-        })
+        // axios.get('user/' + email, {
+        //     headers: {"x-access-token": token}
+        // })
+        axios.get('user/' + email)
         .then(res => {
             console.log(res.data);
             setContent(res.data)

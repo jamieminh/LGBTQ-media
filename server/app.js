@@ -6,7 +6,7 @@ const Sequelize = require('sequelize')
 const db = require('./config/index')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const session = require('express-session')
+const session = require('express-session');
 
 dotenv.config();
 
@@ -36,6 +36,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
+        httpOnly: true,
+        sameSite: true,
         maxAge: 60 * 60 * 60 * 24 *5       // cookie expires in 5 days
     }
 }))

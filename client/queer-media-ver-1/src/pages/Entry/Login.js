@@ -33,20 +33,14 @@ const Login = (props) => {
         })
             .then(response => {
                 const result = response.data;
-                console.log(result);
                 if (result.message)
                     setMessage(result.message)
                 else {
-                    localStorage.setItem('token', "Bearer " + result.token)
-                    localStorage.setItem('user_id', result.user_id)
                     dispatch(actionCreators.login(result))
                     history.push('/')
                 }
-
             })
-            .then(res => setIsLoading(false))
-
-        ac.abort()
+            .then(res => setIsLoading(false))  
 
     }
 

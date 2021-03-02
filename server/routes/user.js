@@ -10,7 +10,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const userAuthCheck = (req, res, next) => {
-    const token = req.headers["x-access-token"]
+    const token = req.session.token;
 
     if (!token)
         return res.sendStatus(401)
@@ -28,7 +28,7 @@ const userAuthCheck = (req, res, next) => {
 }
 
 
-router.get('/:email', (req, res) => {
+router.get('/:email', userAuthCheck, (req, res) => {
     const email = req.params.email
 
     Users.findOne({

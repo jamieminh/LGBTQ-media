@@ -1,4 +1,5 @@
 import React from "react";
+import axios from '../../../../axios'
 import * as actionCreators from '../../../../store/actions/index'
 import './AuthenticationBtn.css'
 import { useDispatch } from "react-redux";
@@ -9,8 +10,12 @@ const LogoutButton = () => {
     const history = useHistory()
 
     const logoutHandler = () => {
-        dispatch(actionCreators.logout())
-        history.push('/')
+        axios.get('entry/logout')
+        .then(_ => {
+            dispatch(actionCreators.logout())
+            history.push('/')
+        })
+        .catch(err => console.error(err))        
     }
 
     return (
