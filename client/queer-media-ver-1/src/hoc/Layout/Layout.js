@@ -8,7 +8,7 @@ class Layout extends Component {
     }
     render() { 
         return (
-            <div className="Layout">
+            <div className="Layout" id="Layout">
                 <Toolbar/>
                 <SearchBar />
                 <main>

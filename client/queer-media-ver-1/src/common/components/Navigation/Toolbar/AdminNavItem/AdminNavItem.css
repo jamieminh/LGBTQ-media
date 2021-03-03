@@ -45,12 +45,18 @@ li.dropdown:hover>.dropdown-menu {
     background-color: #1a4c69 !important;
 }
 
+.dropdown-toggle::after {
+    vertical-align: .2em !important;
+    margin-left: 6px !important;
+}
+
 @media(min-width: 576px) {
     .DropdownTitle {
         display: flex;
-        width: 110px;
-        padding-top: 10px;
-        padding-left: 12px;
+        padding: 8px;
+        /* width: 110px; */
+        /* padding-top: 10px;
+        padding-left: 12px; */
     }
     .DropdownTitle img {
         width: 30px;
@@ -74,7 +80,7 @@ li.dropdown:hover>.dropdown-menu {
 
 @media (min-width: 670px) {
     .DropdownTitle {
-        width: 120px;
+        /* width: 120px; */
     }
     .DropdownTitle img {
         margin-right: 5px;

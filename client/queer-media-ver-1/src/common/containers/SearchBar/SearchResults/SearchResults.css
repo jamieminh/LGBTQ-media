@@ -13,15 +13,18 @@
 .SearchResults{
     width: 95%;
     margin: 0 auto;
+    display: flex;
+    flex-flow: wrap;
+}
+
+.EmptySpaceFill {
+    width: 65%;
 }
 
 
 @media (min-width: 1024px) {
     .SearchResults{
         width: 80%;
-        margin: 0 auto;
-        display: flex;
-        flex-flow: wrap;
     }
 }
 

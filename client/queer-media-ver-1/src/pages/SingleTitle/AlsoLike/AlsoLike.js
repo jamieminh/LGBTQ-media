@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from '../../../axios'
 import { Link } from 'react-router-dom'
 import Spinner from '../../../common/components/UI/Spinner/Spinner';
 import notFound from '../../../assets/images/notfound.jpg'
@@ -12,7 +12,7 @@ class AlsoLike extends Component {
 
     componentDidMount() {
         const genres = this.props.genres.join('+')
-        axios.get('http://localhost:4000/genres/multiple/' + genres)
+        axios.get('genres/multiple/' + genres)
             .then(res => {
                 const titles = res.data;
                 this.setState({ titles: titles })

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 import { config_1 } from '../../config'
 import { Link } from 'react-router-dom'
 
@@ -8,15 +8,14 @@ import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import blank_user from '../../assets/images/blank_user.png'
 import Error from '../ErrorPage/Error'
+import AlsoLike from './AlsoLike/AlsoLike';
 
-import {
-    not_applicable, rating_0, rating_0_5, rating_1,
+import { not_applicable, rating_0, rating_0_5, rating_1,
     rating_1_5, rating_2, rating_2_5, rating_3,
     rating_3_5, rating_4, rating_4_5, rating_5,
     imdb, metacritic, tomato
 } from '../../common/components/Lists/ratings'
 import './SingleTitle.css'
-import AlsoLike from './AlsoLike/AlsoLike';
 
 
 
@@ -25,8 +24,8 @@ proxyurl = ""
 const url = proxyurl + "https://serpapi.com/search.json?"
 const API_KEY = config_1.KEY
 
-axios.defaults.headers.common['Content-Type'] = 'application/json'
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+// axios.defaults.headers.common['Content-Type'] = 'application/json'
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 console.log(axios.defaults.headers);
 
@@ -71,14 +70,15 @@ class SingleTitle extends Component {
         //     { name: 'John Something Goodman', id: 124, img_url: blank_user },
         //     { name: 'Scarlett Johansson', id: 112, img_url: blank_user }
         // ],
-        directors: null         // a list of directors {director name, director id}
+        directors: null,         // a list of directors {director name, director id}
+        refreshTrailer: false
     }
 
 
     componentDidMount() {
         let artists_names = []
         let artists_info = []
-        axios.get('http://localhost:4000/media/full/' + this.props.match.params.media_id)
+        axios.get('media/full/' + this.props.match.params.media_id)
             .then(res => {
                 if (res.data === "")
                     this.setState({ isExist: false })
@@ -140,7 +140,7 @@ class SingleTitle extends Component {
             // })
             .catch(err => console.error(err))
     }
-
+   
     getRatingStars = (score, decimal = false) => {
         if (score.toUpperCase === "N/A")
             return not_applicable

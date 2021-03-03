@@ -4,6 +4,11 @@ footer {
     margin-top: 5vh;
 }
 
+main {
+    position: relative;
+    min-height: 35vh;
+}
+
 
 .SocialMedia {
     background-color: #3a373d;

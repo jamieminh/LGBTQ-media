@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+import axios from '../../../axios'
+import { useSelector } from 'react-redux';
 
 
 const CreateTitle = () => {
 
-    const [role, setRole] = useState()
+    const email = useSelector(state => state.auth.email)
+    const token = localStorage.getItem('token')
 
-    const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-    const USER_ID = '6024b1d4d43b350071506467'
+    const [content, setContent] = useState(null)
 
-    var options = {
-        method: 'GET',
-        url: 'https://' + domain + '/api/v2/users/'+ USER_ID + '/roles',
-        headers: {authorization: 'Bearer MGMT_API_ACCESS_TOKEN'}
-      };
+    useEffect(() => {
+        console.log(email);
+        console.log(token);
+        axios.get('admin/' + email, {
+            headers: {"x-access-token": token}
+        })
+        .then(res => {
+            console.log(res.data);
+            setContent(res.data)
+        })
+        .catch(err => console.log(err))
+    }, [])
 
-    const useEffect = () => {
-        axios.request(options).then(function (response) {
-            console.log(response.data);
-        }).catch(function (error) {
-            console.error(error);
-        });
-    }
 
     return (
-        <h1>Admin page: create title</h1>
+        <div>
+            <h1>Admin Profile</h1>
+            {content ? <h2>{content.user_id}</h2> : 'null'}
+            {content ? <h2>{content.role}</h2> : <h2>null</h2>}
+
+        </div>
     );
 }
 

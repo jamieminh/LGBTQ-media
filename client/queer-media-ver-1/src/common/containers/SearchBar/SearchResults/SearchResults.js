@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import ListItem from '../../../components/ListItem/ListItem'
-import axios from 'axios';
+import axios from '../../../../axios';
 import './SearchResults.css'
 
 const SearchResults = (props) => {
@@ -15,7 +15,7 @@ const SearchResults = (props) => {
         const query = passed_query.trim().replace(/\s+/g, "+")
 
         let titles = []
-        const search_url = 'http://localhost:4000/media/search/' + query;
+        const search_url = 'media/search/' + query;
 
         axios.get(search_url)
             .then(res => {

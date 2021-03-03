@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../../../axios';
 import './MediaSlide.css';
 import { Link } from 'react-router-dom';
 
@@ -13,9 +13,9 @@ const MediaSlide = (props) => {
     useEffect(() => {
         let url = '';
         if (props.rank === 'latest')
-            url = 'http://localhost:4000/media/latest/' + props.type + '/12'
+            url = 'media/latest/' + props.type + '/12'
         else
-            url = 'http://localhost:4000/reviewers/highest/' + props.type
+            url = 'reviewers/highest/' + props.type
 
         axios.get(url)
             .then(res => {
@@ -101,7 +101,7 @@ const MediaSlide = (props) => {
                         state: (props.rank === 'highest') ? { seeMore: true } : null     // this only applies to seemore of 'Highest...' since the data fetched at the Type Page is already sorted
                     }} className="SeeMoreOut">
                         <button className="SeeMoreButton">
-                            See More <i class="fas fa-angle-right"></i>
+                            See More <i className="fas fa-angle-right"></i>
                         </button>
                     </Link>
                 </div>

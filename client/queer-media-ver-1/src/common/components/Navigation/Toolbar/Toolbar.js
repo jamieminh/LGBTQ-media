@@ -4,11 +4,13 @@ import './Toolbar.css';
 import Logo from '../../Logo/Logo';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import NavigationItem from './NavigationItem/NavigationItem'
-import AuthenticationButton from '../../Buttons/Entry/AuthenticationBtn'
-import AdminNav from './AdminNavItem/AdminNavItem'
+import { useSelector } from 'react-redux';
 
 // class Toolbar extends Component { 
 const Toolbar = (props) => {
+    const NavItem = useSelector(state => state.auth.NavItem)
+    
+
     // state = {
     //     show: true
     // }
@@ -66,7 +68,7 @@ const Toolbar = (props) => {
                     <NavigationItem link="/animation">Animation</NavigationItem>
                     <NavigationItem link="/genres">Genres</NavigationItem>                                                         
                     {/* <AuthenticationButton />                                                          */}
-                    <AdminNav />
+                    {NavItem}
                 </ul>
             </div>
         </nav>

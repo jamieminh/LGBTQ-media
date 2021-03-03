@@ -5,3 +5,11 @@ export const REMOVE_GENRE_FILTER = 'REMOVE_GENRE_FILTER'
 export const SET_RATING_FILTER = 'SET_RATING_FILTER'
 export const SORT_BY = 'SORT_BY'
 export const CHANGE_DEFAULT_SORT = 'CHANGE_DEFAULT_SORT'
+
+
+export const LOGIN_START = 'LOGIN_START'
+export const LOGIN = 'LOGIN'
+export const LOGIN_FAIL = 'LOGIN_FAIL'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGOUT = 'LOGOUT'
+export const REGISTER = 'REGISTER'
