@@ -10,10 +10,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import MediaReducer from './store/reducers/mediaFilters'
 import AuthReducer from './store/reducers/auth'
+import AdminReducer from './store/reducers/admin'
 
 const rootReducer = combineReducers({
   media: MediaReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
+  admin: AdminReducer
 })
 
 // redux dev tools in chrome

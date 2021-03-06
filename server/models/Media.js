@@ -23,6 +23,9 @@ const Media = db.define('Media', {
     poster_url: {
         type: DataTypes.STRING
     },
+    runtime: {
+        type: DataTypes.INTEGER
+    },
     rated: {
         type: DataTypes.STRING
     },

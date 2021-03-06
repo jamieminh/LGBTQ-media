@@ -1,0 +1,230 @@
+.AdminPageMain h2 {
+    text-align: center;
+}
+
+.AdminForm {
+    width: 320px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.AdminInput {
+    margin-bottom: 10px;
+
+    min-height: 55px;
+}
+
+.AdminInput * {
+    display: block;
+    width: 100%;
+}
+
+.AdminInput *:not(label, ul) {
+    height: 30px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+}
+
+.AdminBtn button {
+    width: 120px;
+    padding: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    height: fit-content;
+    margin: 40px auto;
+    outline: none;
+    border: none;
+}
+.AdminBtn button {
+    color: white;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+}
+.AdminBtn button:hover {
+    border-radius: 5px;
+}
+
+.AdminBtn.ClearAllBtn button {
+    background-color: #F24C4D;    
+}
+
+.AdminBtn.ConfirmBtn button {
+    background-color: #20DC71;
+}
+
+.AdminInput.Plot textarea {
+    height: 200px;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.AdminInput.Plot * {
+    vertical-align: top;
+}
+
+.AdminInput ul {
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin-bottom: 0 !important;
+    /* height: 35px ; */
+}
+
+.AdminInput ul li {
+    margin-bottom: 15px;
+    width: 250px;
+    padding: 0;
+}
+
+.AdminInput option,
+.AdminInput select {
+    text-transform: capitalize;
+}
+
+.AdminInput.AddableInputs {
+    position: relative
+}
+
+.AdminInput.AddableInputs label {
+    vertical-align: top;
+    text-transform: capitalize;
+}
+
+
+.AdminInput.AddableInputs input,
+.AdminInput.AddableInputs select {
+    padding: 0 10px;
+    width: 200px;
+}
+
+.FormButtons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button.AddableBtn {
+    width: 30px;
+    font-size: 20px;
+    padding: 0;
+    position: absolute;
+    right: 50px;
+    top: 32px;
+    margin: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: rgb(144, 255, 186);
+}
+
+button.AddableBtn:hover {
+    transform: scale(1.1);
+}
+
+button.AddableBtn.RemoveAddableBtn {
+    right: 0px;
+    background-color: rgb(255, 159, 159);
+}
+
+button:focus {
+    outline: none !important;
+}
+
+.AdminInput input::placeholder {
+    color: lightgrey;
+}
+
+.AdminInput > .ReviewersRatings {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.AdminInput > .ReviewersRatings > input{
+    width: 45%;
+}
+
+@media (min-width: 700px) {
+    .AdminForm {
+        width: 600px;
+    }
+
+    .AdminInput {
+        display: flex;
+    }
+
+    .AdminInput * {
+        display: inline-block;
+    }
+    .AdminInput label {
+        width: 30%;
+    }
+    .AdminInput *:not(label, button) {
+        width: 70%;
+    }
+
+    .AdminInput.AddableInputs input, .AdminInput.AddableInputs select {
+        width: 250px;
+    }
+    button.AddableBtn {
+        right: 80px;
+        top: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .AdminForm {
+        width: 900px;
+        height: 900px;
+    }
+    .AdminForm form {
+        display: flex;
+        flex-direction: column;
+        height: 840px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: space-between;
+    }
+    .AdminInput {
+        display: flex;
+        width: 45%;
+    }
+    .AdminInput select {
+        width: 70%;
+    }
+
+    .AdminInput label {
+        width: 38%;
+    }
+
+    .AdminInput *:not(label, button) {
+        width: 62%;
+    }
+
+    .FormButtons {
+        position: absolute;
+        width: 500px;
+        bottom: -3%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    button.AddableBtn {
+        right: 50px;
+    }
+
+    .AdminInput.AddableInputs ul li > * {
+        width: 160px;
+    }
+}
+
+@media (min-width: 1281px) {
+    .AdminForm {
+        width: 1100px;
+    }
+
+    .AdminInput {
+        width: 45%;
+    }
+}

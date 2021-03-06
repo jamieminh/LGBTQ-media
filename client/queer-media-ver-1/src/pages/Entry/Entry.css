@@ -5,7 +5,7 @@ main#EntryMain {
 
 .EntryBox {
     position: absolute;
-    width: 90% !important;
+    width: 85% !important;
     min-height: 600px;
     max-height: 750px;
     background-color: white;
@@ -126,4 +126,10 @@ main#EntryMain {
 
 .entryLink a:hover{
     text-decoration: none;
+}
+
+@media (min-width: 768px) {
+    .EntryBox {
+        width: 600px !important;
+    }
 }

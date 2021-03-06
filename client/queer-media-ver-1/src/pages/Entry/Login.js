@@ -23,8 +23,11 @@ const Login = (props) => {
 
     const login = (event) => {
         setIsLoading(true)
+        console.log('Login btn clicked 1');
 
         event.preventDefault()
+        console.log('Login btn clicked 2');
+
         console.log(emailLogin, pwLogin);
         // dispatch(actionCreators.login(emailLogin, pwLogin))
         axios.post('entry/login/', {

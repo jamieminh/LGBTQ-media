@@ -7,6 +7,7 @@ const Artist = db.define('Artist', {
     artist_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING,

@@ -37,7 +37,10 @@ router.post('/register', async (req, res) => {
         id = id.split('$')[5];
         // console.log(hashedPw);
         Users.create({ user_id: id, email: email, password: hashedPw })
-            .then(response => res.send({ isSuccess: true }))
+            .then(response => {
+                res.send({ isSuccess: true })
+                console.log(response)
+            })
             .catch(err => console.error(err))
     }
 })

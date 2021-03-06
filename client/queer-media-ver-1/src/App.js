@@ -8,16 +8,18 @@ import ErrorPage from './pages/ErrorPage/Error'
 import SearchResults from './common/containers/SearchBar/SearchResults/SearchResults'
 import TypePage from './pages/TypePage/TypePage'
 import UserProfile from './pages/UserPage/User'
-import CreateMedia from './pages/AdminPages/CreateMediaPage/CreateMedia'
+import UpsertTitle from './pages/AdminPages/UpsertTitle'
 import Entry from './pages/Entry/Entry'
 import axios from 'axios'
 import { ProtectedAdminRoute, ProtectedUserRoute } from './auth/ProtectedRoute'
 import Layout from './hoc/Layout/Layout';
 import SingleTitle from './pages/SingleTitle/SingleTitle';
 import ArtistPage from './pages/ArtistPage/ArtistPage';
+import AdminProfile from './pages/AdminPages/AdminProfile'
 import { useDispatch } from 'react-redux';
 import * as actionCreators from './store/actions/index'
 import './App.css';
+import InsertTest from './pages/test/insertTest';
 
 
 // wrap each route with a layout , except for login and register
@@ -43,7 +45,7 @@ const App = () => {
           setIsLoggedIn(true)
         }
         setIsLoggedIn(false)
-      })      
+      })
   }, [])
 
   return (isLoggedIn === null) ? '' : (
@@ -78,9 +80,20 @@ const App = () => {
           <ProtectedUserRoute path="/profile" exact
             component={() => <UserProfile />}
           />
-          <ProtectedAdminRoute path="/create-media" exact
-            component={() => <CreateMedia />}
+
+          <ProtectedAdminRoute path="/admin/profile" exact
+            component={() => <AdminProfile />}
           />
+          <ProtectedAdminRoute path="/upsert-media/create" exact
+            component={() => <UpsertTitle type="create" />}
+          />
+
+          <ProtectedAdminRoute path="/upsert-media/update" exact
+            component={() => <UpsertTitle type="update" />}
+          />
+
+          <RouteWithLayout path="/insert-test" exact component={() => <InsertTest />} />
+
 
           <RouteWithLayout path="/" exact component={() => <Home />} />
 
