@@ -11,15 +11,15 @@ const UpsertTitle = (props) => {
     const history = useHistory()
     const state = history.location.state
     const type = props.type            // create or update
-    const [errorMessage, setErrorMessage] = useState(null)
-    const [successMessage, setSuccessMessage] = useState(null)
-    const [count, setCount] = useState(0);      // to always show modal 
-    console.log(type);
+    const [errorInfo, setErrorInfo] = useState({ count: 0, message: null })
+    const [successInfo, setSuccessInfo] = useState({ count: 0, message: null })
+    const media_id = state ? state.media_id : ''
 
     // used for when the page is loaded fresh (create a new title)
     const titleDetails = (state) ? state.titleDetails : {
-        artists: [''], directors: [''], genres: [''], imdb_url: '', languages: [''], media_id: '', plot: '',
-        poster_url: '', rated: '', released: '', reviewers: [], title: '', type: '', year_end: ''
+        media_id: media_id, artists: [''], directors: [''], genres: [''], 
+        imdb_url: '', languages: [''], media_id: '', plot: '', poster_url: '', 
+        rated: '', released: '', reviewers: [], title: '', type: '', year_end: ''
     }
 
     // get values from input groups (genres, artists, directors, languages)
@@ -33,14 +33,12 @@ const UpsertTitle = (props) => {
         return new Set(groupValues).size === groupValues.length
     }
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-        console.log("confirm button clicked");
+    const submitHandler = () => {
         const ids = ['title', 'type', 'rated', 'released',
             'yearEnd', 'plot', 'posterUrl', 'runtime', 'imdbTitle',
             'imdbScore', 'imdbVotes', 'tomatoScore', 'tomatoVotes',
             'metacriticScore', 'metacriticVotes']
-        const values = ids.map(id => document.getElementById(id).value)
+        const values = ids.map(id => document.getElementById(id).value.trim())
         const artists = inputGroupValues("AdminInput_artist")
         const directors = inputGroupValues("AdminInput_director")
         const genres = inputGroupValues("AdminInput_genre")
@@ -50,16 +48,9 @@ const UpsertTitle = (props) => {
         if (values[11] !== '') reviewers.push(['rotten tomatoes', values[11], values[12]])
         if (values[13] !== '') reviewers.push(['metacritic', values[13], values[14]])
 
-        // console.log(values);
-        // console.log(artists, inputGroupsCheck(artists));
-        // console.log(directors, inputGroupsCheck(directors));
-        // console.log(genres, inputGroupsCheck(genres));
-        // console.log(languages, inputGroupsCheck(languages));
-        // console.log(reviewers);
-
         const yearEnd = values[4] === '' ? 0 : values[4]
 
-        const titleDetails = {
+        const newDetails = {
             title: values[0], type: values[1], rated: values[2],
             released: values[3], yearEnd: yearEnd, plot: values[5],
             posterUrl: values[6], runtime: values[7], imdbTitle: values[8],
@@ -67,51 +58,75 @@ const UpsertTitle = (props) => {
             directors: directors, artists: artists
         }
 
-        
-
         if (inputGroupsCheck(artists) && inputGroupsCheck(directors)
             && inputGroupsCheck(genres) && inputGroupsCheck(languages)) {
-            setErrorMessage(null)
-            setCount(0)
+            setErrorInfo({count: 0})
+            setSuccessInfo({count: 0})
             if (type === 'create') {
-                insertRecord(titleDetails)
+                insertRecord(newDetails)
             }
             else {
-                updateRecord(titleDetails.media_id)
+                updateRecord(titleDetails.media_id, newDetails)
             }
-
-
         }
         else {
-            setErrorMessage("Input Groups Cannot Contain Duplicate Values")
-            setCount(count + 1)
-            console.log(errorMessage);
+            setErrorInfo({
+                count: errorInfo.count + 1,
+                message: "Input Groups Cannot Contain Duplicate Values"
+            })
         }
 
     }
 
-    const insertRecord = (titleDetails) => {
-        console.log(titleDetails);
-        axios.post('admin/create-media', { titleDetails: titleDetails })
+    const insertRecord = (newDetails) => {
+        axios.post('admin/create-media', { titleDetails: newDetails })
             .then(res => {
                 const isSuccess = res.data.isSuccess
+                console.log(res.data);
                 if (isSuccess) {
-                    setSuccessMessage('Insert Successful')
-                    setCount(count + 1)
+                    setSuccessInfo({ count: successInfo + 1, message: 'Insert Successful. You are being directed to Home page.' })
+                    setErrorInfo({count: 0})
                 }
                 else {
-                    setErrorMessage('There are one or more error in the inputs, check and try again')
-                    setCount(count + 1)
+                    setErrorInfo({
+                        count: errorInfo.count + 1,
+                        message: 'The media with this IMDB code already exists.'
+                    })
+                    setSuccessInfo({count: 0})
                 }
             })
             .catch(err => {
-                setErrorMessage('There are one or more error in the inputs, check and try again')
-                setCount(count + 1)
+                setErrorInfo({
+                    count: errorInfo.count + 1,
+                    message: 'There has been some error, Login and try again.'
+                })
+                setSuccessInfo({count: 0})
             })
     }
 
-    const updateRecord = (media_id) => {
-        console.log('Update record');
+    const updateRecord = (media_id, newDetails) => {
+        axios.post('admin/update-media', { titleDetails: newDetails, media_id: media_id })
+            .then(res => {
+                const isSuccess = res.data.isSuccess
+                if (isSuccess) {
+                    setSuccessInfo({ count: successInfo + 1, message: 'Update Successful. You are being directed to the media page.' })
+                    setErrorInfo({count: 0})
+                }
+                else {
+                    setErrorInfo({
+                        count: errorInfo.count + 1,
+                        message: 'There has been some error, check your inputs or try again later'
+                    })
+                    setSuccessInfo({count: 0})
+                }
+            })
+            .catch(_ => {
+                setErrorInfo({
+                    count: errorInfo.count + 1,
+                    message: 'There has been some error, check your inputs or try again later'
+                })
+                setSuccessInfo({count: 0})
+            })
     }
 
     // useEffect(() => {
@@ -134,11 +149,11 @@ const UpsertTitle = (props) => {
 
     return (
         <div className="AdminPageMain">
-            <h2>Add a New Media</h2>
+            <h2 style={{textTransform: 'capitalize'}}>{type} Media</h2>
             <div className="AdminForm">
-                <UpsertForm titleDetails={titleDetails} submitHandler={submitHandler} />
-                {(errorMessage) ? <CustomModal type="error" title="Error" body={errorMessage} key={'error_' + count} /> : ''}
-                {(successMessage) ? <CustomModal type="success" title="Success" body={successMessage} key={'success_' + count} /> : ''}
+                <UpsertForm titleDetails={titleDetails} submitHandler={submitHandler} type={type}/>
+                {(errorInfo.count !== 0) ? <CustomModal type="error" title="Error" body={errorInfo.message} key={'error_' + errorInfo.count} /> : ''}
+                {(successInfo.count !== 0) ? <CustomModal type="success" title="Success" body={successInfo.message} key={'success_' + errorInfo.count} /> : ''}
             </div>
 
         </div>

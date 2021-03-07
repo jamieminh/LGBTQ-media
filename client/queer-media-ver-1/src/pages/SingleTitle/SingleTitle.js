@@ -84,16 +84,23 @@ const SingleTitle = (props) => {
     const updateBtnHandler = () => {
         history.push({
             pathname: '/upsert-media/update',
-            state: {titleDetails: titleDetails}
+            state: {titleDetails: titleDetails, media_id: props.match.params.media_id}
         })
     }
 
-    const AdminBtns = () => {
+    const deleteHandler = () => {
+        history.push({
+            pathname: '/delete-media',
+            state: {media_id: titleDetails.media_id, title: titleDetails.title}
+        })
+    }
+
+    const AdminBtns = () => {        
         if (userRole === 'admin')
             return (
                 <div className="AdminBtns">
                     <button onClick={updateBtnHandler}>Update</button>
-                    <button>Delete</button>
+                    <button onClick={deleteHandler}><i className="fas fa-exclamation-triangle"></i>Delete</button>
                 </div>
             )
     }
@@ -111,6 +118,7 @@ const SingleTitle = (props) => {
                         <img
                             src={getRatingStars(review.score, review.name === "imdb")}
                             alt={review.name + " rating"}></img>
+                        <p>{review.votes} votes</p>
                     </div>
                 )
             })
@@ -144,9 +152,10 @@ const SingleTitle = (props) => {
                             <p><span>Directors</span>: {directors.join(", ")}</p>
                             <p><span>Genres</span>: {titleDetails.genres.join(", ")}</p>
                             <p><span>Languages</span>: {titleDetails.languages.join(", ")}</p>
-                            {AdminBtns()}
                         </div>
                     </div>
+
+                    {AdminBtns()}
 
                     <div className="TitleMainContent">
 

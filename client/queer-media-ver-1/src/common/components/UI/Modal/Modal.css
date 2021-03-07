@@ -23,12 +23,17 @@
     background-color: #46c2ad;
 }
 
+.Modal.ModalWarning .ModalTitle {
+    background-color: rgb(218, 206, 47);
+}
+
 .Modal h2 {    
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
+    width: fit-content;
 }
 
 .Modal p {    
@@ -37,22 +42,37 @@
     font-weight: 500;
 }
 
-.CloseBtn {
+.ModalBtns {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.ModalBtns button {
     background-color: #DC717A;
     color: white;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 16px;
     font-weight: 500;
     padding: 5px 25px;
     border: none;
     border-radius: 35px;
+    cursor: pointer;
 }
 
 .CloseBtn:hover, .CloseBtn:focus {
   background-color: #d85762;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.ModalBtns .ProceedBtn {
+    background-color: #57d180;
+}
+
+.ModalBtns .ProceedBtn:hover, .ModalBtn:focus {
+  background-color: #4fbe74;
   text-decoration: none;
   cursor: pointer;
   outline: none;

@@ -20,6 +20,7 @@ import { useDispatch } from 'react-redux';
 import * as actionCreators from './store/actions/index'
 import './App.css';
 import InsertTest from './pages/test/insertTest';
+import DeleteTitle from './pages/AdminPages/DeleteTitle';
 
 
 // wrap each route with a layout , except for login and register
@@ -86,6 +87,9 @@ const App = () => {
           />
           <ProtectedAdminRoute path="/upsert-media/create" exact
             component={() => <UpsertTitle type="create" />}
+          />
+          <ProtectedAdminRoute path="/delete-media" exact
+            component={() => <DeleteTitle />}
           />
 
           <ProtectedAdminRoute path="/upsert-media/update" exact

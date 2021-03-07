@@ -6,8 +6,26 @@ import './Modal.css';
 Modal.setAppElement('#root')
 const CustomModal = (props) => {
     const [isOpen, setIsOpen] = useState(true)
-    const type = props.type
-    const className = (type === 'success') ? 'ModalSuccess' : ''
+    const type = props.type         // success or error -> determine the color
+    const className = (type === 'success') ? 'ModalSuccess' : (type === 'warning') ? 'ModalWarning' :''
+
+    const proceedHandler = () => {
+        props.proceedHandler();
+        setIsOpen(false)
+    }
+
+    const closeHandler = () => {
+        if (props.closeHandler) {
+            props.closeHandler()
+        }
+        setIsOpen(false)
+    }
+
+
+    const ProceedBtn = () => {
+        return props.proceedHandler ?
+            <button className="ProceedBtn" onClick={proceedHandler}>Proceed</button> : ''
+    }
 
     return (
         <div className="CustomModal">
@@ -21,7 +39,11 @@ const CustomModal = (props) => {
                 </div>
 
                 <p>{props.body}</p>
-                <button className="CloseBtn" onClick={() => setIsOpen(false)}>Close</button>
+                <div className="ModalBtns">
+                    <ProceedBtn />
+                    <button className="CloseBtn" onClick={closeHandler}>Close</button>
+                </div>
+
             </Modal>
         </div>
     );
