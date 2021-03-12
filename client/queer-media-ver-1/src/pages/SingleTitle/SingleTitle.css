@@ -51,7 +51,7 @@
 .SingleTitleReviewer p {
     display: inline-block;
     position: absolute;
-    left: 200px;
+    left: 175px;
 }
 
 .SingleTitleReviewer img:first-child {
@@ -62,7 +62,7 @@
     height: 20px;
     position: absolute;
     top: 2px;
-    left: 70px;
+    left: 60px;
 }
 
 .SingleTitleArtists {
@@ -108,11 +108,11 @@
 }
 
 .TitleMainContent > div {
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .TitleMainContent h3 {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .Comments {

@@ -9,6 +9,7 @@ const initState = {
     isLoggedin: false,
     user_id: null,
     email: null,
+    display_name: null,
     role: null,
     NavItem: <LoginItem />,
 }
@@ -17,10 +18,16 @@ const AuthReducer = (state = initState, action) => {
 
     switch (action.type) {
         case actionTypes.LOGIN:
-            const payload = action.payload
-            const nav = (payload.role === 'admin') ? <AdminNav /> : <UserNav />
-            return updateState(state, {isLoggedin: true, user_id: payload.user_id, 
-                email: payload.email, role: payload.role, NavItem: nav})
+            console.log(action.payload);
+            const { user_id, email, role, display_name } = action.payload.userData
+            console.log(user_id, email, role, display_name);
+            const nav = (role === 'admin') ? <AdminNav /> : <UserNav />
+            return updateState(state,
+                {
+                    isLoggedin: true, user_id: user_id,
+                    display_name: display_name, email: email,
+                    role: role, NavItem: nav
+                })
 
         case actionTypes.LOGOUT:
             return updateState(state, {
@@ -28,6 +35,7 @@ const AuthReducer = (state = initState, action) => {
                 user_id: null,
                 email: null,
                 role: null,
+                display_name: null,
                 NavItem: <LoginItem />,
             })
 

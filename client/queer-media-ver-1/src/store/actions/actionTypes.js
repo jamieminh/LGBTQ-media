@@ -16,3 +16,9 @@ export const REGISTER = 'REGISTER'
 
 
 export const UPDATE_RATINGS = 'UPDATE_RATINGS'
+
+export const SET_COMMENTS = 'SET_COMMENTS'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const REMOVE_COMMNET = 'REMOVE_COMMNENT'
+export const ADD_RATING = 'ADD_RATING'
+export const REMOVE_RATING = 'REMOVE_RATING'

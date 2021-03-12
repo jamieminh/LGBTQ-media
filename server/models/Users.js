@@ -9,6 +9,10 @@ const Users = db.define('Users', {
         type: DataTypes.CHAR(24),
         primaryKey: true,
     },
+    display_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -30,12 +34,20 @@ const Users = db.define('Users', {
 })
 
 const Users_Comments = db.define('Users_Comments', {
+    comment_id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     comment: {
-        type: DataTypes.TEXT
-    }
+        type: DataTypes.CHAR(6000)
+    },
+    // date: {
+    //     type: DataTypes.Da
+    // }
 },
 {
-    timestamps: false
+    createdAt: true
 })
 
 const Users_Ratings = db.define('Users_Ratings', {

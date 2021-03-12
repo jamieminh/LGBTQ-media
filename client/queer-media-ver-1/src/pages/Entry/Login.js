@@ -36,6 +36,7 @@ const Login = (props) => {
         })
             .then(response => {
                 const result = response.data;
+                console.log(result);
                 if (result.message)
                     setMessage(result.message)
                 else {

@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 const Register = (props) => {
 
     const [emailReg, setEmailReg] = useState(null)
+    const [displayName, setDisplayName] = useState(null)
     const [pwReg, setPwReg] = useState(null)
     const [pwRegRep, setPwRegRep] = useState(null)
 
@@ -25,6 +26,7 @@ const Register = (props) => {
 
             axios.post('entry/register/', {
                 email: emailReg,
+                displayName: displayName,
                 password: pwReg
             })
                 .then(response => {
@@ -57,6 +59,16 @@ const Register = (props) => {
                         required
                     />
                     <span className="InputSymbol"><i className="fas fa-envelope"></i></span>
+                </div>
+
+                <div className="FormInput">
+                    <input type="text" placeholder="You display name" name="display"
+                        pattern="\w{1,45}"
+                        title="Can not exceed 45 characters containing letters, numbers and underscore"
+                        onChange={(e) => setDisplayName(e.target.value)}
+                        required
+                    />
+                    <span className="InputSymbol"><i className="fas fa-user-tag"></i></span>
                 </div>
 
                 <div className="FormInput">

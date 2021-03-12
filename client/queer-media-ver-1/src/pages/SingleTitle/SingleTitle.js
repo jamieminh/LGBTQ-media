@@ -9,6 +9,7 @@ import Spinner from '../../common/components/UI/Spinner/Spinner'
 import blank_user from '../../assets/images/blank_user.png'
 import Error from '../ErrorPage/Error'
 import AlsoLike from './AlsoLike/AlsoLike';
+import Comments from './Comments/Comments'
 
 import {
     not_applicable, rating_0, rating_0_5, rating_1,
@@ -79,23 +80,23 @@ const SingleTitle = (props) => {
                 }
             })
             .catch(err => console.error(err))
-    }, [ props.match.params.media_id])
+    }, [props.match.params.media_id])
 
     const updateBtnHandler = () => {
         history.push({
             pathname: '/upsert-media/update',
-            state: {titleDetails: titleDetails, media_id: props.match.params.media_id}
+            state: { titleDetails: titleDetails, media_id: props.match.params.media_id }
         })
     }
 
     const deleteHandler = () => {
         history.push({
             pathname: '/delete-media',
-            state: {media_id: titleDetails.media_id, title: titleDetails.title}
+            state: { media_id: titleDetails.media_id, title: titleDetails.title }
         })
     }
 
-    const AdminBtns = () => {        
+    const AdminBtns = () => {
         if (userRole === 'admin')
             return (
                 <div className="AdminBtns">
@@ -176,19 +177,19 @@ const SingleTitle = (props) => {
                             <p>{titleDetails.plot}</p>
                         </div>
 
-                        {/* <div className="SingleTitleTrailer">
+                        <div className="SingleTitleTrailer">
                             <h3>Trailer</h3>
                             <TrailerEmbed titleName={titleDetails.title} />
-                        </div> */}
+                        </div>
+
 
                         <div className="RelatedTitles">
                             <h3>You may also like</h3>
                             <AlsoLike genres={titleDetails.genres} />
                         </div>
 
-                        <div className="Comments">
-                            <h3>Comments</h3>
-                        </div>
+                        <Comments media_id='5126' />
+
                     </div>
                 </div>
 
@@ -203,10 +204,10 @@ const SingleTitle = (props) => {
     return (isExist == null) ? (
         <Spinner />
     ) : (
-            <React.Fragment>
-                {getContent()}
-            </React.Fragment>
-        );
+        <React.Fragment>
+            {getContent()}
+        </React.Fragment>
+    );
 
 }
 

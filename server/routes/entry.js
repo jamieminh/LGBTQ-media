@@ -12,6 +12,7 @@ const Op = Sequelize.Op;
 router.post('/register', async (req, res) => {
     const email = req.body.email
     const username = email.split('@')
+    const display_name = req.body.displayName
     const pw = req.body.password
     let isAvailable = true
 
@@ -36,7 +37,7 @@ router.post('/register', async (req, res) => {
 
         id = id.split('$')[5];
         // console.log(hashedPw);
-        Users.create({ user_id: id, email: email, password: hashedPw })
+        Users.create({ user_id: id, email: email, display_name: display_name, password: hashedPw })
             .then(response => {
                 res.send({ isSuccess: true })
                 console.log(response)
@@ -54,6 +55,7 @@ router.post('/login', async (req, res) => {
         where: { email: email }
     })
         .then(async (result) => {
+            console.log(result);
             if (result !== null) {  // there's a user with that email
                 const user = result.dataValues
                 const hashedPw = user.password
@@ -65,10 +67,10 @@ router.post('/login', async (req, res) => {
                         jwt.sign({ id }, process.env.JWT_SECRET_ADMIN, { expiresIn: 60 * 60 * 60 * 24 * 5 })
                         : jwt.sign({ id }, process.env.JWT_SECRET_USER, { expiresIn: 60 * 60 * 60 * 24 * 5 })
 
-                    req.session.user = {user_id: result.user_id, role: result.role, email: result.email}
+                    req.session.user = {user_id: user.user_id, role: user.role, email: user.email, display_name: user.display_name}
                     req.session.token = token
 
-                    res.send({ user_id: user.user_id, email: email, role: user.role })
+                    res.send({ user_id: user.user_id, email: email, role: user.role, display_name: user.display_name })
                 }
                 else
                     res.send({ message: "Wrong email/password combination!" })
@@ -89,6 +91,7 @@ router.get('/logout', (req, res) => {
 // login using session
 router.get('/login', (req, res) => {
     if (req.session.user) {
+        console.log(req.session.user);
         res.send({ isLoggedIn: true, user: req.session.user })
     }    
     else {

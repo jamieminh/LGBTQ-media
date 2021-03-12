@@ -8,14 +8,12 @@ const DeleteTitle = (props) => {
     const history = useHistory()
     const [modal, setModal] = useState(null)
     const state = history.location.state
-    console.log(state);
 
     const deleteTitleProceedHandler = () => {
         const media_id = state.media_id
         axios.post('admin/delete-media', { media_id: media_id })
             .then(res => {
                 const isSuccess = res.data.isSuccess
-                console.log(res.data);
                 if (isSuccess) {
                     setModal(<CustomModal type='success' title='Success' key='modal_success'
                         body="Deletion Successful. You are being directed to Home page." />)

@@ -35,7 +35,7 @@ router.get('/:genre', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// get title with multiple genres
+// get title with multiple genres (also like features)
 router.get('/multiple/:genres', (req, res) => {
     const genres = req.params.genres.split("+")
     let len = genres.length
@@ -43,7 +43,7 @@ router.get('/multiple/:genres', (req, res) => {
     let offset = Math.round(Math.random() * 500)
     let query_in = []
     let same_genres_titles = []
-    const suggestionNums = 6
+    const suggestionNums = 4
 
 
     // if there's only 1 genre
