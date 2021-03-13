@@ -47,7 +47,8 @@ const Users_Comments = db.define('Users_Comments', {
     // }
 },
 {
-    createdAt: true
+    createdAt: true,
+    updatedAt: false
 })
 
 const Users_Ratings = db.define('Users_Ratings', {

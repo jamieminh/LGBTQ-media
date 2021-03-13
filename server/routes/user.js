@@ -1,6 +1,6 @@
 const express = require('express');
 const Media = require('../models/Media');
-const { Users, Users_Comments } = require('../models/Users')
+const { Users, Users_Comments, Users_Ratings } = require('../models/Users')
 const sequelize = require('sequelize');
 const router = express.Router();
 const Op = sequelize.Op;
@@ -27,18 +27,6 @@ const userAuthCheck = (req, res, next) => {
     }
 }
 
-
-router.get('/:email', userAuthCheck, (req, res) => {
-    const email = req.params.email
-
-    Users.findOne({
-        where: { email: email },
-        attributes: ['user_id', 'role', 'display_name']
-    })
-        .then(response => res.send(response))
-        .catch(err => console.log(err))
-})
-
 // get all comments of a media
 router.get('/comments/:media_id', (req, res) => {
     const media_id = req.params.media_id
@@ -50,14 +38,15 @@ router.get('/comments/:media_id', (req, res) => {
         include: {
             model: Users,
             attributes: ['display_name']
-        }
+        },
+        order: [['createdAt', 'DESC']]
 
     })
         .then(results => {
             const comments = results.map(result => {
                 const createdAt = result.createdAt.toString().replace('T', '').replace('.000Z', '')
                 return {
-                    comment: result.comment,
+                    comment: decodeURIComponent(result.comment),
                     comment_id: result.comment_id,
                     createdAt: createdAt,
                     user: result.User.display_name
@@ -70,15 +59,62 @@ router.get('/comments/:media_id', (req, res) => {
 })
 
 
-// add a comment
+// add a comment 
 router.post('/add-comment', userAuthCheck, (req, res) => {
-    const comment = req.body.comment
+    const comment = encodeURIComponent(req.body.comment)
     const media_id = req.body.media_id
     const user_id = req.body.user_id
 
-    // Users_Comments.create({media_id: media_id, user_id: user_id, })
+    Users_Comments.create({media_id: media_id, user_id: user_id, comment: comment})
+    .then(response => {
+        res.send({ isSuccess: true })
+        console.log(response)
+    })
+    .catch(err => console.error(err))
 })
 
 
-// const escapeSpecialChars
+// get rating made by a user 
+router.get('/get-rating', userAuthCheck, (req, res) => {
+    const {media_id, user_id} = req.query
+    // const media_id = req.params.media_id
+    // console.log('[GET-RATING] ----------------' + media_id);
+    Users_Ratings.findOne({
+        where: {media_id: media_id, user_id: user_id},
+        attributes: ['score']
+    })
+    .then(result => {
+        res.send(result)
+    })
+    .catch(err => console.error(err))
+})
+
+// change/add rating from a user
+router.post('/add-rating', userAuthCheck, (req, res) => {
+    const {media_id, user_id, score} = req.body.params
+    console.log(media_id, user_id, score);
+
+    // remove the old score, then insert the new one
+    Users_Ratings.destroy({
+        where: {media_id: media_id, user_id: user_id}
+    })
+    .then(_ => {
+       Users_Ratings.create({media_id: media_id, user_id: user_id, score: score}) 
+       .catch(err => console.error(err))
+    })
+    .catch(err => console.error(err))
+})
+
+
+router.get('/:email', userAuthCheck, (req, res) => {
+    const email = req.params.email
+
+    Users.findOne({
+        where: { email: email },
+        attributes: ['user_id', 'role', 'display_name']
+    })
+        .then(response => res.send(response))
+        .catch(err => console.log(err))
+})
+
 module.exports = router

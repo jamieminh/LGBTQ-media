@@ -5,43 +5,72 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actionCreators from '../../../store/actions/index'
 import './Comments.css'
 import UserIcon from '../../../common/components/User/UserIcon/UserIcon';
+import CustomModal from '../../../common/components/UI/Modal/Modal'
 
 const Comments = (props) => {
     const media_id = props.media_id
-    // const comments = useSelector(state => state.user.comments)
-    const [comments, setComments] = useState(useSelector(state => state.user.comments))
-    const [userComment, setUserComment] = useState(null)
     const dispatch = useDispatch()
-    const isUser = useSelector(state => state.auth.role) === 'user'
-    const displayName = useSelector(state => state.auth.display_name)
-    let charactersLeft = 3000
-    const [charLeft, setCharLeft] = useState(3000)
+
+    const user_id = useSelector(state => state.auth.user_id)    // to display the Comment button and post comments
+    const displayName = useSelector(state => state.auth.display_name)   // to display a user icon next to the cmt box
+
+    const [comments, setComments] = useState(useSelector(state => state.user.comments))
+    const [userComment, setUserComment] = useState('')        // userComment, updated onChange
+    const [commentAdded, setCommentAdded] = useState(null)      // state to re-render Comments everytime user leave a comment
+    const [charLeft, setCharLeft] = useState(3000)              // to keep track of characters left in the comment box
+    const [modal, setModal] = useState({ count: 0, message: null }) // state to display modal
 
     useEffect(() => {
-        console.log(media_id);
         axios.get('/user/comments/' + media_id)
             .then(res => {
                 const cmts = res.data
                 setComments(cmts)
-                dispatch(actionCreators.setComments({ media_id: media_id, comments: cmts }))
+                dispatch(actionCreators.setComments(media_id, cmts))
             })
-    }, [])
+    }, [commentAdded])      // use commentAdded to re-fetch the comments
 
-    // const onFocusHandler = () => {
-    //     document.getElementById('comment-submit').classList.toggle('notShown')
-    // }
-
+    // handle posting comments
     const addCommentHandler = (event) => {
         event.preventDefault()
-        const comment = document.getElementById('comment-ta').value;
         console.log('add comment form submitted');
-        console.log(comment);
+        setModal({
+            count: modal.count + 1, type: 'warning', title: 'Are you sure?', proceed: true,
+            message: 'Are you sure you want to add this comment, this action is irreversible.',
+        })
     }
 
-    const onChangeHandler = () => {
-        // charactersLeft--;
-        // document.getElementById('char-left').innerText = charactersLeft
-        setCharLeft(charLeft-1)
+    // when user is sure they want to leave the comment
+    const addCommentProceedHandler = () => {
+        setUserComment('')
+        setCharLeft(3000)
+        axios.post('/user/add-comment', {
+            comment: userComment,
+            media_id: media_id,
+            user_id: user_id
+        })
+            .then(res => {
+                if (res.data.isSuccess) {
+                    // set success Modal
+                    setModal({
+                        count: modal.count + 1, type: 'success', title: 'Comment Added',
+                        message: 'Your comment has been posted.'
+                    })
+                    setCommentAdded(!commentAdded)
+                }
+                else {
+                    // set error Modal'
+                    setModal({
+                        count: modal.count + 1, type: 'error', title: 'Comment NOT Added',
+                        message: 'There has been some error, try again later.'
+                    })
+                }
+            })
+    }
+
+    // whenever use type in the comment area, calculate characters left and update userComment
+    const onChangeHandler = (e) => {
+        setUserComment(e.target.value)
+        setCharLeft(charLeft - 1)
     }
 
 
@@ -49,16 +78,18 @@ const Comments = (props) => {
         <div className='MediaComments'>
             <h3>Comments</h3>
             <div className="AddComment">
-                <UserIcon displayName={displayName}/>
+                <UserIcon displayName={displayName} />
                 <form onSubmit={addCommentHandler}>
                     <textarea className="CommentArea"
-                        pattern="[^<>&]" minLength='1' maxLength='3000' onChange={onChangeHandler}
+                        minLength='1' maxLength='3000' onChange={onChangeHandler}
+                        value={userComment}
                         title='Must NOT contains any of the following characters <, >, & or backslash'
-                        placeholder="Leave a Comment, maximum 3000 characters" id="comment-ta" ></textarea>
+                        placeholder="Leave a Comment, maximum 3000 characters"
+                        id="comment-ta" required></textarea>
                     <span className="focus-border"></span>
                     <small><em id="char-left">{charLeft} characters left</em></small>
-                    {!isUser ?
-                        <small><em>* You have to log in to leave a comment</em></small> :
+                    {!user_id ?
+                        <small style={{ float: 'right' }}><em>* You need to login to leave a comment</em></small> :
                         <button className='notShown' id='comment-submit'>Comment</button>}
 
                 </form>
@@ -74,7 +105,12 @@ const Comments = (props) => {
                         </div>
                     )
                 })}
-            </div>            
+            </div>
+
+            {modal.count ?
+                <CustomModal key={modal.count} type={modal.type} body={modal.message}
+                    title={modal.title} proceedHandler={modal.proceed ? addCommentProceedHandler : ''}
+                /> : ''}
 
         </div>
     );

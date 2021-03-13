@@ -19,6 +19,7 @@ import {
 } from '../../common/components/Lists/ratings'
 import './SingleTitle.css'
 import { useSelector } from 'react-redux';
+import UserVote from './UserVote/UserVote';
 
 
 
@@ -31,6 +32,7 @@ import { useSelector } from 'react-redux';
 const SingleTitle = (props) => {
     const [isExist, setExist] = useState(null)
     const [titleDetails, setTitleDetails] = useState(null)
+    const media_id = props.match.params.media_id
 
     const userRole = useSelector(state => state.auth.role)
     const history = useHistory()
@@ -59,33 +61,41 @@ const SingleTitle = (props) => {
 
 
     useEffect(() => {
-        axios.get('media/full/' + props.match.params.media_id)
+        let isSubscribed = true     // cleanup unmounted component
+        axios.get('media/full/' + media_id)
             .then(res => {
-                if (res.data === "")
-                    setExist(false)
-                else {
-                    const media = res.data.media
-                    console.log(res.data);
-                    // artists_names = (res.data.artists)
+                if (isSubscribed) {
+                    if (res.data === "")
+                        setExist(false)
+                    else {
+                        const media = res.data.media
 
-                    setTitleDetails({
-                        media_id: media.media_id, title: media.title, runtime: media.runtime,
-                        rated: media.rated, released: media.released, plot: media.plot,
-                        poster_url: media.poster_url, type: media.type, year_end: media.year_end,
-                        languages: media.languages, imdb_url: media.imdb_url, genres: res.data.genres,
-                        artists: res.data.artists, reviewers: res.data.reviewers, directors: res.data.directors
-                    })
-                    setExist(true)
+                        setTitleDetails({
+                            media_id: media.media_id, title: media.title, runtime: media.runtime,
+                            rated: media.rated, released: media.released, plot: media.plot,
+                            poster_url: media.poster_url, type: media.type, year_end: media.year_end,
+                            languages: media.languages, imdb_url: media.imdb_url, genres: res.data.genres,
+                            artists: res.data.artists, reviewers: res.data.reviewers, directors: res.data.directors
+                        })
+                        setExist(true)
 
+                    }
                 }
+
             })
-            .catch(err => console.error(err))
-    }, [props.match.params.media_id])
+            .catch(err => {
+                if (isSubscribed)
+                    console.error(err)
+            })
+
+            return () => (isSubscribed = false)
+    }, [media_id])
+
 
     const updateBtnHandler = () => {
         history.push({
             pathname: '/upsert-media/update',
-            state: { titleDetails: titleDetails, media_id: props.match.params.media_id }
+            state: { titleDetails: titleDetails, media_id: media_id }
         })
     }
 
@@ -146,6 +156,7 @@ const SingleTitle = (props) => {
                             <h2 className="MediaTitle">{titleDetails.title}</h2>
                             <div className="GeneralInfoRatings">
                                 {review_scores}
+                                <UserVote media_id={media_id} />
                             </div>
                             <p><span>Type</span>: {titleDetails.type}</p>
                             <p><span>Rated</span>: {titleDetails.rated}</p>
@@ -177,10 +188,10 @@ const SingleTitle = (props) => {
                             <p>{titleDetails.plot}</p>
                         </div>
 
-                        <div className="SingleTitleTrailer">
+                        {/* <div className="SingleTitleTrailer">
                             <h3>Trailer</h3>
                             <TrailerEmbed titleName={titleDetails.title} />
-                        </div>
+                        </div> */}
 
 
                         <div className="RelatedTitles">
@@ -188,7 +199,7 @@ const SingleTitle = (props) => {
                             <AlsoLike genres={titleDetails.genres} />
                         </div>
 
-                        <Comments media_id='5126' />
+                        <Comments media_id={media_id} />
 
                     </div>
                 </div>

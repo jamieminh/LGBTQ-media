@@ -18,15 +18,12 @@ const Login = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const ac = new AbortController();
-
+    const historyState = history.location.state
 
     const login = (event) => {
+        let isSubscribed = true
         setIsLoading(true)
-        console.log('Login btn clicked 1');
-
         event.preventDefault()
-        console.log('Login btn clicked 2');
 
         console.log(emailLogin, pwLogin);
         // dispatch(actionCreators.login(emailLogin, pwLogin))
@@ -35,16 +32,23 @@ const Login = (props) => {
             password: pwLogin
         })
             .then(response => {
-                const result = response.data;
-                console.log(result);
-                if (result.message)
-                    setMessage(result.message)
-                else {
-                    dispatch(actionCreators.login(result))
-                    history.push('/')
+                if (isSubscribed) {
+                    const result = response.data;
+                    console.log(result);
+                    if (result.message)
+                        setMessage(result.message)
+                    else {
+                        dispatch(actionCreators.login(result))
+                        history.push(historyState ? historyState.fromUrl : '/')
+                    }
                 }
             })
-            .then(res => setIsLoading(false))  
+            .then(res => {
+                if (isSubscribed)
+                    setIsLoading(false)
+            })
+
+            return () => {isSubscribed = false}
 
     }
 

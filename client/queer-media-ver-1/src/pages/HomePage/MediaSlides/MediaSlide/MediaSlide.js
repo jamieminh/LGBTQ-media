@@ -8,10 +8,10 @@ import notFound from '../../../../assets/images/notfound.jpg'
 
 const MediaSlide = (props) => {
     const [titles, setTitles] = useState(null)
-    const state = props.rank === 'latest' ? { seeMore: true } : null     // this only applies to seemore of 'Highest...' since the data fetched at the Type Page is already sorted
 
     useEffect(() => {
         let url = '';
+        let isSubscribed = true         // cleanup unmounted component
         if (props.rank === 'latest')
             url = 'media/latest/' + props.type + '/12'
         else
@@ -19,11 +19,17 @@ const MediaSlide = (props) => {
 
         axios.get(url)
             .then(res => {
-                const titles = res.data;
-                setTitles(titles)
+                if (isSubscribed) {
+                    const titles = res.data;
+                    setTitles(titles)
+                }
             })
-            .catch(err => console.log(err))
-    }, [])
+            .catch(err => {
+                if (isSubscribed)
+                    console.log(err)
+            })
+        return () => {isSubscribed = false}
+    }, [props.rank, props.type])
 
 
     const carouseSlide = (startPos, range) => {
