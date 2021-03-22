@@ -1,0 +1,194 @@
+.Navbar {
+    padding: .5rem 2.5rem;
+    display: flex;
+    align-items: center;
+    background-color: #1d5477 !important;
+    height: 80px;
+}
+
+@font-face {
+    font-family: "Gilbert";
+    src: url('../../../../assets/fonts//Gilbert-Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.NavbarText {
+    font-family: 'Gilbert';
+    position: absolute;
+    left: 100px;
+    font-size: 25px;
+    min-width: 145px;
+    text-decoration: none;
+    animation-name: textGoLeft;
+    animation-duration: 1s;
+}
+
+.NavbarText:hover {
+    text-decoration: none;
+}
+
+#queer-1, #queer-6 {
+    color: #D344B0;
+}
+
+#queer-2, #queer-7 {
+    color: #08B4E4;
+}
+
+#queer-3, #queer-8 {
+    color: #30C979;
+}
+
+#queer-4, #queer-9 {
+    color: #FBBF47;
+}
+
+#queer-5, #queer-10 {
+    color: #FA7015;
+}
+
+.NavBurgerIcon {
+    width: fit-content;
+}
+
+.NavItems {
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    grid-gap: 10px;
+    text-align: center;
+    list-style: none;
+    width: 100vw;
+    justify-content: end;
+    margin-top: 16px;
+}
+
+.NavItemLink {
+    color: white;
+    padding: .5rem .5rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.NavItems li:last-child a {
+    background-color: #FBBF47;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.NavItemLink:hover {
+    transition: all 0.1s ease-in;
+    text-decoration: none;
+    border-bottom: 3px solid white;
+    color: white;
+}
+
+.NavItemLink.active {
+    border-bottom: 3px solid white;
+}
+
+ul li:last-child .NavItemLink {
+    width: 100px;
+    margin: 0 auto;
+    color: black;
+}
+
+ul li:last-child .NavItemLink:hover {
+    color: #FBBF47;
+    background-color: black;
+    border: none;
+}
+
+/* mobile */
+
+@media(max-width: 768px) {
+    .Navbar {
+        position: relative;
+    }
+    .NavbarText {
+        position: absolute;     
+        left: 50%;
+        transform: translateX(-50%);   
+        animation-name: textGoMiddle;
+        animation-duration: 1s
+    }
+    ul.NavItems {
+        padding-inline-start: 0 !important;
+    }
+    .NavItems {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background-color: #1d5477;
+        top: 80px;
+        width: 100%;
+        height: 310px;
+        grid-gap: 0;
+        margin: 0;
+        z-index: 1;
+    }
+    .NavItems.noactive {
+        left: -100%;
+        animation-name: NavDisappear;
+        animation-duration: .5s
+    }
+    .NavItems.active {
+        left: 0;
+        transition: all 0.5s ease;
+        opacity: 1;
+    }
+    .NavItems li {
+        border-bottom: 1px solid #1d5477;
+    }
+    .NavItemLink {
+        text-align: center;
+        padding: .8rem;
+        display: table;
+        width: 100%;
+    }
+    .NavItemLink:hover {
+        transition: all 0.3s ease-in;
+        text-decoration: none;
+        background-color: white;
+        border: none;
+        color: #1d5477;
+    }
+    .NavItemLink.active {
+        background-color: white;
+        color: #1d5477;
+        border: none;
+    }
+
+    ul li:last-child .NavItemLink {
+        margin-top: 10px;
+        padding: .6rem;
+    }
+}
+
+@keyframes textGoMiddle {
+    from {
+        left: 100px;
+    }
+    to {
+        left: 50%;
+    }
+}
+
+@keyframes textGoLeft {
+    from {
+        left: 50%;
+    }
+    to {
+        left: 100px;
+    }
+}
+
+@keyframes NavDisappear {
+    from {
+        left: 0;
+    }
+    to {
+        left: -100%;
+    }
+}

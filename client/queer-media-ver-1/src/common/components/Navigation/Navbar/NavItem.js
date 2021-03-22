@@ -1,0 +1,5 @@
+const NavItems = [
+    {
+        title: 'Home'
+    }
+]

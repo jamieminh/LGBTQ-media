@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Toolbar from '../../common/components/Navigation/Toolbar/Toolbar';
+import Navbar from '../../common/components/Navigation/Navbar/Navbar';
+// import Toolbar from '../../common/components/Navigation/Toolbar/Toolbar';
 import Footer from '../../common/components/UI/Footer/Footer';
 import SearchBar from '../../common/containers/SearchBar/SearchBar'
 class Layout extends Component {
@@ -9,7 +10,8 @@ class Layout extends Component {
     render() { 
         return (
             <div className="Layout" id="Layout">
-                <Toolbar/>
+                {/* <Toolbar/> */}
+                <Navbar />
                 <SearchBar />
                 <main>
                     {this.props.children}

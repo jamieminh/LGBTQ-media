@@ -17,8 +17,9 @@ const TypePage = (props) => {
 
     useEffect(() => {
         const state = props.location.state
-        dispatch(actionCreators.resetTitles())  // reset store titles because when this function fires, user likely came from another page
-
+        // reset store titles because when this function fires, user likely came from another page
+        dispatch(actionCreators.resetTitles())  
+        
         axios.get('media/latest/' + props.type + '/all')
             .then(res => {
                 const fetchedTitles = res.data

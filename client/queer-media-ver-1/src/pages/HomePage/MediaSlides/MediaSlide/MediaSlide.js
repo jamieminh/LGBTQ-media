@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../../../axios';
+import Slider from 'react-slick'
 import './MediaSlide.css';
 import { Link } from 'react-router-dom';
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Spinner from '../../../../common/components/UI/Spinner/Spinner'
 import notFound from '../../../../assets/images/notfound.jpg'
 
 const MediaSlide = (props) => {
     const [titles, setTitles] = useState(null)
+    const config = {
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        autoplay: true,
+        autoplaySpeed: 8000,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        swipe: true,
+    };
+
+    const configXS = { ...config, slidesToShow: 1, slidesToScroll: 1, dots: false, }
+    const configS = { ...config, slidesToShow: 2, slidesToScroll: 2 }
+
+
 
     useEffect(() => {
         let url = '';
@@ -28,117 +45,66 @@ const MediaSlide = (props) => {
                 if (isSubscribed)
                     console.log(err)
             })
-        return () => {isSubscribed = false}
+        return () => { isSubscribed = false }
     }, [props.rank, props.type])
 
+    console.log(titles);
 
-    const carouseSlide = (startPos, range) => {
+    const content = (titles) ? titles.map(title => {
         return (
-            <div className="row">
-                {[...titles].splice(startPos, range).map(item => {
-                    return (
-                        <div className="col-sm-3 CarouselMedia" key={'mediaSlide-' + item.media_id}>
-                            <Link to={"/media/" + item.media_id}>
-                                <p className="MediaScore">{(item.score === 'N/A') ? '__' : item.score}</p>
-                                <img className="MediaImage"
-                                    src={item.poster_url}
-                                    onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = notFound
-                                    }}
-                                    alt={item.title + " poster"} />
-                                <p className="title">{item.title + " (" + item.released + ") "}</p>
-                            </Link>
+            <div className="CarouselItem" key={'carousel-item-' + title.media_id}>
+                <Link to={"/media/" + title.media_id}>
+                    <p className="CarouselMediaScore">{(title.score === 'N/A') ? '__' : title.score}</p>
+                    <img className="CarouselImage"
+                        src={title.poster_url}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = notFound
+                        }}
+                        alt={title.title + " poster"} />
+                    <p className="CarouselMediaTitle">{title.title + " (" + title.released + ") "}</p>
+                </Link>
 
-                        </div>
-                    )
-                })}
             </div>
         )
-    }
+    }) : ''
 
-    const carouseSlideXS = (item, active = "") => {
-        return (
-            <div className={"carousel-item " + active} key={item.media_id}>
-                <div className="CarouselMedia">
-                    <Link to={"/media/" + item.media_id}>
-                        <p className="MediaScore">{(item.score === 'N/A') ? '__' : item.score}</p>
-                        <img className="MediaImage"
-                            src={item.poster_url}
-                            onError={(e) => {
-                                e.target.onerror = null;
-                                e.target.src = notFound
-                            }}
-                            alt={item.title + " poster"} />
-                        <p className="title">{item.title + " (" + item.released + ") "}</p>
-                    </Link>
-                </div>
-            </div>
-        )
-    }
-
-    const carouselControls = (isXS) => {
-        const xs = (isXS) ? "xs" : "";
-        let href = "#" + props.rank + props.type + xs;
-        return (
-            <React.Fragment>
-                <a href={href} className="carousel-control-prev" role="button" data-slide="prev">
-                    <span><i className="fa fa-angle-left fa-2x" aria-hidden="true"></i></span>
-                    <span className="sr-only">Previous</span>
-                </a>
-
-                <a href={href} className="carousel-control-next" role="button" data-slide="next">
-                    <span><i className="fa fa-angle-right fa-2x" aria-hidden="true"></i></span>
-                    <span className="sr-only">Next</span>
-                </a>
-            </React.Fragment>
-        )
-    }
 
     return (
         (!titles) ? <Spinner /> :
-
-            <div className=" CarouselWrapper">
+            <div className="CarouselContainer">
                 <div className="CarouselHeader">
                     <h3 className="CarouselTitle">{props.title}</h3>
 
                     <Link to={{
                         pathname: '/' + (props.type === 'movie' ? 'movies' : props.type),
                         state: (props.rank === 'highest') ? { seeMore: true } : null     // this only applies to seemore of 'Highest...' since the data fetched at the Type Page is already sorted
-                    }} className="SeeMoreOut">
-                        <button className="SeeMoreButton">
+                    }} className="SeeMore">
+                        <button>
                             See More <i className="fas fa-angle-right"></i>
                         </button>
                     </Link>
                 </div>
 
-                {/* Carousel for sm and larger screens */}
-                <div className="carousel slide CarouselGenre d-none d-sm-block" id={props.rank + props.type}>
-                    <div className="carousel-inner">
-                        <div className="carousel-item active">
-                            {carouseSlide(0, 4)}
-                        </div>
-                        <div className="carousel-item">
-                            {carouseSlide(4, 4)}
-                        </div>
-                        <div className="carousel-item">
-                            {carouseSlide(8, 4)}
-                        </div>
-                        {carouselControls(false)}
-                    </div>
+                <div className="CarouselXSmall">
+                    <Slider {...configXS}>
+                        {content}
+                    </Slider>
                 </div>
 
-                {/* Carousel for xs screens */}
-                <div className="carousel slide CarouselGenre d-sm-none" id={props.rank + props.type + "xs"}>
-                    <div className="carousel-inner">
-                        {carouseSlideXS({ ...titles[0] }, "active")}
-                        {[...titles].splice(1, 11).map(item => carouseSlideXS(item))}
+                <div className="CarouselSmall">
+                    <Slider {...configS}>
+                        {content}
+                    </Slider>
+                </div>
 
-                        {carouselControls(true)}
-                    </div>
+                <div className="CarouselMedium">
+                    <Slider {...config}>
+                        {content}
+                    </Slider>
                 </div>
             </div>
-    );
+    )
 
 
 }

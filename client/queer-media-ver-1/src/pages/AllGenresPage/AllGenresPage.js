@@ -4,15 +4,13 @@ import allGenres from '../../common/components/Lists/genres'
 import './AllGenresPage.css'
 
 const genres = (props) => {
-    const classes = "col-6 col-md-4 col-lg-3 d-flex justify-content-center";
-
     return (
-        <div className="container">
-            <div className="row GenresRow">
-                { allGenres.map(genre => <div className={classes} key={genre}> <GenreCategory genre={genre}/> </div>) }
-            </div>           
+        <div className="AllGenres">
+            { allGenres.map(genre => <GenreCategory genre={genre} key={genre} />)}
+            <div className="AllGenresSpaceFill"></div>
+            <div className="AllGenresSpaceFill"></div>
         </div>
     );
 }
- 
+
 export default genres;

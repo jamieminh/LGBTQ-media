@@ -1,6 +1,6 @@
 const express = require('express');
 const { Genre, Media_Genre, genre_ids } = require('../models/Genre');
-const { Review, Media_Reviewer } = require('../models/Reviewer')
+const { Review, Media_Reviewer, Reviewer } = require('../models/Reviewer')
 const Media = require('../models/Media');
 const { Sequelize, random } = require('../config');
 
@@ -21,16 +21,26 @@ router.get('/', (req, res) => {
 router.get('/:genre', (req, res) => {
     let genre = req.params.genre;
     Media.findAll({
-        include: [{ model: Genre, where: { name: genre } }],
+        include: [
+            { model: Genre, where: { name: genre } },
+            { model: Reviewer, where: { name: 'imdb' } }
+        ],
         order: [
             ['released', 'DESC']
-        ]
-        // limit: 5
+        ],
+        attributes: ['title', 'imdb_url', 'media_id', 'released', 'year_end', 'poster_url'],
     })
 
         .then(results => {
-            // res.send("length = " + results.length)
-            res.send(results)
+            const titles = results.map(r => {
+                const score = r.Reviewers[0].Media_Reviewer.score
+                return {
+                    title: r.title, imdb_url: r.imdb_url,
+                    media_id: r.media_id, released: r.released,
+                    year_end: r.year_end, poster_url: r.poster_url, score: score
+                }
+            })
+            res.send(titles)
         })
         .catch(err => console.log(err))
 })
@@ -49,7 +59,7 @@ router.get('/multiple/:genres', (req, res) => {
     // if there's only 1 genre
     if (len == 1)
         limit = suggestionNums
-    
+
     query_in = genres.map(genre => ({ genre_id: genre_ids[genre.replace('-', '_')] }))
 
     Media_Genre.findAll({
@@ -62,7 +72,7 @@ router.get('/multiple/:genres', (req, res) => {
         .then(results => {
             // res.send(results)
             if (len != 1) {
-                let count = {}                
+                let count = {}
                 // count the appearance of each id
                 for (let i = 0; i < results.length; i++) {
                     const media_id = results[i].media_id
@@ -115,7 +125,7 @@ router.get('/multiple/:genres', (req, res) => {
                 .then(results => {
                     const titles = results.map(item => {
                         return {
-                            media_id: item.media_id, title: item.title, 
+                            media_id: item.media_id, title: item.title,
                             released: item.released, year_end: item.year_end,
                             poster_url: item.poster_url, score_imdb: item.Media_Reviewers[0].score
                         }

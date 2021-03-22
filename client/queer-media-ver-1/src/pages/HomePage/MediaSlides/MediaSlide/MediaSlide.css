@@ -1,111 +1,95 @@
-/* Mobile First */
-
-
-.carousel {
-    width: 300px;
+.CarouselSmall, .CarouselMedium {
+    display: none;
 }
 
-.CarouselWrapper {
-    width: 100%;
-    margin: 25px auto;
-    height: 440px;
-    margin-top: 70px;
+.slick-slider {
+    width: 250px;
+    margin: 0 auto !important;
+    background-color: #0d3046;
+    border-radius: 3px;
 }
 
-.CarouselGenre {
-    background-color: #0d3046 !important;
-    margin: auto;
-    border-radius: 10px;
-    overflow: hidden;
-    height: 90%;
+.CarouselContainer {
+    margin: 20px 10px 60px;
 }
 
-.CarouselTitle {
-    margin-left: 35px;
+.CarouselItem {
+    width: fit-content !important;
+    margin: 20px auto;
+    display: block !important;
 }
 
-.carousel-inner {
-    height: 100%;
-    padding: 0 20px;
+.slick-arrow.slick-prev {
+    left: -35px !important;
 }
 
-.carousel-item {
-    width: 95%;
-    height: 100%;
-    margin-top: 10px;
+.slick-arrow.slick-next {
+    right: -35px !important;
 }
 
-.CarouselMedia {
-    text-align: center;
+.CarouselItem {
     position: relative;
-    margin: 10px auto;
-    width: 90%;
 }
 
-.CarouselMedia a {
+.CarouselItem a {
     text-decoration: none;
-}
-
-.CarouselMedia a:hover{
-    text-decoration: none;
-    opacity: 0.9;
-    z-index: -1;
-}
-
-.CarouselMedia .title {
-    margin-top: 10px;
     color: white;
 }
 
-.CarouselMedia .title:hover {
-    color: rgb(223, 223, 223);
+.CarouselItem a:hover {
+    text-decoration: none;
+    color: white;
+    opacity: 0.8;
 }
 
-.MediaScore {
+.CarouselMediaScore {
     position: absolute;
     background-color: #F1B722;
     color: black;
     width: 50px;
     border-radius: 20px;
     margin: auto;
-    top: 15px;
     left: 50%;
+    z-index: 1;
+    text-align: center;
     transform: translate(-50%, -50%);
 }
 
-.MediaImage {
-    width: 200px;
-    height: 280px;
-    margin-top: 15px;
-    border-radius: 4px;
+.CarouselImage {
+    z-index: -1;
+    border-radius: 2px;
+    width: 160px;
+    height: 250px;
+    margin: 0 auto;
     object-fit: cover;
 }
 
-.fa {
-    color: rgb(255, 255, 255);
+.CarouselMediaTitle {
+    margin-top: 5px;
+    text-align: center;
+    width: 170px;
 }
 
 .CarouselHeader {
     position: relative;
-    width: 300px;
-    margin: 0 auto;
+    width: 250px;
+    margin: 0 auto 10px;
 }
 
-.CarouselHeader h3 {
-    position: absolute;
-    bottom: 5px;
-    left: -30px;
+.CarouselTitle {
+    text-align: center;
 }
 
-.SeeMoreOut{
+
+.SeeMore{
     position: absolute;
     right: 0;
-    bottom: -435px;
+    bottom: -390px;
     text-decoration: none;
     color: white;
 }
 
-.SeeMoreOut button {
+.SeeMore button {
     position: relative;
     text-transform: uppercase;
     border: none;
@@ -118,92 +102,88 @@
     font-weight: 500;
 }
 
-.SeeMoreOut button:hover {
+.SeeMore button:hover {
     outline: none;
     opacity: 0.9;
 }
 
-.SeeMoreOut i {
+.SeeMore i {
     position: absolute;
     top: 7px;
     right: 12px;
     font-size: 17px;
 }
 
+@media(min-width: 481px) {
+    .CarouselSmall {
+        display: block;
+    }
+    .CarouselXSmall {
+        display: none;
+    }
 
-@media (min-width: 576px) {
-    .carousel {
-        width: 95%;
+    .CarouselContainer {
+        margin-bottom: 40px;
     }
-    .carousel-inner {
-        padding: 0 40px;
-    }
-    .CarouselWrapper {
-        height: 400px;
-        margin-top: 50px;
-    }
-    .CarouselMedia {
-        height: 25vw;
-    }
-    .MediaImage {
-        width: 17vw;
-        height: 100%;
-    }
-    .carousel-control-next {
-        right: -4.5%  !important; 
-    }
-    .carousel-control-prev {
-        left: -4.5% !important;
-    }
-    .CarouselHeader {
+    .slick-slider, .CarouselHeader {
         width: 90%;
-        margin-bottom: 10px;
     }
-    .CarouselHeader a {
-        bottom: 10px;
-        right: -15px;
+
+    .CarouselTitle {
+        text-align: left;
+    }
+
+    .SeeMore{
+        bottom: 0;
     }
 }
 
-@media (min-width: 769px) {
-    .CarouselWrapper {
-        height: 420px;
+@media(min-width: 768px) {
+    .CarouselSmall {
+        display: none;
     }
-}
-
-@media (min-width: 992px) {
-    .CarouselWrapper {
-        height: 36vw;
+    .CarouselMedium {
+        display: block;
     }
-    .CarouselMedia {
-        height: 18vw;
-    }
-    .MediaImage {
-        width: 100%
-    }
-}
-
-@media (min-width: 1224px) {
-    .CarouselWrapper {
-        height: 33vw;
-    }
-}
-
-@media (min-width: 1440px) {
-    .CarouselWrapper {
+    .CarouselImage {
+        width: 17vw;
         height: 26vw;
     }
-    .CarouselMedia {
-        height: 16vw;
+    .CarouselMediaTitle {
+        width: 17vw;
     }
-    .MediaImage {
-        width: 100%
-    }
+}
 
-    .carousel-control-next {
-        right: -5.2%  !important; 
+@media(min-width: 992px) {
+    .CarouselImage {
+        width: 13vw;
+        height: 19vw;
+        margin: 0 auto;
     }
-    .carousel-control-prev {
-        left: -5.2% !important;
+    .CarouselMediaTitle {
+        width: 13vw;
+    }
+    
+}
+
+@media(min-width: 1366px) {
+    .CarouselImage {
+        width: 180px;
+        height: 264px;
+        margin: 0 auto;
+    }
+    .CarouselMediaTitle {
+        width: 180px;
+    }
+}
+
+@media(min-width: 1440px) {
+    .CarouselImage {
+        width: 11vw;
+        height: 16vw;
+        margin: 0 auto;
+    }
+    .CarouselMediaTitle {
+        width: 11vw;
     }
 }

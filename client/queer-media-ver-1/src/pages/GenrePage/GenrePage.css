@@ -1,12 +1,40 @@
 .GenrePage {
-    width: 90%;
+    width: 92%;
     margin: 0 auto;
+}
+
+.GenrePageContent {
+    display: flex;
+    flex-flow: column;
+}
+
+.GenrePageContent > .ListPaginate { order: 2 }
+.GenrePageContent > .TitlesFilter { order: 1 } 
+
+.GenrePageContent > .TitlesFilter {
+    margin: 0 10%;
+    width: 90%;
 }
 
 .GenrePage > h1 {
     text-align: center;
     font-size: 50px;
     margin-bottom: 40px;
+}
+
+@media (min-width: 769px) {
+    .GenrePageContent {
+        flex-flow: row;
+    }
+
+    .GenrePageContent > .ListPaginate { order: 1 }
+    .GenrePageContent > .TitlesFilter { order: 2 } 
+
+    .GenrePageContent > .TitlesFilter {
+        margin: 60px 0 0 30px;
+        width: 30%;
+    }
+
 }
 
 @media (min-width: 1280px) {

@@ -16,7 +16,7 @@ const GenreCategory = (props) => {
     // const { module: image } = module;
     const genre = props.genre;
     return (
-        <div className="Genre">
+        <div className="AllGenresGenre">
             <Link className="GenreImage" to={props.match.url + '/' + genre}> <img src={module} alt={genre + " poster"} /> </Link>
             <Link className="GenreText" to={props.match.url + '/' + genre}>{genre}</Link>
         </div>
