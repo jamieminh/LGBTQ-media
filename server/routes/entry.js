@@ -12,9 +12,11 @@ const Op = Sequelize.Op;
 router.post('/register', async (req, res) => {
     const email = req.body.email
     const username = email.split('@')
-    const display_name = req.body.displayName
+    let display_name = req.body.displayName
     const pw = req.body.password
     let isAvailable = true
+
+    display_name = display_name + Math.ceil(Math.random() * 899999 + 100000)
 
     await Users.findOne({ where: { email: email } })
         .then(result => {

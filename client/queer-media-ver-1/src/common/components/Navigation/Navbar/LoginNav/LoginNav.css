@@ -1,0 +1,27 @@
+.NavItemLink.LoginNavItem, .NavItemLink.toggleDropdown {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #FBBF47;
+    border-radius: 3px;
+    color: black;
+    margin: 10px auto;
+}
+
+.NavItemLink.LoginNavItem {
+    width: 100px;
+}
+
+.NavItemLink.LoginNavItem:hover,
+.NavItemLink.toggleDropdown:hover {
+    color: #FBBF47;
+    background-color: black;
+    border: none;
+}
+
+@media(min-width: 769px) {
+    .NavItemLink.LoginNavItem,
+    .NavItemLink.toggleDropdown {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

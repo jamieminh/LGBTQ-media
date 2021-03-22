@@ -1,11 +1,13 @@
-.AuthBtn {
+.LogoutBtn {
     background-color: transparent;
     font-weight: 500;
     font-size: 17px;
     outline: none;
     border: none;
     cursor: pointer;
-    width: 90px;
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 10px;
 }
 
 .AuthBtn:hover {
@@ -17,18 +19,11 @@
 }
 
 .LogoutBtn{
-    color: #df4d52;    
+    color: black;    
 }
 
 .LogoutBtn:hover{
-    color: #ff5d5d;    
+    color: white;
+    background-color: rgb(187, 33, 33);
 }
 
-
-.LoginBtn{
-    color: #4be285;    
-}
-
-.LoginBtn:hover{
-    color: #47ff8d;    
-}

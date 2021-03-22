@@ -1,5 +1,5 @@
 .Navbar {
-    padding: .5rem 2.5rem;
+    padding: 10px 2rem;
     display: flex;
     align-items: center;
     background-color: #1d5477 !important;
@@ -16,7 +16,7 @@
 .NavbarText {
     font-family: 'Gilbert' !important;
     position: absolute;
-    left: 100px;
+    left: 85px;
     font-size: 25px;
     min-width: 145px;
     text-decoration: none;
@@ -53,13 +53,13 @@
 }
 
 .NavItems {
-    display: grid;
-    grid-template-columns: repeat(6, auto);
+    display: flex;
     grid-gap: 10px;
     text-align: center;
     list-style: none;
     width: 100vw;
-    justify-content: end;
+    justify-content: flex-end;
+    align-items: center;
     margin-top: 16px;
 }
 
@@ -71,13 +71,6 @@
     text-decoration: none;
 }
 
-.NavItems li:last-child a {
-    background-color: #FBBF47;
-    border-radius: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 .NavItemLink:hover {
     transition: all 0.1s ease-in;
     text-decoration: none;
@@ -87,18 +80,6 @@
 
 .NavItemLink.active {
     border-bottom: 3px solid white;
-}
-
-ul li:last-child .NavItemLink {
-    width: 100px;
-    margin: 0 auto;
-    color: black;
-}
-
-ul li:last-child .NavItemLink:hover {
-    color: #FBBF47;
-    background-color: black;
-    border: none;
 }
 
 /* mobile */
@@ -122,7 +103,7 @@ ul li:last-child .NavItemLink:hover {
         flex-direction: column;
         position: absolute;
         background-color: #1d5477;
-        top: 60px;
+        top: 80px;
         width: 100%;
         height: fit-content;
         grid-gap: 0;
@@ -141,6 +122,7 @@ ul li:last-child .NavItemLink:hover {
     }
     .NavItems li {
         border-bottom: 1px solid #1d5477;
+        width: 100%;
     }
     .NavItemLink {
         text-align: center;
@@ -161,11 +143,7 @@ ul li:last-child .NavItemLink:hover {
         border: none;
     }
 
-    ul li:last-child .NavItemLink {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        padding: .9rem;
-    }
+
 }
 
 @keyframes textGoMiddle {

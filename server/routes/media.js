@@ -30,8 +30,8 @@ router.get('/latest/:type/:limit', (req, res) => {
             attributes: ['name']
         }],
         where: { type: type },
-        attributes: ['media_id', 'title', 'released', 'poster_url', 'year_end'],
-        order: [['released', 'DESC']],
+        attributes: ['media_id', 'title', 'released', 'poster_url', 'year_end', 'createdAt'],
+        order: [['released', 'DESC'], ['createdAt', 'DESC']],
     }
 
     if (limit !== 'all') 
