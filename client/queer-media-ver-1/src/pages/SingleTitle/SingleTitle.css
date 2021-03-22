@@ -48,6 +48,12 @@
     margin-right: 5px;
 }
 
+.SingleTitleReviewer p {
+    display: inline-block;
+    position: absolute;
+    left: 175px;
+}
+
 .SingleTitleReviewer img:first-child {
     height: 22px;
 }
@@ -56,7 +62,7 @@
     height: 20px;
     position: absolute;
     top: 2px;
-    left: 80px;
+    left: 60px;
 }
 
 .SingleTitleArtists {
@@ -102,17 +108,53 @@
 }
 
 .TitleMainContent > div {
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .TitleMainContent h3 {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .Comments {
     border: 2px solid coral;
     height: 500px;
 }
+
+.AdminBtns {
+    margin-top: 70px;
+    text-align: center;
+}
+
+.AdminBtns button {
+    margin-right: 50px;
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 30px;
+    transition: all 0.1s ease-in-out;
+    font-weight: 500;
+}
+
+i.fas.fa-exclamation-triangle {
+    margin-right: 10px;
+    font-size: 17px;
+}
+
+.AdminBtns button:first-child {
+    background-color: rgb(78, 199, 108);
+}
+
+.AdminBtns button:nth-child(2) {
+    background-color: rgb(199, 78, 78);
+    padding: 5px 20px;
+}
+
+.AdminBtns button:hover {
+    transform: scale(1.1);
+}
+
 
 @media(min-width: 481px) {
     .GeneralInfo .GeneralInfoImg>img {

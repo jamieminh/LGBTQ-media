@@ -4,7 +4,23 @@
 }
 
 .RandomTitles {
-    margin-top: 35px;
+    margin-top: 15px;
+    display: none;
+}
+
+
+@media (min-width: 992px) {
+    .Home {
+        display: flex;
+    }
+
+    .HomeSlides {
+        width: 75%;
+    }
+    .RandomTitles {
+        display: inline;
+        width: 25%;
+    }
 }
 
 

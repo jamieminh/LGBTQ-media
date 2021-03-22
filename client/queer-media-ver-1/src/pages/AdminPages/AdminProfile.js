@@ -1,9 +1,8 @@
+import axios from '../../axios';
 import React, { useState, useEffect } from 'react';
-import axios from '../../../axios'
 import { useSelector } from 'react-redux';
 
-
-const CreateTitle = () => {
+const AdminProfile = (props) => {
 
     const email = useSelector(state => state.auth.email)
     const token = localStorage.getItem('token')
@@ -13,9 +12,10 @@ const CreateTitle = () => {
     useEffect(() => {
         console.log(email);
         console.log(token);
-        axios.get('admin/' + email, {
-            headers: {"x-access-token": token}
-        })
+        // axios.get('user/' + email, {
+        //     headers: {"x-access-token": token}
+        // })
+        axios.get('admin/' + email)
         .then(res => {
             console.log(res.data);
             setContent(res.data)
@@ -26,12 +26,11 @@ const CreateTitle = () => {
 
     return (
         <div>
-            <h1>Admin Profile</h1>
-            {content ? <h2>{content.user_id}</h2> : 'null'}
+            <h1>User Profile</h1>
+            {content ? <h2>{content.user_id}</h2> : <h2>null</h2>}
             {content ? <h2>{content.role}</h2> : <h2>null</h2>}
-
         </div>
     );
 }
-
-export default CreateTitle;
+ 
+export default AdminProfile;

@@ -1,4 +1,25 @@
-.GenresRow > div {
-    margin: 50px 0;
+.AllGenres {
+    margin: 50px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (min-width: 1024px) {    
+    .AllGenres {
+        margin: 50px 60px;
+    }
+}
+
+@media(min-width: 1280px) {
+    .AllGenres {
+        margin: 50px 12%;
+    }
+}
+
+@media(min-width: 1500px) {
+    .AllGenres {
+        margin: 50px 18%;
+    }
 }
 

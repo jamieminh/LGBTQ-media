@@ -1,0 +1,112 @@
+.UserComment {
+    margin-bottom: 10px;
+}
+
+.UserComment h5 {
+    margin-bottom: 0 !important;
+    font-size: 1.2em;
+}
+
+.UserComment small {
+    font-size: 65% !important;
+    color: rgb(207, 207, 207);
+}
+
+.UserComment p {
+    margin-bottom: 0 !important;
+}
+
+.UserComment hr {
+    width: 100%;
+    background-color: rgb(196, 196, 196)
+}
+
+.MediaComments .AddComment {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.AddComment form {
+    width: calc(100% - 65px);
+    position: relative;
+}
+
+.CommentArea {
+    width: 100%;
+    padding: 5px 10px;
+    resize: none;
+    height: 100px;
+    color: white;
+    background-color: #164b6b;
+    border-top-left-radius: 2px ;
+    border-top-right-radius: 2px;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+.CommentArea:focus {
+    outline: none;
+}
+.CommentArea::placeholder {
+    color: rgb(202, 202, 202);
+}
+
+.CommentArea~.focus-border {
+    position: absolute;
+    top: 99px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #3399FF;
+    transition: 0.4s;
+}
+
+.CommentArea:focus~.focus-border {
+    width: 100%;
+    transition: 0.4s;
+    left: 0;
+}
+
+
+.AddComment form button {
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding: 3px 8px;
+    background-color: #ece269;
+    float: right;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+/* .AddComment form button.notShown {
+    display: none;
+} */
+.AddComment form button:hover {
+    background-color: #cfc33c;
+}
+
+.AddComment form :is(button, textarea):active, .AddComment form button:focus {
+    outline: none;
+}
+
+.AddComment form em {
+    color: rgb(255, 94, 94);
+}
+
+/* @media (min-width: 481px) {
+    .AddComment form {
+        width: 83%;
+    }
+    
+}
+
+@media (min-width: 768px) {
+    .AddComment form {
+        width: 83%;
+    }
+    
+} */

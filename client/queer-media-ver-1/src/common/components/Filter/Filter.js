@@ -8,10 +8,10 @@ import allGenres from '../Lists/genres'
 import './Filter.css'
 
 
-const Filter = () => {
+const Filter = (props) => {
     const sortBy = useSelector(state => state.media.sortBy)
     const dispatch = useDispatch()
- 
+
     // function to handle genres filter by dispatching actions to the store
     const updateSelectedGenres = (cb) => {
         const genre = cb.target.value
@@ -67,12 +67,12 @@ const Filter = () => {
         rotateSibling.classList.toggle('on')
     }
 
-    const genresFilter = allGenres.map(genre => (
+    const genresFilter = (!props.isGenre) ? allGenres.map(genre => (
         <div className="FiterGenre" key={"filter-by-" + genre}>
             <input type="checkbox" id={"filter-genre-" + genre} value={genre} onClick={updateSelectedGenres} />
             <label htmlFor={"filter-genre-" + genre}>{genre}</label>
         </div>
-    ))
+    )) : ''
 
 
     return (
@@ -87,7 +87,7 @@ const Filter = () => {
             <div id="SortBy">
                 <div>
                     <input type="radio" name="sort" id="date_desc" onClick={updateSelectedRadio}
-                    checked={(sortBy.type === 'date' && sortBy.order === 'desc')} readOnly/>
+                        checked={(sortBy.type === 'date' && sortBy.order === 'desc')} readOnly />
                     <label htmlFor="date_desc">Release Date - Latest</label>
                 </div>
                 <div>
@@ -95,8 +95,8 @@ const Filter = () => {
                     <label for="date_asc">Release Date - Oldest</label>
                 </div>
                 <div>
-                    <input type="radio" name="sort" id="rating_desc" onClick={updateSelectedRadio} 
-                    checked={(sortBy.type === 'rating' && sortBy.order === 'desc')} readOnly/>
+                    <input type="radio" name="sort" id="rating_desc" onClick={updateSelectedRadio}
+                        checked={(sortBy.type === 'rating' && sortBy.order === 'desc')} readOnly />
                     <label for="rating_desc">IMDB Score - Highest</label>
                 </div>
                 <div>
@@ -160,13 +160,20 @@ const Filter = () => {
             </div>
 
             {/* Filter titles by genres */}
-            <div className="FilterToggler" onClick={() => toggleHandler('genre')}>
-                <h5 id="GenreRotateSibling">Filter by Genre</h5>
-                <i className="fas fa-caret-right icon-rotates" id="GenreTogglerIcon"></i>
-            </div>
-            <div id="FilterByGenre">
-                {genresFilter}
-            </div>
+            {(!props.isGenre) ?
+                <div>
+                    <div className="FilterToggler" onClick={() => toggleHandler('genre')}>
+                        <h5 id="GenreRotateSibling">Filter by Genre</h5>
+                        <i className="fas fa-caret-right icon-rotates" id="GenreTogglerIcon"></i>
+                    </div>
+
+
+                    <div id="FilterByGenre">
+                        {genresFilter}
+                    </div>
+                </div> : ''
+            }
+
         </div>
     );
 

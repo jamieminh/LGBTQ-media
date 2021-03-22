@@ -101,12 +101,13 @@ router.get("/full/:id", (req, res) => {
                     released: result.released, plot: result.plot, 
                     poster_url: result.poster_url, rated: result.rated, 
                     imdb_url: result.imdb_url, type: result.type, 
-                    year_end: result.year_end, languages: result.language.split(", ")
+                    runtime: result.runtime, year_end: result.year_end, 
+                    languages: result.language.split(", ")
                 }
 
                 const genres = result.Genres.map(item => item.name)
                 const reviewers = result.Reviewers.map(item => {
-                    return { name: item.name, score: item.Media_Reviewer.score }
+                    return { name: item.name, score: item.Media_Reviewer.score, votes: item.Media_Reviewer.votes}
                 })
                 const artists = result.Artists.map(item => {
                     return { name: item.name, artist_id: item.Media_Artist.artist_id }

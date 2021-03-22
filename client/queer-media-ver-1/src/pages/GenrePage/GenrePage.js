@@ -3,17 +3,22 @@ import axios from '../../axios';
 import './GenrePage.css'
 import ListPaginate from '../../common/components/ListPaginate/ListPaginate';
 import Spinner from '../../common/components/UI/Spinner/Spinner'
+import Filter from '../../common/components/Filter/Filter'
+import { useDispatch, useSelector } from 'react-redux';
+import * as actionCreators from '../../store/actions/index'
 
 
 const Genre = (props) => {
-
+    const titles = useSelector(state => state.media.titles)
     const [genre, setGenre] = useState('')
-    const [titles, setTitles] = useState(null)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const genre = props.genre
         let titles = []
         const search_url = 'genres/' + genre;
+        // reset store titles because when this function fires, user likely came from another page
+        dispatch(actionCreators.resetTitles())  
 
         axios.get(search_url)
             .then(res => {
@@ -24,7 +29,7 @@ const Genre = (props) => {
                 const next_5 = titles.slice(5, 10)
                 titles = next_5.concat(first_5).concat(titles.slice(10))
                 setGenre(genre)
-                setTitles(titles)
+                dispatch(actionCreators.setTitles(titles))
 
             })
             .catch(err => console.log(err))
@@ -33,12 +38,14 @@ const Genre = (props) => {
     return !titles ? (
         <Spinner />
     ) : (
-            <div className="GenrePage">
-                <h1>Genre {genre} </h1>
+        <div className="GenrePage">
+            <h1>Genre {genre} </h1>
+            <div className="GenrePageContent">
                 <ListPaginate titles={titles} />
-
+                <Filter isGenre={true} />
             </div>
-        );
+        </div>
+    );
 
 }
 

@@ -1,0 +1,25 @@
+.UserIcon div {
+    width: 55px;
+    height: 55px;
+    background-color: #b061c3;
+    border-radius: 50%;
+    position: relative;
+    
+}
+
+.UserIcon div h2 {
+    position: absolute;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+}
+
+.UserIcon img {
+    width: 55px;
+    border-radius: 50%;
+}
+
+/* .UserIcon h1 {
+    background-color: aquamarine;
+} */

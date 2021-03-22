@@ -7,9 +7,10 @@ import './TrailerEmbed.css'
 
 const TrailerEmbed = (props) => {
 
-    const [trailerId, setTrailerId] = useState(null)
+    const [trailerId, setTrailerId] = useState('wkzwDOCEDCo')       // default video if none is loaded
 
     useEffect(() => {
+        console.log('[TrailerImbed]');
         let url = 'https://www.googleapis.com/youtube/v3/search'
         let params = {
             key: config_3.KEY,

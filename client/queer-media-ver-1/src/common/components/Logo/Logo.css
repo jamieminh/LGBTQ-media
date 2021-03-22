@@ -1,46 +1,15 @@
-/* .Logo {
-    padding: 8px;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-.Logo img {
-    height: 100%;
-}
-
-.SideDrawer {
-    width: 100%;
-    padding-top: 5px;
-    margin-bottom: 20px;
-} */
-
-
-
 .Logo {
+    display: inline-block;
     width: 50px;
+    margin-right: 20px;
     padding-bottom: 10px;
 }
 .Logo img {
     width: 100%;
 }
 
-@media (min-width: 576px) {
-    .logo {
-        margin-right: 0;
-        width: 40px;
-    }
-}
-
-@media(min-width: 610px) {
-    .Logo {
-        display: none;
-    }
-}
-
 @media(min-width: 700px) {
     .Logo {
-        margin-right: 10px;
-        width: 45px;
-        display: block;
+        display: inline-block;
     }
 }

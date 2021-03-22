@@ -1,33 +1,31 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import axios from '../../../axios'
 import { Link } from 'react-router-dom'
 import Spinner from '../../../common/components/UI/Spinner/Spinner';
 import notFound from '../../../assets/images/notfound.jpg'
 import './AlsoLike.css'
 
-class AlsoLike extends Component {
-    state = {
-        titles: null
-    }
+const AlsoLike = (props) => {
+    const [titles, setTitles] = useState(null)
 
-    componentDidMount() {
-        const genres = this.props.genres.join('+')
+    useEffect(() => {
+        console.log('[ALSO LIKE]');
+        const genres = props.genres.join('+')
         axios.get('genres/multiple/' + genres)
             .then(res => {
                 const titles = res.data;
-                this.setState({ titles: titles })
+                setTitles(titles)
 
             })
             .catch(err => console.error(err))
-    }
+    }, [])
 
-    render() {
-
-        let content = ''
-        if (this.state.titles) {
-            content = this.state.titles.map(item => {
-                let year = item.released + (item.year_end == 0 ? '' :  ' - ' + item.year_end)
-                return (
+    let content = ''
+    if (titles) {
+        content = titles.map(item => {
+            let year = item.released + (item.year_end == 0 ? '' : ' - ' + item.year_end)
+            return (
                 <div className="AlsoLikeItem" key={item.media_id}>
                     <Link to={"/media/" + item.media_id}>
                         <p className="AlsoLikeScore">{(item.score_imdb === 'N/A') ? '__' : item.score_imdb}</p>
@@ -41,18 +39,17 @@ class AlsoLike extends Component {
                         <p className="title">{item.title + "(" + year + ")"}</p>
                     </Link>
                 </div>)
-            })
+        })
 
-        }
-
-        return (this.state.titles == null) ? (
-            <Spinner />
-        ) : (
-                <div className="AlsoLike">
-                    {content}
-                </div>
-            );
     }
+
+    return (titles == null) ? (
+        <Spinner />
+    ) : (
+        <div className="AlsoLike">
+            {content}
+        </div>
+    );
 }
 
 export default AlsoLike;

@@ -1,42 +1,117 @@
 .Modal {
-    position: fixed;
     z-index: 500;   /* z-index: specifies stack order of an elem, elem w/ higher stack order is always in front of an elem w/ lower stack order*/
-    width: 80%;
+    min-height: 230px;
     background-color: white;
-    box-shadow: 0 0 10px grey ;   /* not specify h- and v- offset will give 4 side shadow */
-                                    /* box shadow: h-offset v-offset blur spread color |inset|initial|inherit */
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    padding: 16px;
-    left: 10%;
-    top: 20%;
+    border-radius: 3px;
     box-sizing: border-box;         /* allow include the padding and border of an alem to the actual total height and width of that elem */    
     transition: all 0.3s ease-out;  /* slower at the end */
+    top: 40%;
+    position: relative;
+    width: 340px;
+    margin: 0 auto;
 }
 
+.Modal .ModalTitle {
+    height: 80px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: #DC717A;
+    position: relative;
+}
 
-.CloseBtn {
-    color: rgb(155, 155, 155);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    background-color: rgb(216, 216, 216);
-    padding: 2px 10px;
-    border-radius: 50%;
+.Modal.ModalSuccess .ModalTitle {
+    background-color: #46c2ad;
+}
+
+.Modal.ModalWarning .ModalTitle {
+    background-color: #ecc919;
+}
+
+.Modal h2 {    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #3a3a3a;
+    width: fit-content;
+}
+
+.Modal p {    
+    margin: 20px 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.ModalBtns {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.ModalBtns button {
+    background-color: #DC717A;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 25px;
     border: none;
+    border-radius: 35px;
+    cursor: pointer;
 }
 
 .CloseBtn:hover, .CloseBtn:focus {
-  color: black;
-  background-color: rgb(194, 194, 194);
+  background-color: #d85762;
   text-decoration: none;
   cursor: pointer;
   outline: none;
 }
 
+.ModalBtns .ProceedBtn {
+    background-color: #57d180;
+}
+
+.ModalBtns .ProceedBtn:hover, .ModalBtn:focus {
+  background-color: #4fbe74;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.Modal.ModalSuccess .CloseBtn{
+    background-color: #26b495;
+}
+
+.Modal.ModalSuccess .CloseBtn:hover{
+    background-color: #1a836c;
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
+
 @media (min-width: 600px) {
     .Modal{
         width: 500px;
-        left: calc(50% - 250px);
     }
 }
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fbfbfb3b;
+    z-index: 400;
+}
+

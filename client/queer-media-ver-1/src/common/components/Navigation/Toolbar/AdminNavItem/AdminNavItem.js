@@ -16,11 +16,9 @@ const AdminNav = (props) => {
                     role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Admin</a>
             </div>
-  
+
             <div className="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                <Link className="dropdown-item" to="/create-media">Create</Link>
-                <a className="dropdown-item" href="#">Update</a>
-                <a className="dropdown-item" href="#">Delete</a>
+                <Link className="dropdown-item" to="/upsert-media/create">Create</Link>
                 <div className="dropdown-divider"></div>
                 <LogoutBtn />
             </div>

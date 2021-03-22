@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import axios from '../../axios';
 import { config_1 } from '../../config'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
 import notFound from '../../assets/images/notfound.jpg'
@@ -9,139 +9,35 @@ import Spinner from '../../common/components/UI/Spinner/Spinner'
 import blank_user from '../../assets/images/blank_user.png'
 import Error from '../ErrorPage/Error'
 import AlsoLike from './AlsoLike/AlsoLike';
+import Comments from './Comments/Comments'
 
-import { not_applicable, rating_0, rating_0_5, rating_1,
+import {
+    not_applicable, rating_0, rating_0_5, rating_1,
     rating_1_5, rating_2, rating_2_5, rating_3,
     rating_3_5, rating_4, rating_4_5, rating_5,
     imdb, metacritic, tomato
 } from '../../common/components/Lists/ratings'
 import './SingleTitle.css'
+import { useSelector } from 'react-redux';
+import UserVote from './UserVote/UserVote';
 
 
 
-let proxyurl = "https://cors-anywhere.herokuapp.com/";
-proxyurl = ""
-const url = proxyurl + "https://serpapi.com/search.json?"
-const API_KEY = config_1.KEY
-
-// axios.defaults.headers.common['Content-Type'] = 'application/json'
-// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-
-console.log(axios.defaults.headers);
+// let proxyurl = "https://cors-anywhere.herokuapp.com/";
+// proxyurl = ""
+// const url = proxyurl + "https://serpapi.com/search.json?"
+// const API_KEY = config_1.KEY
 
 
-// let params = [
-//     ['api_key', API_KEY].join('='),
-//     ['tbm', "isch"].join('='),    // image search
-//     ['ijn', '0'].join('='),       // first page
-//     ['gl', 'us'].join('='),
-//     ['hl', 'en'].join('=')
-// ].join('&')
+const SingleTitle = (props) => {
+    const [isExist, setExist] = useState(null)
+    const [titleDetails, setTitleDetails] = useState(null)
+    const media_id = props.match.params.media_id
 
-let params = {
-    api_key: API_KEY,
-    tbm: "isch",    // image search
-    ijn: '0',       // first page
-    gl: 'us',
-    hl: 'en',
-    q: 'superman'
-}
+    const userRole = useSelector(state => state.auth.role)
+    const history = useHistory()
 
-class SingleTitle extends Component {
-    state = {
-        isExist: null,
-        media_id: null,
-        title: null,
-        released: null,
-        plot: null,
-        poster_url: null,
-        rated: null,
-        type: null,
-        year_end: null,
-        imdb_url: null,
-        languages: null,        // a list of languages as Strings
-        genres: null,           // a list of genres as Strings
-        reviewers: null,        // a list of reviewers {reviewer, score}
-        artists: null,          // a list of artists {artist name, artist id}
-        // artists: [
-        //     { name: 'Charlize Theron', id: 12, img_url: blank_user },
-        //     { name: 'Sofia Boutella', id: 344, img_url: blank_user },
-        //     { name: 'James McAvoy', id: 444, img_url: blank_user },
-        //     { name: 'John Something Goodman', id: 124, img_url: blank_user },
-        //     { name: 'Scarlett Johansson', id: 112, img_url: blank_user }
-        // ],
-        directors: null,         // a list of directors {director name, director id}
-        refreshTrailer: false
-    }
-
-
-    componentDidMount() {
-        let artists_names = []
-        let artists_info = []
-        axios.get('media/full/' + this.props.match.params.media_id)
-            .then(res => {
-                if (res.data === "")
-                    this.setState({ isExist: false })
-                else {
-                    const media = res.data.media
-                    artists_names = (res.data.artists)
-                    this.setState({
-                        isExist: true, media_id: media.media_id, title: media.title,
-                        rated: media.rated, released: media.released, plot: media.plot,
-                        poster_url: media.poster_url, type: media.type, year_end: media.year_end,
-                        languages: media.languages, imdb_url: media.imdb_url, genres: res.data.genres,
-                        artists: res.data.artists, reviewers: res.data.reviewers, directors: res.data.directors
-                    })
-                }
-            })
-            //  get artists images
-            // .then(res => {
-            //     if (this.state.isExist) {
-            //         const requests = []
-            // artists_names.forEach(artist => {
-            //     const request = url + params + '&q=' + encodeURIComponent(artist.name + " imdb")
-            //     requests.push(axios.get(request))
-            // })
-
-            // console.log(this.state.artists);
-
-            // let artists_images = []
-
-            // request({url: url, qs: params}, (err, res, body) => {
-            //     if (err) return console.log(err);
-            //     console.log(body.url);
-            //     console.log(body);
-            //     console.log(res);
-            // })
-
-            // axios.all(requests)
-            //     .then(responses => {
-            //         responses.forEach(res => {
-            //             console.log(res);
-            //             if (res.data.error == null)   // no error
-            //                 artists_images.push(res.data.images_results[0].original);
-            //             else
-            //                 artists_images.push(blank_user)
-            //         })
-            //     })
-            //     .then(res => {
-            //         console.log(artists_images);
-            //         for (let i = 0; i < artists_names.length; i++) {
-            //             const artist = { ...artists_names[i], img_url: artists_images[i] }
-            //             artists_info.push(artist)
-            //         }
-            //         this.setState({ artists: artists_info })
-            //     })
-            //     .catch(err => console.error(err))
-            //     }
-            // })
-            // .then(res => {
-            //     this.setState({ artists: artists_info })
-            // })
-            .catch(err => console.error(err))
-    }
-   
-    getRatingStars = (score, decimal = false) => {
+    const getRatingStars = (score, decimal = false) => {
         if (score.toUpperCase === "N/A")
             return not_applicable
 
@@ -164,63 +60,119 @@ class SingleTitle extends Component {
     }
 
 
+    useEffect(() => {
+        let isSubscribed = true     // cleanup unmounted component
+        axios.get('media/full/' + media_id)
+            .then(res => {
+                if (isSubscribed) {
+                    if (res.data === "")
+                        setExist(false)
+                    else {
+                        const media = res.data.media
 
-    render() {
+                        setTitleDetails({
+                            media_id: media.media_id, title: media.title, runtime: media.runtime,
+                            rated: media.rated, released: media.released, plot: media.plot,
+                            poster_url: media.poster_url, type: media.type, year_end: media.year_end,
+                            languages: media.languages, imdb_url: media.imdb_url, genres: res.data.genres,
+                            artists: res.data.artists, reviewers: res.data.reviewers, directors: res.data.directors
+                        })
+                        setExist(true)
 
-        var content = <Error />
-
-
-        if (this.state.isExist) {
-            var directors = this.state.directors.map(director => director.name)     // get directors' names
-            var review_scores = this.state.reviewers.map(review => {        // format the ratings
-                let review_img = (review.name === "imdb") ? imdb : (review.name === "metacritic") ? metacritic : tomato
-                return (
-                    <div className="SingleTitleReviewer" key={this.state.media_id + "-" + review.name}>
-                        <a href={this.state.imdb_url} target="_blank"><img src={review_img} alt={review.name + " logo"}></img></a>
-                        <img
-                            src={this.getRatingStars(review.score, review.name === "imdb")}
-                            alt={review.name + " rating"}></img>
-                    </div>
-                )
+                    }
+                }
 
             })
+            .catch(err => {
+                if (isSubscribed)
+                    console.error(err)
+            })
 
-            const year = this.state.released + (this.state.year_end == 0 ? '' : ' - ' + this.state.year_end)
+            return () => (isSubscribed = false)
+    }, [media_id])
 
-            content = (
+
+    const updateBtnHandler = () => {
+        history.push({
+            pathname: '/upsert-media/update',
+            state: { titleDetails: titleDetails, media_id: media_id }
+        })
+    }
+
+    const deleteHandler = () => {
+        history.push({
+            pathname: '/delete-media',
+            state: { media_id: titleDetails.media_id, title: titleDetails.title }
+        })
+    }
+
+    const AdminBtns = () => {
+        if (userRole === 'admin')
+            return (
+                <div className="AdminBtns">
+                    <button onClick={updateBtnHandler}>Update</button>
+                    <button onClick={deleteHandler}><i className="fas fa-exclamation-triangle"></i>Delete</button>
+                </div>
+            )
+    }
+
+    const getContent = () => {
+        if (!isExist)
+            return <Error />
+        else {
+            let directors = titleDetails.directors.map(director => director.name)     // get directors' names
+            let review_scores = titleDetails.reviewers.map(review => {        // format the ratings
+                let review_img = (review.name === "imdb") ? imdb : (review.name === "metacritic") ? metacritic : tomato
+                return (
+                    <div className="SingleTitleReviewer" key={titleDetails.media_id + "-" + review.name}>
+                        <a href={titleDetails.imdb_url} target="_blank" rel="noreferrer"><img src={review_img} alt={review.name + " logo"}></img></a>
+                        <img
+                            src={getRatingStars(review.score, review.name === "imdb")}
+                            alt={review.name + " rating"}></img>
+                        <p>{review.votes} votes</p>
+                    </div>
+                )
+            })
+
+            const year = titleDetails.released + (titleDetails.year_end === 0 ? '' : ' - ' + titleDetails.year_end)
+
+            return (
                 <div className="SingleTitle">
                     <div className="GeneralInfo">
                         <div className="GeneralInfoImg">
                             <img
-                                src={this.state.poster_url}
+                                src={titleDetails.poster_url}
                                 onError={(e) => {
                                     e.target.onerror = null;
                                     e.target.src = notFound
                                 }}
-                                alt={this.state.title + " poster"} />
+                                alt={titleDetails.title + " poster"} />
                         </div>
 
-                        <h2 className="MediaTitleSm">{this.state.title}</h2>
+                        <h2 className="MediaTitleSm">{titleDetails.title}</h2>
 
 
                         <div className="GeneralInfoText">
-                            <h2 className="MediaTitle">{this.state.title}</h2>
+                            <h2 className="MediaTitle">{titleDetails.title}</h2>
                             <div className="GeneralInfoRatings">
                                 {review_scores}
+                                <UserVote media_id={media_id} />
                             </div>
-                            <p><span>Type</span>: {this.state.type}</p>
-                            <p><span>Rated</span>: {this.state.rated}</p>
+                            <p><span>Type</span>: {titleDetails.type}</p>
+                            <p><span>Rated</span>: {titleDetails.rated}</p>
                             <p><span>Year</span>: {year}</p>
                             <p><span>Directors</span>: {directors.join(", ")}</p>
-                            <p><span>Genres</span>: {this.state.genres.join(", ")}</p>
-                            <p><span>Languages</span>: {this.state.languages.join(", ")}</p>
+                            <p><span>Genres</span>: {titleDetails.genres.join(", ")}</p>
+                            <p><span>Languages</span>: {titleDetails.languages.join(", ")}</p>
                         </div>
                     </div>
+
+                    {AdminBtns()}
 
                     <div className="TitleMainContent">
 
                         <div className="SingleTitleArtists">
-                            {this.state.artists.map(artist =>
+                            {titleDetails.artists.map(artist =>
                                 <div className="SingleTitleArtist" key={artist.name}>
                                     {/* <img src={artist.img_url} alt={artist.name + " profile picture"}></img> */}
                                     <Link to={'/artist/' + artist.artist_id}>
@@ -233,39 +185,41 @@ class SingleTitle extends Component {
 
                         <div className="SingleTitlePlot">
                             <h3>Plot Summary</h3>
-                            <p>{this.state.plot}</p>
+                            <p>{titleDetails.plot}</p>
                         </div>
 
-                        <div className="SingleTitleTrailer">
+                        {/* <div className="SingleTitleTrailer">
                             <h3>Trailer</h3>
-                            <TrailerEmbed titleName={this.state.title} />
-                        </div>
+                            <TrailerEmbed titleName={titleDetails.title} />
+                        </div> */}
+
 
                         <div className="RelatedTitles">
                             <h3>You may also like</h3>
-                            <AlsoLike genres={this.state.genres} />
+                            <AlsoLike genres={titleDetails.genres} />
                         </div>
 
-                        <div className="Comments">
-                            <h3>Comments</h3>
-                        </div>
+                        <Comments media_id={media_id} />
+
                     </div>
                 </div>
 
             )
         }
-
-        return (this.state.isExist == null) ? (
-            <Spinner />
-        ) : (
-                <React.Fragment>
-                    {content}
-
-
-
-                </React.Fragment>
-            );
     }
+
+
+
+
+
+    return (isExist == null) ? (
+        <Spinner />
+    ) : (
+        <React.Fragment>
+            {getContent()}
+        </React.Fragment>
+    );
+
 }
 
 export default SingleTitle;

@@ -1,5 +1,8 @@
-.Genre {
+.AllGenresGenre {
     position: relative;
+    width: 80%;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .GenreText {
@@ -9,17 +12,13 @@
     background-color: salmon;
     border-radius: 10px;
     text-decoration: none !important;
-
     padding: 5px 10px; 
     bottom: -33px;
     left: 50%;
     transform: translate(-50%, -50%);
-
     color: black;
     font-weight: 500;
     text-transform: capitalize;
-
-    /* box-shadow: 0 0 6px grey; */
 }
 
 .GenreText:hover {
@@ -36,7 +35,8 @@
     width: 200px;
     height: 295px;
     margin: auto;
-    border-radius: 5px;
+    border-radius: 3px;
+    object-fit: cover;
 }
 
 .GenreImage:hover {
@@ -44,30 +44,56 @@
 }
 
 /* xs devices */
-@media (max-width: 575px) {      
+@media (min-width: 481px) {    
+    .AllGenresGenre, .AllGenresSpaceFill {
+        width: 50%;
+    }
+    
     .GenreImage img {
-        width: 150px;
-        height: 221px;
-        margin: auto;
+        width: 160px;
+        height: 230px;
     }
 
 }
 
-/* sm devices */
-@media (max-width: 767px) {      
+@media (min-width: 768px) {    
+    .AllGenresGenre, .AllGenresSpaceFill {
+        width: 33%;
+        margin-bottom: 50px;
+    }
     
-}
-
-/* md devices 768->991 */    
-@media (min-width: 768px) and (max-width: 991px) {      
     .GenreImage img {
         width: 170px;
         height: 251px;
-        margin: auto;
+    }
+
+}
+
+
+@media (min-width: 1024px) {    
+    .AllGenresGenre, .AllGenresSpaceFill {
+        width: 25%;
+        margin-bottom: 60px;
+    }
+    
+    .GenreImage img {
+        width: 180px;
+        height: 270px;
+    }
+
+}
+
+@media (min-width: 1280px) {    
+    .GenreImage img {
+        width: 190px;
+        height: 275px;
     }
 }
 
-/* lg devices */
-@media (max-width: 1119px) {      
-    
+
+@media (min-width: 1500px) {    
+    .GenreImage img {
+        width: 14vw;
+        height: 21vw;
+    }
 }

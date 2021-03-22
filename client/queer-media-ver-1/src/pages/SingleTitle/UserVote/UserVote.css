@@ -1,0 +1,55 @@
+.UserRating {
+    position: relative;
+}
+/* Ratings widget */
+.UserRatingOptions {
+    display: inline-block;
+    border: 0;
+    position: absolute;
+    top: 0px;
+    left: 60px;
+}
+/* Hide radio */
+.UserRatingOptions > input {
+    display: none;
+}
+/* Order correctly by floating highest to the right */
+.UserRatingOptions > label {
+    float: right;
+    font-size: 16px;
+}
+/* The star of the show */
+.UserRatingOptions > label:before {
+    display: inline-block;
+    font-size: 1.1rem;
+    padding: 0 .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005"; /* full star */
+    font-weight: 900;
+    font-size: 16px;
+}
+
+/* Half star trick */
+.UserRatingOptions .half:before {
+    content: "\f089"; /* half star no outline */
+    position: absolute;
+    padding-right: 0;
+    font-size: 16px;
+
+}
+/* Click + hover color */
+input:checked ~ label, /* color current and previous stars on checked */
+label:hover, label:hover ~ label { color: #FFC107;  } /* color previous stars on hover */
+
+/* Hover highlights */
+input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
+input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
+label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #c99807;  } 
+
+.CurrentUserRating {
+    position: absolute;
+    top: 0px;
+    left: 200px;
+}

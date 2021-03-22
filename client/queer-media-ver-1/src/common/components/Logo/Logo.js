@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 import tvlogo from '../../../assets/images/logo.png'
 import './Logo.css'
 
-const logo = (props) => {
-    // let addClasses = props.onSideDrawer ? classes.SideDrawer : null
-
+const logo = () => {
     return (
         <div className="Logo" >
             <Link to='/'>
@@ -16,4 +14,3 @@ const logo = (props) => {
 }
 
 export default logo;
-// style={{width: props.width}}

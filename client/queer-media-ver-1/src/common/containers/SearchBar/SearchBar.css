@@ -10,7 +10,7 @@
 .search-box {
     display: flex;
     flex-direction: row;
-    padding: 0 5%;
+    padding: 0 7%;
 }
 
 .search-box #search-input {
@@ -53,7 +53,7 @@
     
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1024px) {
     .search-box {
         padding-left: 25%;
         padding-right: 25%;
