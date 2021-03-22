@@ -16,18 +16,43 @@ const router = express.Router();
 const Op = Sequelize.Op;
 
 
-// get latest animation
-router.get('/latest/animation/:limit', (req, res) => {
-    const limit = req.params.limit;
-    getLatest('animation', limit, res)
-})
-
-
 // get latest movies or series
 router.get('/latest/:type/:limit', (req, res) => {
     const type = req.params.type;
     const limit = req.params.limit;
-    getLatest(type, limit, res)
+    const findParams = {
+        include: [{
+            model: Media_Reviewer,
+            attributes: ['score'],
+            where: { reviewer_id: 'im' }
+        }, {
+            model: Genre,
+            attributes: ['name']
+        }],
+        where: { type: type },
+        attributes: ['media_id', 'title', 'released', 'poster_url', 'year_end'],
+        order: [['released', 'DESC']],
+    }
+
+    if (limit !== 'all') 
+        findParams.limit = parseInt(limit)
+    
+    Media.findAll(findParams)
+        .then(medias => {
+            const titles = medias.map(item => {
+                return {
+                    media_id: item.media_id,
+                    title: item.title,
+                    released: item.released,
+                    poster_url: item.poster_url,
+                    score: item.Media_Reviewers[0].score,
+                    genres: item.Genres.map(genre => genre.name),
+                    year_end: item.year_end,
+                }
+            })
+            res.send(titles)
+        })
+        .catch(err => console.log(err))
 })
 
 
@@ -97,17 +122,17 @@ router.get("/full/:id", (req, res) => {
                 res.send(null)
             else {
                 const media = {
-                    media_id: result.media_id, title: result.title, 
-                    released: result.released, plot: result.plot, 
-                    poster_url: result.poster_url, rated: result.rated, 
-                    imdb_url: result.imdb_url, type: result.type, 
-                    runtime: result.runtime, year_end: result.year_end, 
+                    media_id: result.media_id, title: result.title,
+                    released: result.released, plot: result.plot,
+                    poster_url: result.poster_url, rated: result.rated,
+                    imdb_url: result.imdb_url, type: result.type,
+                    runtime: result.runtime, year_end: result.year_end,
                     languages: result.language.split(", ")
                 }
 
                 const genres = result.Genres.map(item => item.name)
                 const reviewers = result.Reviewers.map(item => {
-                    return { name: item.name, score: item.Media_Reviewer.score, votes: item.Media_Reviewer.votes}
+                    return { name: item.name, score: item.Media_Reviewer.score, votes: item.Media_Reviewer.votes }
                 })
                 const artists = result.Artists.map(item => {
                     return { name: item.name, artist_id: item.Media_Artist.artist_id }
@@ -122,8 +147,6 @@ router.get("/full/:id", (req, res) => {
         })
         .catch(err => console.log(err))
 })
-
-
 
 
 // get media based on id 
@@ -157,54 +180,4 @@ router.get("/:id", (req, res) => {
 })
 
 
-
-const getLatest = (type, limit, res) => {
-    // FIRST: find all media ids with genre animation
-    Media_Genre.findAll({
-        attributes: ['media_id'],
-        include: { model: Genre, attributes: [], where: { name: 'animation' } },
-    })
-        .then(result => {
-            const ids = result.map(item => item.media_id);      // ids of animations 
-            let findAllParams = {
-                include: [{
-                    model: Media_Reviewer,
-                    attributes: ['score'],
-                    where: { reviewer_id: 'im' }
-                }, {
-                    model: Genre,
-                    attributes: ['name']
-                }],
-                // 'where' clause to be added conditionally, including 'type' and 'media_id'
-                attributes: ['media_id', 'title', 'released', 'poster_url', 'year_end'],
-                order: [['released', 'DESC']],
-            }
-            // set limit of result turned back
-            if (limit !== 'all') findAllParams.limit = parseInt(limit)
-
-            // set 'where' clause
-            findAllParams.where = (type !== 'animation') ? { type: type, media_id: { [Op.notIn]: ids } }
-                : { media_id: { [Op.in]: ids } }
-
-            // SECOND: get titles that's (not) of genre animation
-            Media.findAll(findAllParams)
-                .then(medias => {
-                    const titles = medias.map(item => {
-                        return {
-                            media_id: item.media_id,
-                            title: item.title,
-                            released: item.released,
-                            poster_url: item.poster_url,
-                            score: item.Media_Reviewers[0].score,
-                            genres: item.Genres.map(genre => genre.name),
-                            year_end: item.year_end,
-                        }
-                    })
-                    res.send(titles)
-                })
-                .catch(err => console.log(err))
-            // end inner find
-        })
-        .catch(err => console.log(err))
-}
 module.exports = router

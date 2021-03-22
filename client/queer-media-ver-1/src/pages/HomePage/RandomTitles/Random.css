@@ -5,7 +5,7 @@
 }
 
 .Random p {
-    margin-bottom: 5px;
+    padding: 3px;
 }
 
 .RandomMedia > a {
@@ -46,8 +46,8 @@
     background-color: salmon;
     text-align: center;
     width: fit-content;
-    padding: 0 10px;
-    border-radius: 5px;
+    padding: 1px 10px 3px;
+    border-radius: 2px;
 }
 
 .Random::-webkit-scrollbar-track {

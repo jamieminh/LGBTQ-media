@@ -11,7 +11,6 @@ const Navbar = () => {
         { name: 'Home', link: '/' },
         { name: 'Movies', link: '/movies' },
         { name: 'Shows', link: '/series' },
-        { name: 'Animations', link: '/animation' },
         { name: 'Genres', link: '/genres' },
         { name: 'Login', link: '/login' }]
 

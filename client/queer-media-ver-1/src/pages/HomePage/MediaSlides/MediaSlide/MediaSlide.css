@@ -46,7 +46,8 @@
     position: absolute;
     background-color: #F1B722;
     color: black;
-    width: 50px;
+    width: 45px;
+    padding: 3px;
     border-radius: 20px;
     margin: auto;
     left: 50%;

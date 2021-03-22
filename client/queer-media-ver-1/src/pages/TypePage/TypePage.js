@@ -36,7 +36,7 @@ const TypePage = (props) => {
 
     return (!titles) ? (<Spinner />) : (
         <div className="TypePage">
-            <h1>All {props.type}</h1>
+            <h1>All {props.pageTitle}</h1>
             <div className="TypePageContent">
                 <ListPaginate titles={titles} />
                 <Filter />

@@ -57,9 +57,8 @@ const App = () => {
           <Route path="/login" exact component={(props) => <Entry {...props} entry="login" key="login" />} />
           <Route path="/register" exact component={(props) => <Entry {...props} entry="register" key="register" />} />
 
-          <RouteWithLayout path="/movies" exact component={props => <TypePage {...props} type="movie" key="movies" />} />
-          <RouteWithLayout path="/series" exact component={(props) => <TypePage {...props} type="series" key="series" />} />
-          <RouteWithLayout path="/animation" exact component={(props) => <TypePage {...props} type="animation" key="animation" />} />
+          <RouteWithLayout path="/movies" exact component={props => <TypePage {...props} type="movie" pageTitle="Movies" key="movies" />} />
+          <RouteWithLayout path="/series" exact component={(props) => <TypePage {...props} type="series" pageTitle="Series" key="series" />} />
 
           <RouteWithLayout path="/genres" exact component={() => <AllGenres />} />
           <RouteWithLayout path="/genres/:genre"
