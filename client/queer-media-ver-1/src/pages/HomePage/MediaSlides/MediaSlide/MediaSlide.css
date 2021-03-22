@@ -96,10 +96,11 @@
     outline: none;
     cursor: pointer;
     border-radius: 15px;
-    padding: 3px 25px 3px 12px;
+    padding: 7px 28px 7px 15px;
     background-color: #17a2b8;
     color: white;
-    font-weight: 500;
+    margin-bottom: 2px;
+    font-size: 14px;
 }
 
 .SeeMore button:hover {

@@ -80,7 +80,7 @@ const Filter = (props) => {
 
             {/* Sort Titles by Release Date (asc/desc) or IMDB score (asc/desc) */}
             <div className="FilterToggler" onClick={() => toggleHandler('sort')}>
-                <h5 id="SortRotateSibling">Sort by</h5>
+                <h3 id="SortRotateSibling">Sort by</h3>
                 <i className="fas fa-caret-right icon-rotates" id="SortTogglerIcon"></i>
             </div>
 
@@ -107,7 +107,7 @@ const Filter = (props) => {
 
             {/* Filter Titles by Ratings  */}
             <div className="FilterToggler" onClick={() => toggleHandler('rating')}>
-                <h5 id="RatingRotateSibling">Filter by Rating</h5>
+                <h3 id="RatingRotateSibling">Filter by Rating</h3>
                 <i className="fas fa-caret-right icon-rotates" id="RatingTogglerIcon"></i>
             </div>
 
@@ -163,7 +163,7 @@ const Filter = (props) => {
             {(!props.isGenre) ?
                 <div>
                     <div className="FilterToggler" onClick={() => toggleHandler('genre')}>
-                        <h5 id="GenreRotateSibling">Filter by Genre</h5>
+                        <h3 id="GenreRotateSibling">Filter by Genre</h3>
                         <i className="fas fa-caret-right icon-rotates" id="GenreTogglerIcon"></i>
                     </div>
 

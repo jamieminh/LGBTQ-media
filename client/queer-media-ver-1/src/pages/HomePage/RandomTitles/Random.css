@@ -1,6 +1,7 @@
 .Random {
     overflow: auto;
     height: 100vh;
+    margin-top: 17px;
 }
 
 .Random p {

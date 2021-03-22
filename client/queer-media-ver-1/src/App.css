@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600&display=swap');
+
 .App {
   /* text-align: center; */
   font-family: 'Maven Pro', sans-serif;
@@ -5,4 +8,16 @@
   color: white;
 }
 
+.App button, .App p, .App input {
+  font-family: 'Maven Pro', sans-serif;
+}
 
+.App a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500 !important;
+  margin: .2rem;
+}

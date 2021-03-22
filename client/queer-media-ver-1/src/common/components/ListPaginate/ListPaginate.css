@@ -82,6 +82,10 @@
     margin-bottom: -20px;
 }
 
+.PageJump p {
+    margin: 5px;
+}
+
 .PageJump > select {
     height: 30px;
     width: 60px;

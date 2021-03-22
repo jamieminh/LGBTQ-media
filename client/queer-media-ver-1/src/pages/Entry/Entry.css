@@ -7,7 +7,6 @@ main#EntryMain {
     position: absolute;
     width: 85% !important;
     min-height: 600px;
-    /* max-height: 750px; */
     background-color: white;
     border-radius: 10px;
     top: 50%;
@@ -55,8 +54,9 @@ main#EntryMain {
     outline: none;
     border: none;
     border-radius: 25px;
-    padding: 7px 60px;
+    padding: 0 60px;
     width: 100%;
+    box-sizing: border-box;
     background-color: #E6E6E6;
     transition: all 0.3s ease;
 }

@@ -74,7 +74,7 @@ const MediaSlide = (props) => {
         (!titles) ? <Spinner /> :
             <div className="CarouselContainer">
                 <div className="CarouselHeader">
-                    <h3 className="CarouselTitle">{props.title}</h3>
+                    <h1 className="CarouselTitle">{props.title}</h1>
 
                     <Link to={{
                         pathname: '/' + (props.type === 'movie' ? 'movies' : props.type),

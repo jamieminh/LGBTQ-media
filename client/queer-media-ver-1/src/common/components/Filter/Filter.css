@@ -22,7 +22,7 @@
 
 #FilterByRating img {
     /* position: absolute; */
-    margin-bottom: 4px;
+    margin-right: 5px;
 }
 
 .FilterToggler {
@@ -101,7 +101,7 @@
 }
 
 #FilterByRating label, #FilterByGenre label, #SortBy label {
-    display: inline-block;
+    display: flex;
     background-color: #04162f3b;
     color: #e6e6e6;
     border-radius: 25px;
@@ -128,7 +128,7 @@
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
     font-size: 14px;
-    padding: 0 6px;
+    padding: 3px 6px;
     content: "\f192";
     transition: transform .5s ease-in-out;
 }

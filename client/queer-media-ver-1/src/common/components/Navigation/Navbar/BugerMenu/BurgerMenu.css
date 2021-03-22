@@ -55,7 +55,7 @@
 
 .BurgerMenu.open span:nth-child(2) {
     opacity: 0;
-    left: 40px;
+    left: 30px;
 }
 
 .BurgerMenu.open span:nth-child(3) {
