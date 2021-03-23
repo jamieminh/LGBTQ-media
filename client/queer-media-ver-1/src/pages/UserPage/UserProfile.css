@@ -1,0 +1,140 @@
+.UserProfile {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.UserProfile h1 {
+    text-align: center;
+}
+
+.UserProfile > div {
+    margin-top: 10vh;
+}
+
+.UserDetails > div {
+    margin: 50px 0;
+}
+
+.UserDetails > div > label{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: block;
+    
+}
+
+.UserDetails > div > input{
+    display: block;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 10px 15px ;
+    color: black;
+    font-size: 15px;
+    border-radius: 2px 2px 0 0 ;
+    color: white;
+    background-color: #1e5e86;
+    border-bottom: 2px solid white;
+    transition: .3s ease-in-out;
+    box-sizing: border-box;
+}
+
+.UserDetails .UserDisplayName > input {
+    display: inline-block;
+    width: 68%;
+}
+
+.UserDetails .UserDisplayName > input:last-child {
+    width: 30%;
+    margin-left: 2%;
+}
+
+.UserDetails > div > input {
+    
+}
+
+.UserDetails > div > label:hover{
+    color: white;
+}
+
+.UserDetails > div > input:disabled {
+    border: none;
+    border-bottom: 2px solid transparent;
+}
+
+.UserDetails > div > input:focus {
+    transform: scale(1.03);
+}
+
+.UserDetails > div > input::placeholder{
+    color: rgb(179, 179, 179);
+}
+
+
+.UserDetailsBtns {
+    text-align: center;
+}
+
+.UserDetailsBtns button {
+    display: inline-block;
+    padding: 15px 25px ;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-weight: 500;
+    background-color: #dd4a47;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all .3s ease;
+}
+
+.UserDetailsBtns #UserSaveChanges.show {
+    background-color: #33b960;
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.UserDetailsBtns #UserSaveChanges {
+    display: none;
+}
+
+.UserDetailsBtns button:hover {
+    transform: scale(1.05)
+}
+
+@media(min-width: 481px) {
+    .UserProfile {
+        width: 400px;
+    }
+}
+
+@media(min-width: 768px) {
+    .UserProfile {
+        width: 700px;
+    }
+
+    .UserDetails > div {
+        display: flex;
+    }
+
+    .UserDetails > div > label{ 
+        width: 30%;
+    }
+
+    .UserDetails .UserEmail > input { 
+        width: 70%;
+    }
+
+    .UserDetails .UserDisplayName input {
+        width: 48%;
+    }
+
+    .UserDetails .UserDisplayName input:last-child {
+        width: 20%;
+    }
+
+    .UserDetailsBtns {
+        margin-left: 30%;
+        text-align: start;
+    }
+}

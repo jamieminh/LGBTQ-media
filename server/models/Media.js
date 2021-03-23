@@ -44,7 +44,8 @@ const Media = db.define('Media', {
 },
 {
     freezeTableName: true,  // do not pluralize the name
-    timestamps: false       // do not generate createdAt and updatedAt
+    createdAt: true,
+    updatedAt: false
 })
 
 

@@ -9,6 +9,7 @@
     position: relative;
     width: 340px;
     margin: 0 auto;
+    outline: none;
 }
 
 .Modal .ModalTitle {
@@ -50,29 +51,33 @@
 }
 
 .ModalBtns button {
-    background-color: #DC717A;
+    background-color: #da4955;
     color: white;
     font-size: 16px;
     font-weight: 500;
-    padding: 5px 25px;
+    padding: 10px 25px;
     border: none;
     border-radius: 35px;
     cursor: pointer;
+    transition: .2s ease-in-out;
+    font-family: 'Maven Pro';
 }
 
+
+.ModalBtns button:hover {
+    transform: scale(1.05);
+}
 .CloseBtn:hover, .CloseBtn:focus {
-  background-color: #d85762;
   text-decoration: none;
   cursor: pointer;
   outline: none;
 }
 
 .ModalBtns .ProceedBtn {
-    background-color: #57d180;
+    background-color: #33b960;
 }
 
 .ModalBtns .ProceedBtn:hover, .ModalBtn:focus {
-  background-color: #4fbe74;
   text-decoration: none;
   cursor: pointer;
   outline: none;

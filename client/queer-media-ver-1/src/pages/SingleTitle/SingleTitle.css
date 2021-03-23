@@ -52,7 +52,17 @@
     display: inline-block;
     position: absolute;
     left: 175px;
+    margin: 2px 0;
 }
+
+.SingleTitleReviewer a img {
+    transition: 0.2s ease-in-out;
+}
+
+.SingleTitleReviewer a:hover img {
+    transform: scale(1.1);
+}
+
 
 .SingleTitleReviewer img:first-child {
     height: 22px;
@@ -61,7 +71,7 @@
 .SingleTitleReviewer img:nth-child(2) {
     height: 20px;
     position: absolute;
-    top: 2px;
+    top: 0;
     left: 60px;
 }
 
@@ -108,7 +118,7 @@
 }
 
 .TitleMainContent > div {
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 .TitleMainContent h3 {
@@ -232,6 +242,10 @@ i.fas.fa-exclamation-triangle {
 
     .GeneralInfoText p {
         font-size: 18px;
+    }
+
+    .SingleTitleReviewer p {
+        margin: 0;
     }
 }
 

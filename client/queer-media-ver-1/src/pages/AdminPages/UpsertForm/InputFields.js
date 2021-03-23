@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import * as actionCreators from '../../../store/actions/index'
 import allGenres from '../../../common/components/Lists/genres'
 
 

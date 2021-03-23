@@ -8,16 +8,16 @@ export const setComments = (media_id, comments) => {
     }
 }
 
-export const addComment = (comment) => {
-    return {
-        type: actionTypes.ADD_COMMENT,
-        payload: {comment: comment}
-    }
-}
+// export const addComment = (comment) => {
+//     return {
+//         type: actionTypes.ADD_COMMENT,
+//         payload: {comment: comment}
+//     }
+// }
 
-export const removeComment = (commentID) => {
-    return {
-        type :actionTypes.REMOVE_COMMNET,
-        payload: {commentID: commentID}
-    }
-}
+// export const removeComment = (commentID) => {
+//     return {
+//         type :actionTypes.REMOVE_COMMNET,
+//         payload: {commentID: commentID}
+//     }
+// }

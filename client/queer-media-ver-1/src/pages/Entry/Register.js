@@ -63,8 +63,8 @@ const Register = (props) => {
 
                 <div className="FormInput">
                     <input type="text" placeholder="Your display name" name="display"
-                        pattern="\w{1,45}"
-                        title="Can not exceed 45 characters containing letters, numbers and underscore"
+                        pattern="\w{1,20}"
+                        title="Can not exceed 20 characters containing letters, numbers and underscore"
                         onChange={(e) => setDisplayName(e.target.value)}
                         required
                     />

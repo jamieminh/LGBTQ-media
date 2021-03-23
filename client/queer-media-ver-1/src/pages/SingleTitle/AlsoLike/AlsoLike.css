@@ -29,12 +29,13 @@ p.AlsoLikeScore {
     position: absolute;
     background-color: #F1B722;
     left: 50%;
-    top: -10px;
+    top: -25px;
     color: black;
     border-radius: 20px;
     width: 50px;
     transform: translateX(-50%);
     z-index: 100;
+    padding: 2px;
 }
 
 .AlsoLikeItem p.title {
@@ -45,12 +46,17 @@ p.AlsoLikeScore {
     .AlsoLike {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .AlsoLikeItem {
         margin: 0 auto 5%;
-        width: 240px;
         padding: 0 20px;
+        width: 40%;
+    }
+
+    .AlsoLikeItem > a > img.AlsoLikeImage {
+        width: 200px;
     }
 }
 
@@ -62,18 +68,26 @@ p.AlsoLikeScore {
 
     .AlsoLikeItem {
         margin: 0 auto 5%;
-        width: 240px;
         padding: 0 20px;
     }
 }
 
-@media(min-width: 1024px) {
+@media(min-width: 900px) {
+
     .AlsoLikeItem {
-        width: 220px;
+        width: 160px;
+        margin: 0;
+        padding: 0;
     }
 
-    .AlsoLikeItem > a > img.AlsoLikeImage {
+    .AlsoLikeItem > a > img.AlsoLikeImage{
         height: 240px;
+        width: 160px;
+    }
+
+    .AlsoLikeItem > a > p:last-child {
+        width: 150px;
+        margin: 0 auto;
     }
 }
 

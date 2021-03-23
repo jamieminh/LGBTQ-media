@@ -6,7 +6,7 @@ import notFound from "../../../assets/images/notfound.jpg";
 
 import "./Random.css";
 
-const Random = (props) => {
+const Random = () => {
     const [titles, setTitles] = useState(null)
 
     useEffect(() => {
@@ -14,9 +14,12 @@ const Random = (props) => {
         // console.log(randomTitles);
         if (randomTitles === null) {
             // generate a list of random id
-            const ids = Array.from({ length: 15 }, () =>
+            let ids = Array.from({ length: 15 }, () =>
                 Math.floor(Math.random() * 5000 + 1)
             );
+
+            ids = [... new Set(ids)]
+            console.log(ids);
             const promises = ids.map((id) =>
                 axios.get("http://localhost:4000/media/" + id)
             );

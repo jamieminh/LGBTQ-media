@@ -48,8 +48,6 @@ const MediaSlide = (props) => {
         return () => { isSubscribed = false }
     }, [props.rank, props.type])
 
-    console.log(titles);
-
     const content = (titles) ? titles.map(title => {
         return (
             <div className="CarouselItem" key={'carousel-item-' + title.media_id}>

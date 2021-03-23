@@ -88,7 +88,7 @@ const SingleTitle = (props) => {
                     console.error(err)
             })
 
-            return () => (isSubscribed = false)
+        return () => (isSubscribed = false)
     }, [media_id])
 
 
@@ -123,9 +123,14 @@ const SingleTitle = (props) => {
             let directors = titleDetails.directors.map(director => director.name)     // get directors' names
             let review_scores = titleDetails.reviewers.map(review => {        // format the ratings
                 let review_img = (review.name === "imdb") ? imdb : (review.name === "metacritic") ? metacritic : tomato
+                let img = (review.name === "imdb") ?
+                    <a href={titleDetails.imdb_url} target="_blank" rel="noreferrer">
+                        <img src={review_img} alt={review.name + " logo"}></img>
+                    </a> :
+                    <img src={review_img} alt={review.name + " logo"}></img>
                 return (
                     <div className="SingleTitleReviewer" key={titleDetails.media_id + "-" + review.name}>
-                        <a href={titleDetails.imdb_url} target="_blank" rel="noreferrer"><img src={review_img} alt={review.name + " logo"}></img></a>
+                        {img}
                         <img
                             src={getRatingStars(review.score, review.name === "imdb")}
                             alt={review.name + " rating"}></img>
@@ -149,11 +154,11 @@ const SingleTitle = (props) => {
                                 alt={titleDetails.title + " poster"} />
                         </div>
 
-                        <h2 className="MediaTitleSm">{titleDetails.title}</h2>
+                        <h1 className="MediaTitleSm">{titleDetails.title}</h1>
 
 
                         <div className="GeneralInfoText">
-                            <h2 className="MediaTitle">{titleDetails.title}</h2>
+                            <h1 className="MediaTitle">{titleDetails.title}</h1>
                             <div className="GeneralInfoRatings">
                                 {review_scores}
                                 <UserVote media_id={media_id} />
@@ -184,18 +189,18 @@ const SingleTitle = (props) => {
                         </div>
 
                         <div className="SingleTitlePlot">
-                            <h3>Plot Summary</h3>
+                            <h2>Plot Summary</h2>
                             <p>{titleDetails.plot}</p>
                         </div>
 
                         {/* <div className="SingleTitleTrailer">
-                            <h3>Trailer</h3>
+                            <h2>Trailer</h2>
                             <TrailerEmbed titleName={titleDetails.title} />
                         </div> */}
 
 
                         <div className="RelatedTitles">
-                            <h3>You may also like</h3>
+                            <h2>You may also like</h2>
                             <AlsoLike genres={titleDetails.genres} />
                         </div>
 

@@ -76,7 +76,7 @@ const Comments = (props) => {
 
     return (!comments) ? <Spinner /> : (
         <div className='MediaComments'>
-            <h3>Comments</h3>
+            <h2>Comments</h2>
             <div className="AddComment">
                 <UserIcon displayName={displayName} />
                 <form onSubmit={addCommentHandler}>

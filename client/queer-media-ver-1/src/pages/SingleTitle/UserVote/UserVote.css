@@ -6,7 +6,7 @@
     display: inline-block;
     border: 0;
     position: absolute;
-    top: 0px;
+    top: 2px;
     left: 60px;
 }
 /* Hide radio */
@@ -16,7 +16,7 @@
 /* Order correctly by floating highest to the right */
 .UserRatingOptions > label {
     float: right;
-    font-size: 16px;
+    font-size: 15px;
 }
 /* The star of the show */
 .UserRatingOptions > label:before {
@@ -50,6 +50,12 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
 
 .CurrentUserRating {
     position: absolute;
-    top: 0px;
+    top: -15px;
     left: 200px;
+}
+
+@media(min-width: 768px) {
+    .CurrentUserRating {
+        top: -18px;
+    }
 }

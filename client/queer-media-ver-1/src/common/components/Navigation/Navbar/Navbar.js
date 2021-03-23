@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom'
 
 import './Navbar.css'
 import BurgerMenu from './BugerMenu/BurgerMenu';
+import LoggedinNav from './LoggedInNav/LoggedInNavItem';
+import { useSelector } from 'react-redux';
+import LoginNav from './LoginNav/LoginNav';
 
 const Navbar = () => {
 
@@ -11,10 +14,12 @@ const Navbar = () => {
         { name: 'Home', link: '/' },
         { name: 'Movies', link: '/movies' },
         { name: 'Shows', link: '/series' },
-        { name: 'Genres', link: '/genres' },
-        { name: 'Login', link: '/login' }]
+        { name: 'Genres', link: '/genres' },]
 
     const [clicked, setClicked] = useState(false)
+    const subPages = useSelector(state => state.auth.pages)
+
+    const authNavItem = subPages ? <LoggedinNav pages={subPages} /> : <LoginNav />
 
     const burgerMenuToggleHandler = () => {
         setClicked(!clicked)
@@ -44,6 +49,8 @@ const Navbar = () => {
                         to={page.link}
                         exact
                     >{page.name}</NavLink></li>)}
+
+                {authNavItem}
             </ul>
         </nav>
     );

@@ -10,6 +10,7 @@
 
 .App button, .App p, .App input {
   font-family: 'Maven Pro', sans-serif;
+  box-sizing: border-box;
 }
 
 .App a {

@@ -24,7 +24,7 @@ const CustomModal = (props) => {
 
     const ProceedBtn = () => {
         return props.proceedHandler ?
-            <button className="ProceedBtn" onClick={proceedHandler}>Proceed</button> : ''
+            <button className="ProceedBtn" onClick={proceedHandler}>Yes I'm Sure</button> : ''
     }
 
     return (

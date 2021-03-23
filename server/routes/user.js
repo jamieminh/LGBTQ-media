@@ -65,55 +65,62 @@ router.post('/add-comment', userAuthCheck, (req, res) => {
     const media_id = req.body.media_id
     const user_id = req.body.user_id
 
-    Users_Comments.create({media_id: media_id, user_id: user_id, comment: comment})
-    .then(response => {
-        res.send({ isSuccess: true })
-        console.log(response)
-    })
-    .catch(err => console.error(err))
+    Users_Comments.create({ media_id: media_id, user_id: user_id, comment: comment })
+        .then(response => {
+            res.send({ isSuccess: true })
+            console.log(response)
+        })
+        .catch(err => console.error(err))
 })
 
 
 // get rating made by a user 
 router.get('/get-rating', userAuthCheck, (req, res) => {
-    const {media_id, user_id} = req.query
+    const { media_id, user_id } = req.query
     // const media_id = req.params.media_id
     // console.log('[GET-RATING] ----------------' + media_id);
     Users_Ratings.findOne({
-        where: {media_id: media_id, user_id: user_id},
+        where: { media_id: media_id, user_id: user_id },
         attributes: ['score']
     })
-    .then(result => {
-        res.send(result)
-    })
-    .catch(err => console.error(err))
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => console.error(err))
 })
 
 // change/add rating from a user
 router.post('/add-rating', userAuthCheck, (req, res) => {
-    const {media_id, user_id, score} = req.body.params
+    const { media_id, user_id, score } = req.body.params
     console.log(media_id, user_id, score);
 
     // remove the old score, then insert the new one
     Users_Ratings.destroy({
-        where: {media_id: media_id, user_id: user_id}
+        where: { media_id: media_id, user_id: user_id }
     })
-    .then(_ => {
-       Users_Ratings.create({media_id: media_id, user_id: user_id, score: score}) 
-       .catch(err => console.error(err))
-    })
-    .catch(err => console.error(err))
+        .then(_ => {
+            Users_Ratings.create({ media_id: media_id, user_id: user_id, score: score })
+                .catch(err => console.error(err))
+        })
+        .catch(err => console.error(err))
 })
 
 
-router.get('/:email', userAuthCheck, (req, res) => {
-    const email = req.params.email
+router.post('/change', userAuthCheck, (req, res) => {
+    let { email, newName } = req.body
 
     Users.findOne({
         where: { email: email },
-        attributes: ['user_id', 'role', 'display_name']
     })
-        .then(response => res.send(response))
+        .then(response => {
+            newName += '_' + Math.ceil(Math.random() * 8999999 + 1000000)
+            response.update({display_name: newName})
+            .then(_ => res.send({isSuccess: true, changedName: newName}))
+            .catch(err => {
+                console.error(err)
+                res.send({isSuccess: false})
+            })
+        })
         .catch(err => console.log(err))
 })
 

@@ -1,0 +1,66 @@
+.UserNavItem {
+    position: relative;
+}
+
+.NavItemLink.toggleDropdown {
+    width: 180px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.LoggedinMenuDropdown {
+    display: none;
+    position: absolute;
+    width: 200px;
+    border-radius: 0 0 2px 2px;
+    background-color: #d19a2c;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 55px;
+}
+
+.NavItemLink.toggleDropdown span {
+    font-weight: 500;
+}
+
+.toggleDropdown:hover+.LoggedinMenuDropdown, .LoggedinMenuDropdown:hover {
+    display: block;
+}
+
+.toggleDropdown:hover{
+    border-radius: 2px 2px 0 0;
+}
+
+.LoggedinMenuDropdown * {
+    display: block;
+}
+
+.dropdownItem {
+    padding: 10px 0;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdownItem:hover {
+    color: #d19a2c;
+    background-color: black;
+}
+
+.toggleDropdown i {
+    margin-left: 10px;
+    transition: transform 0.5s ease 0s;
+}
+
+.toggleDropdown:hover i {
+    transform: rotate(90deg);
+}
+
+.LoggedinMenuDropdown hr {
+    border: 1px solid black;
+}
+
+@media(min-width: 769px) {
+    .LoggedinMenuDropdown {
+        top: 44px;
+    }
+}

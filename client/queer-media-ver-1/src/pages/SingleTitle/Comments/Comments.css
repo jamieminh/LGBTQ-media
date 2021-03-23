@@ -1,10 +1,11 @@
 .UserComment {
-    margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 .UserComment h5 {
     margin-bottom: 0 !important;
     font-size: 1.2em;
+    margin-left: 0;
 }
 
 .UserComment small {
@@ -18,7 +19,7 @@
 
 .UserComment hr {
     width: 100%;
-    background-color: rgb(196, 196, 196)
+    border: 1px solid rgb(196, 196, 196);
 }
 
 .MediaComments .AddComment {
@@ -32,6 +33,10 @@
     position: relative;
 }
 
+.MediaComments h2 {
+    margin-bottom: 20px;
+}
+
 .CommentArea {
     width: 100%;
     padding: 5px 10px;
@@ -43,6 +48,7 @@
     border-top-right-radius: 2px;
     border: none;
     border-bottom: 1px solid white;
+    box-sizing: border-box;
 }
 
 .CommentArea:focus {
@@ -74,12 +80,15 @@
     border: none;
     outline: none;
     border-radius: 2px;
-    padding: 3px 8px;
-    background-color: #ece269;
+    padding: 10px 18px;
+    font-size: 15px;
+    background-color: #C59F2D;
+    color: white;
     float: right;
     font-weight: 500;
     cursor: pointer;
     transition: 0.5s ease;
+    margin-top: 10px;
 }
 
 /* .AddComment form button.notShown {
