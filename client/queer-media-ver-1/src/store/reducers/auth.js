@@ -11,16 +11,14 @@ const initState = {
     pages: null
 }
 
-const adminPages = [{ name: "Create", link: '/upsert-title/create' }]
+const adminPages = [{ name: "Create", link: '/upsert-media/create' }]
 const userPages = [{ name: 'Profile', link: '/profile' }]
 
 const AuthReducer = (state = initState, action) => {
 
     switch (action.type) {
         case actionTypes.LOGIN:
-            console.log(action.payload);
             const { user_id, email, role, display_name } = action.payload.userData
-            console.log(user_id, email, role, display_name);
             const pages = (role === 'admin') ? adminPages : userPages
             return updateState(state,
                 {
@@ -37,6 +35,11 @@ const AuthReducer = (state = initState, action) => {
                 role: null,
                 display_name: null,
                 pages: null
+            })
+
+        case actionTypes.CHANGE_DISPLAY_NAME:
+            return updateState(state, {
+                display_name: action.payload.newName
             })
 
         default:

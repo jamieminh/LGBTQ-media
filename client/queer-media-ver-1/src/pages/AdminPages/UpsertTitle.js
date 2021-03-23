@@ -129,27 +129,10 @@ const UpsertTitle = (props) => {
             })
     }
 
-    // useEffect(() => {
-    //     console.log(email);
-    //     console.log(token);
-    //     axios.get('admin/' + email, {
-    //         headers: {"x-access-token": token}
-    //     })
-    //     .then(res => {
-    //         console.log(res.data);
-    //         setContent(res.data)
-    //     })
-    //     .catch(err => console.log(err))
-    // }, [])
-
-    // const createTitle = (event) => {
-    //     event.preventDefault()
-    // }
-
 
     return (
         <div className="AdminPageMain">
-            <h2 style={{textTransform: 'capitalize'}}>{type} Media</h2>
+            <h1 style={{textTransform: 'capitalize'}}>{type} Media</h1>
             <div className="AdminForm">
                 <UpsertForm titleDetails={titleDetails} submitHandler={submitHandler} type={type}/>
                 {(errorInfo.count !== 0) ? <CustomModal type="error" title="Error" body={errorInfo.message} key={'error_' + errorInfo.count} /> : ''}

@@ -16,7 +16,6 @@ const Entry = (props) => {
         pw.type = (pw.type === 'password') ? 'text' : 'password'
 
         let eye = document.getElementById(id + "-eye")
-        console.log(eye);
         eye.className = ( eye.className === "fas fa-eye-slash") ? "fas fa-eye" : "fas fa-eye-slash"
     }
 

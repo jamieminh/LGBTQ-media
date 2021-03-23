@@ -16,7 +16,8 @@ router.post('/register', async (req, res) => {
     const pw = req.body.password
     let isAvailable = true
 
-    display_name = display_name + Math.ceil(Math.random() * 899999 + 100000)
+    // 32-character name include, user entered name, an underscore and a random 7 digit number
+    display_name = display_name + '_' + Math.ceil(Math.random() * 8999999 + 1000000)
 
     await Users.findOne({ where: { email: email } })
         .then(result => {

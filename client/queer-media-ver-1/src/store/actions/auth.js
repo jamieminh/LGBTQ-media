@@ -21,3 +21,10 @@ export const register = (email, password) => {
         payload: { email, password }
     }
 }
+
+export const changeDisplayName = (newName) => {
+    return {
+        type: actionTypes.CHANGE_DISPLAY_NAME,
+        payload: { newName: newName }
+    }
+}

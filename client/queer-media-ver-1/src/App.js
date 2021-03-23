@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Spinner from './common/components/UI/Spinner/Spinner'
 import Home from './pages/HomePage/Home'
 import AllGenres from './pages/AllGenresPage/AllGenresPage'
 import GenrePage from './pages/GenrePage/GenrePage'
 import ErrorPage from './pages/ErrorPage/Error'
 import SearchResults from './common/containers/SearchBar/SearchResults/SearchResults'
 import TypePage from './pages/TypePage/TypePage'
-import UserProfile from './pages/UserPage/User'
+import UserProfile from './pages/UserPage/UserProfile'
 import UpsertTitle from './pages/AdminPages/UpsertTitle'
 import Entry from './pages/Entry/Entry'
 import axios from 'axios'
