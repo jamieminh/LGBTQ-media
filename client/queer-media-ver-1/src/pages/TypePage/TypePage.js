@@ -31,7 +31,7 @@ const TypePage = (props) => {
                 }
             })
             .catch(err => console.error(err))
-    }, [])
+    }, [dispatch, props.location.state, props.type])
 
 
     return (!titles) ? (<Spinner />) : (

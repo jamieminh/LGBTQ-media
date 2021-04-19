@@ -18,7 +18,7 @@ const Random = () => {
                 Math.floor(Math.random() * 5000 + 1)
             );
 
-            ids = [... new Set(ids)]
+            ids = [...new Set(ids)]
             console.log(ids);
             const promises = ids.map((id) =>
                 axios.get("http://localhost:4000/media/" + id)

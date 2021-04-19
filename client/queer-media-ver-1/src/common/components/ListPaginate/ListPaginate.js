@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import ListItem from '../../../common/components/ListItem/ListItem';
 import './ListPaginate.css'

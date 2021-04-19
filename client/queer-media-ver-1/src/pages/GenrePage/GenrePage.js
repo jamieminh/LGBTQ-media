@@ -33,7 +33,7 @@ const Genre = (props) => {
 
             })
             .catch(err => console.log(err))
-    }, []);
+    }, [dispatch, props.genre]);
 
     return !titles ? (
         <Spinner />

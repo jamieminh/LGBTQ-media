@@ -2,16 +2,13 @@ import axios from '../../axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-const AdminProfile = (props) => {
-
+const AdminProfile = () => {
     const email = useSelector(state => state.auth.email)
     const token = localStorage.getItem('token')
 
     const [content, setContent] = useState(null)
 
     useEffect(() => {
-        console.log(email);
-        console.log(token);
         // axios.get('user/' + email, {
         //     headers: {"x-access-token": token}
         // })
@@ -21,7 +18,7 @@ const AdminProfile = (props) => {
             setContent(res.data)
         })
         .catch(err => console.log(err))
-    }, [])
+    }, [email, token])
 
 
     return (

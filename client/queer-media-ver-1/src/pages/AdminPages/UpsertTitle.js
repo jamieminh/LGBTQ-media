@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from '../../axios'
-import { useSelector } from 'react-redux';
 import './AdminPages.css'
 import UpsertForm from './UpsertForm/UpsertForm'
 import { useHistory } from 'react-router-dom';
@@ -13,12 +12,11 @@ const UpsertTitle = (props) => {
     const type = props.type            // create or update
     const [errorInfo, setErrorInfo] = useState({ count: 0, message: null })
     const [successInfo, setSuccessInfo] = useState({ count: 0, message: null })
-    const media_id = state ? state.media_id : ''
 
-    // used for when the page is loaded fresh (create a new title)
+    //if state exist then it is update else create a new title
     const titleDetails = (state) ? state.titleDetails : {
-        media_id: media_id, artists: [''], directors: [''], genres: [''], 
-        imdb_url: '', languages: [''], media_id: '', plot: '', poster_url: '', 
+        media_id: '', artists: [''], directors: [''], genres: [''], 
+        imdb_url: '', languages: [''], plot: '', poster_url: '', 
         rated: '', released: '', reviewers: [], title: '', type: '', year_end: ''
     }
 

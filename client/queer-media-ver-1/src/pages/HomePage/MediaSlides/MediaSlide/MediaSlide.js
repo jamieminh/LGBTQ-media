@@ -38,6 +38,7 @@ const MediaSlide = (props) => {
             .then(res => {
                 if (isSubscribed) {
                     const titles = res.data;
+                    console.log(titles);
                     setTitles(titles)
                 }
             })
@@ -84,7 +85,7 @@ const MediaSlide = (props) => {
                     </Link>
                 </div>
 
-                <div className="CarouselXSmall">
+                <div className="CarouselXSmall" data-test="CarouselSlides">
                     <Slider {...configXS}>
                         {content}
                     </Slider>

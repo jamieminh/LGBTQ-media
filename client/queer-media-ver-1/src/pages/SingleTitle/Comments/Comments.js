@@ -27,7 +27,7 @@ const Comments = (props) => {
                 setComments(cmts)
                 dispatch(actionCreators.setComments(media_id, cmts))
             })
-    }, [commentAdded])      // use commentAdded to re-fetch the comments
+    }, [commentAdded, dispatch, media_id])      // use commentAdded to re-fetch the comments
 
     // handle posting comments
     const addCommentHandler = (event) => {

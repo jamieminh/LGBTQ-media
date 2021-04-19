@@ -22,7 +22,7 @@ const footer = () => {
                 </div>
 
                 {/* Second Column */}
-                <div className="LinksCol">
+                {/* <div className="LinksCol">
                     <h3 className="text-uppercase">LINKS</h3>
                     <hr style={{ width: '50px' }} />
                     <ul className="list-unstyled">
@@ -36,7 +36,7 @@ const footer = () => {
                             <NavLink to="/about">About</NavLink>
                         </li>
                     </ul>
-                </div>
+                </div> */}
 
                 {/* Column */}
                 <div className="ContactCol">
@@ -44,15 +44,15 @@ const footer = () => {
                     <hr style={{ width: '100px' }} />
 
                     <ul className="list-unstyled">
-                        <li className="my-2">
+                        {/* <li>
                             <i className="fas fa-map-marked-alt mr-3"></i>Address
-                                </li>
-                        <li className="my-2">
+                                </li> */}
+                        <li>
                             <i className="fas fa-envelope mr-3"></i>Mail
                                 </li>
-                        <li className="my-2">
+                        {/* <li>
                             <i className="fas fa-phone mr-3"></i>Phone number
-                                </li>
+                                </li> */}
 
                     </ul>
                 </div>

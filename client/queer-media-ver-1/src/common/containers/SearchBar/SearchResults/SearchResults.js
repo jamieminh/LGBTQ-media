@@ -24,7 +24,7 @@ const SearchResults = (props) => {
                 setResults(titles)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [props.match.params.query])
 
 
 

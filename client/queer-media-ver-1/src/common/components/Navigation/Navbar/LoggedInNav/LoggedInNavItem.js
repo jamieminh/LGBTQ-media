@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import blank_user from '../../../../../assets/images/blank_user.png'
 import LogoutButton from '../LogoutBtn/LogoutBtn';
 import './LoggedInNavItem.css'
 

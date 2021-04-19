@@ -19,12 +19,12 @@ const AlsoLike = (props) => {
 
             })
             .catch(err => console.error(err))
-    }, [])
+    }, [props.genres])
 
     let content = ''
     if (titles) {
         content = titles.map(item => {
-            let year = item.released + (item.year_end == 0 ? '' : ' - ' + item.year_end)
+            let year = item.released + (item.year_end === 0 ? '' : ' - ' + item.year_end)
             return (
                 <div className="AlsoLikeItem" key={item.media_id}>
                     <Link to={"/media/" + item.media_id}>

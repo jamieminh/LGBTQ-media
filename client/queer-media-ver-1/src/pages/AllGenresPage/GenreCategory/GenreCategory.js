@@ -11,7 +11,7 @@ const GenreCategory = (props) => {
             .then(image => {
                 setModule(image.default)
             })
-    }, [])
+    }, [props.genre])
 
     // const { module: image } = module;
     const genre = props.genre;

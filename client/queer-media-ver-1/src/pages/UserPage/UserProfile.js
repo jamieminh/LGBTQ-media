@@ -1,5 +1,5 @@
 import axios from '../../axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomModal from '../../common/components/UI/Modal/Modal';
 import * as actionCreators from '../../store/actions/index'
@@ -11,7 +11,7 @@ const UserProfile = () => {
     const displayName = useSelector(state => state.auth.display_name)
     const nameHead = displayName.substring(0, displayName.length - 8)
     const nameTail = displayName.slice(-8)
-    const token = localStorage.getItem('token')
+    // const token = localStorage.getItem('token')
     const [isEditBtn, setIsEditBtn] = useState(true)       // true mean the current btn is 'Change Display Name'
     const [modalResult, setModalResult] = useState({ count: 0 })
     const [modalWarning, setModalWarning] = useState({ count: 0 })

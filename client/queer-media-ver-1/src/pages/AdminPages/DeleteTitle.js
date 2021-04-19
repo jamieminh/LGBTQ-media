@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import CustomModal from '../../common/components/UI/Modal/Modal';
 import Spinner from '../../common/components/UI/Spinner/Spinner';
 
-const DeleteTitle = (props) => {
+const DeleteTitle = () => {
     const history = useHistory()
     const [modal, setModal] = useState(null)
     const state = history.location.state
@@ -45,7 +45,7 @@ const DeleteTitle = (props) => {
                     "'? This action is irreverisible!"} />)
 
         }
-    }, [])
+    }, [history, state])
 
     return (!modal) ? <Spinner /> : modal
 

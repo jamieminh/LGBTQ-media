@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "argon2": "^0.27.1",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
     "cookie-parser": "^1.4.5",
@@ -21,9 +22,11 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "google-search-results-nodejs": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
     "sequelize": "^6.3.5"
-  }
+  },
+  "devDependencies": {}
 }
