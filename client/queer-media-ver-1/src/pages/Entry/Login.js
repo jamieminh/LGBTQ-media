@@ -4,6 +4,7 @@ import Spinner from '../../common/components/UI/Spinner/Spinner'
 import * as actionCreators from '../../store/actions/index'
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 
 axios.defaults.withCredentials = true
@@ -14,6 +15,8 @@ const Login = (props) => {
 
     const [message, setMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    let isRemember = false
+    const cookies = new Cookies() 
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -25,11 +28,12 @@ const Login = (props) => {
         setIsLoading(true)
         event.preventDefault()
 
-        console.log(emailLogin, pwLogin);
+        console.log(emailLogin, pwLogin, isRemember);
         // dispatch(actionCreators.login(emailLogin, pwLogin))
         axios.post('entry/login/', {
             email: emailLogin,
-            password: pwLogin
+            password: pwLogin,
+            remember: isRemember
         })
             .then(response => {
                 if (isSubscribed) {
@@ -38,6 +42,14 @@ const Login = (props) => {
                     if (result.message)
                         setMessage(result.message)
                     else {
+                        // set login cookie if user chose "remember me"
+                        if (result.token !== '') {
+                            cookies.set('token', result.token, {
+                                path: '/',
+                                maxAge: 5 * 24 * 60 * 60
+                            })
+                        }
+
                         dispatch(actionCreators.login(result))
                         history.push(historyState ? historyState.fromUrl : '/')
                     }
@@ -48,7 +60,7 @@ const Login = (props) => {
                     setIsLoading(false)
             })
 
-            return () => {isSubscribed = false}
+        return () => { isSubscribed = false }
 
     }
 
@@ -80,8 +92,10 @@ const Login = (props) => {
                         <i className="fas fa-eye" id="login-pw-eye"></i>
                     </span>
                 </div>
-                {/* <InputEmail />
-                <InputPw  togglePw={props.togglePw}/> */}
+                <div className="FormInput RememberMe">
+                    <input type="checkbox" name="remember" id="remember-me" onChange={() => isRemember = !isRemember} />
+                    <label htmlFor="remember">Remember Me</label>
+                </div>
                 <button value="login">Login</button>
             </form>
 

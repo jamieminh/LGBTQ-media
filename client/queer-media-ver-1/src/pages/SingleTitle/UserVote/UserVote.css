@@ -40,13 +40,13 @@
 
 }
 /* Click + hover color */
-input:checked ~ label, /* color current and previous stars on checked */
-label:hover, label:hover ~ label { color: #FFC107;  } /* color previous stars on hover */
+.UserRating input:checked ~ label, /* color current and previous stars on checked */
+.UserRating label:hover, label:hover ~ label { color: #FFC107;  } /* color previous stars on hover */
 
 /* Hover highlights */
-input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
-input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #c99807;  } 
+.UserRating input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
+.UserRating input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
+.UserRating label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #c99807;  } 
 
 .CurrentUserRating {
     position: absolute;
