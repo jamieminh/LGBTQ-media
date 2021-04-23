@@ -7,6 +7,7 @@
 
 .AlsoLike {
     margin-top: 20px;
+    text-align: left;
 }
 
 .AlsoLikeItem > a {
@@ -74,9 +75,15 @@ p.AlsoLikeScore {
 
 @media(min-width: 900px) {
 
+    .AlsoLike {
+        flex-flow: column;
+        align-items: center;
+    }
+
     .AlsoLikeItem {
         width: 160px;
         margin: 0;
+        margin-bottom: 30px;
         padding: 0;
     }
 

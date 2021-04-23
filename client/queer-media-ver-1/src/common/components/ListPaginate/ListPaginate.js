@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import ListItem from '../../../common/components/ListItem/ListItem';
 import './ListPaginate.css'
@@ -49,7 +49,6 @@ const ListPaginate = (props) => {
                 <button onClick={goToPage}>Go</button>
             </div>
             <div className="ListContainer">
-                {/* {goClicked==true ? goToPage() :  */}
                 {currentPageData(currentPage * PER_PAGE)}
 
                 {/* add empty space fill so the last item line wont be cented */}

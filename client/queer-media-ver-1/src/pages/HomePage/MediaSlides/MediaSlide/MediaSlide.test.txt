@@ -1,0 +1,70 @@
+import React from 'react';
+import moxios from 'moxios'
+import axios from '../../../../axios'
+import { shallow } from 'enzyme'
+import MediaSlide from './MediaSlide'
+
+
+const getLatestMovies = () => async (dispatch) => {
+    await axios.get('media/latest/movie/12')
+    .then(res => {
+        dispatch({type: types.GET_POSTS, payload: res.data})
+    })
+    .catch(err => console.log(err))
+}
+
+describe('getLatestMovies action', () => {
+    let wrapper
+
+    beforeEach(() => {
+        // if use api then then pass api in
+        moxios.install(axios)
+        moxios.stubRequest('media/latest/movie/12', {
+            status: 200,
+            response: [{
+                media_id: 1234,
+                title: "Movie title 1",
+                poster_url: "some_image_url.jpg",
+                released: 2021,
+                score: "8.1",
+                year_end: 0,
+                genres: ["genre 1", "genre 2"]
+            },{
+                media_id: 1111,
+                title: "Movie title 2",
+                poster_url: "some_image_url_2.jpg",
+                released: 1999,
+                score: "4.1",
+                year_end: 0,
+                genres: ["genre 1"]
+            }, {
+                media_id: 444,
+                title: "Movie title 3",
+                poster_url: "some_image_url_3.jpg",
+                released: 2021,
+                score: "5.9",
+                year_end: 0,
+                genres: ["genre 1", "genre 2", "genre 3"]
+            }]
+        })
+
+        const props = {
+            title: 'Latest Movies',
+            rank: "latest",
+            type: "movie"
+        }
+
+        wrapper = shallow(<MediaSlide {...props} />)
+    })
+
+    afterEach(() => {
+        moxios.uninstall()
+    })
+
+    it('Get 12 latest movies from server and display it', () => {
+
+        const component = wrapper.find(`[data-test='CarouselSlides']`)
+        expect(component.length).toBe(1)
+
+    })
+})

@@ -3,6 +3,8 @@ const { Artist, Media_Artist } = require('../models/Artist');
 const { Media_Reviewer } = require('../models/Reviewer');
 const Media = require('../models/Media');
 const { Sequelize } = require('../config');
+const axios = require('axios')
+const api_keys = require('../keys')
 
 const router = express.Router();
 const Op = Sequelize.Op;
@@ -43,6 +45,38 @@ router.get('/media/:artist_id', (req, res) => {
 })
 
 
+
+
+
+// get artist image
+router.get('/image/', (req, res) => {
+    const name = req.query["name"]
+    const id = req.query["id"]
+    let artist_info = [id, name]
+
+    const API_KEY = api_keys.config_1.KEY
+
+    let params = [
+        ['api_key', API_KEY].join('='),
+        ['tbm', "isch"].join('='),    // image search
+        ['ijn', '0'].join('='),       // first page
+        ['gl', 'us'].join('='),
+        ['hl', 'en'].join('=')
+    ].join('&')
+
+    axios.get('https://serpapi.com/search.json?' + params + '&q=' + encodeURIComponent(name + " imdb"))
+        .then(r => {
+            artist_info.push(r.data.images_results[0].original)
+        })
+        .then(_ => {
+            res.send(artist_info)
+        })
+        .catch(err => console.log(err))
+
+})
+
+
+
 // get artist information
 router.get('/:artist_id', (req, res) => {
     const artist_id = req.params.artist_id
@@ -55,6 +89,5 @@ router.get('/:artist_id', (req, res) => {
         })
         .catch(err => console.log(err))
 })
-
 
 module.exports = router

@@ -11,15 +11,14 @@ const Random = () => {
 
     useEffect(() => {
         let randomTitles = sessionStorage.getItem("randomTitles");
-        // console.log(randomTitles);
         if (randomTitles === null) {
-            // generate a list of random id
-            let ids = Array.from({ length: 15 }, () =>
+            // generate a list of 14 random ids
+            let ids = Array.from({ length: 14 }, () =>
                 Math.floor(Math.random() * 5000 + 1)
             );
 
-            ids = [... new Set(ids)]
-            console.log(ids);
+            // convert the array to set to make sure there's no duplicate
+            ids = [...new Set(ids)]
             const promises = ids.map((id) =>
                 axios.get("http://localhost:4000/media/" + id)
             );
@@ -41,10 +40,9 @@ const Random = () => {
                         tts.push(data);
                     });
                 })
-                .then((res) => {
+                .then(_ => {
                     sessionStorage.setItem('randomTitles', JSON.stringify(tts))
                     setTitles(tts)
-                    // console.log(this.state.titles);
                 });
         }
         else {
@@ -56,35 +54,35 @@ const Random = () => {
     return !titles ? (
         <Spinner />
     ) : (
-            <div className="Random">
-                {titles.map((item) => (
-                    <div className="RandomMedia" key={item.id}>
-                        <Link to={'/media/' + item.id}>
-                            <img
-                                className="RandomImage"
-                                src={item.poster}
-                                onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = notFound;
-                                }}
-                                alt={item.title + " poster"}
-                            />
-                            <div className="RandomInfo">
-                                <p className="RandomTitle">
-                                    {item.title + " (" + item.released + ")"}
-                                </p>
-                                <p className="RandomScore">{item.score}</p>
-                                <div className="RandomGenres">
-                                    {item.genres.map((genre) => (
-                                        <p key={genre}>{genre}</p>
-                                    ))}
-                                </div>
+        <div className="Random">
+            {titles.map((item) => (
+                <div className="RandomMedia" key={item.id}>
+                    <Link to={'/media/' + item.id}>
+                        <img
+                            className="RandomImage"
+                            src={item.poster}
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = notFound;
+                            }}
+                            alt={item.title + " poster"}
+                        />
+                        <div className="RandomInfo">
+                            <p className="RandomTitle">
+                                {item.title + " (" + item.released + ")"}
+                            </p>
+                            <p className="RandomScore">{item.score}</p>
+                            <div className="RandomGenres">
+                                {item.genres.map((genre) => (
+                                    <p key={genre}>{genre}</p>
+                                ))}
                             </div>
-                        </Link>
-                    </div>
-                ))}
-            </div>
-        );
+                        </div>
+                    </Link>
+                </div>
+            )) }
+        </div>
+    );
 }
 
 export default Random;

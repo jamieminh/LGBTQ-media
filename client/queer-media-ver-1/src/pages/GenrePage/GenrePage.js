@@ -6,6 +6,7 @@ import Spinner from '../../common/components/UI/Spinner/Spinner'
 import Filter from '../../common/components/Filter/Filter'
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionCreators from '../../store/actions/index'
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 
 
 const Genre = (props) => {
@@ -33,12 +34,13 @@ const Genre = (props) => {
 
             })
             .catch(err => console.log(err))
-    }, []);
+    }, [dispatch, props.genre]);
 
     return !titles ? (
         <Spinner />
     ) : (
         <div className="GenrePage">
+            <PageTitle title={genre + " Genre"} cap="true"/>
             <h1>Genre {genre} </h1>
             <div className="GenrePageContent">
                 <ListPaginate titles={titles} />

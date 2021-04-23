@@ -15,11 +15,12 @@ import Layout from './hoc/Layout/Layout';
 import SingleTitle from './pages/SingleTitle/SingleTitle';
 import ArtistPage from './pages/ArtistPage/ArtistPage';
 import AdminProfile from './pages/AdminPages/AdminProfile'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actionCreators from './store/actions/index'
 import './App.css';
 import InsertTest from './pages/test/insertTest';
 import DeleteTitle from './pages/AdminPages/DeleteTitle';
+import Cookies from 'universal-cookie';
 
 
 // wrap each route with a layout , except for login and register
@@ -33,19 +34,24 @@ axios.defaults.withCredentials = true
 const App = () => {
 
   const dispatch = useDispatch()
-  const [isLoggedIn, setIsLoggedIn] = useState(null)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedin)
+  const cookies = new Cookies()
+  const userCookie = cookies.get('token')
+
+  console.log(userCookie);
 
 
   useEffect(() => {
-    axios.get('http://localhost:4000/entry/login')
-      .then(res => {
-        const isLoggedIn = res.data.isLoggedIn
-        if (isLoggedIn) {
-          dispatch(actionCreators.login(res.data.user))
-          setIsLoggedIn(true)
-        }
-        setIsLoggedIn(false)
-      })
+    if (!isLoggedIn) {
+      axios.get('http://localhost:4000/entry/login/' + userCookie)
+        .then(res => {
+          const isLoggedIn = res.data.isLoggedIn
+          if (isLoggedIn) {
+            dispatch(actionCreators.login(res.data.user))
+          }
+        })
+    }
+
   }, [])
 
   return (isLoggedIn === null) ? '' : (

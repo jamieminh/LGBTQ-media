@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from '../../axios'
-import { useSelector } from 'react-redux';
 import './AdminPages.css'
 import UpsertForm from './UpsertForm/UpsertForm'
 import { useHistory } from 'react-router-dom';
 import CustomModal from '../../common/components/UI/Modal/Modal'
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 
 
 const UpsertTitle = (props) => {
@@ -13,12 +13,11 @@ const UpsertTitle = (props) => {
     const type = props.type            // create or update
     const [errorInfo, setErrorInfo] = useState({ count: 0, message: null })
     const [successInfo, setSuccessInfo] = useState({ count: 0, message: null })
-    const media_id = state ? state.media_id : ''
 
-    // used for when the page is loaded fresh (create a new title)
+    //if state exist then it is update else create a new title
     const titleDetails = (state) ? state.titleDetails : {
-        media_id: media_id, artists: [''], directors: [''], genres: [''], 
-        imdb_url: '', languages: [''], media_id: '', plot: '', poster_url: '', 
+        media_id: '', artists: [''], directors: [''], genres: [''], 
+        imdb_url: '', languages: [''], plot: '', poster_url: '', 
         rated: '', released: '', reviewers: [], title: '', type: '', year_end: ''
     }
 
@@ -95,7 +94,7 @@ const UpsertTitle = (props) => {
                     setSuccessInfo({count: 0})
                 }
             })
-            .catch(err => {
+            .catch(_ => {
                 setErrorInfo({
                     count: errorInfo.count + 1,
                     message: 'There has been some error, Login and try again.'
@@ -132,6 +131,7 @@ const UpsertTitle = (props) => {
 
     return (
         <div className="AdminPageMain">
+            <PageTitle title={type + " media"} cap="true"/>
             <h1 style={{textTransform: 'capitalize'}}>{type} Media</h1>
             <div className="AdminForm">
                 <UpsertForm titleDetails={titleDetails} submitHandler={submitHandler} type={type}/>

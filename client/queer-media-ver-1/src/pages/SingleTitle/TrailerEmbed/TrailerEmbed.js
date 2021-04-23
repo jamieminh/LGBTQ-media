@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player'
 import axios from 'axios'
-import { config_3 } from '../../../config'
+import { youtube } from '../../../keys'
 import Spinner from '../../../common/components/UI/Spinner/Spinner'
 import './TrailerEmbed.css'
 
@@ -13,7 +13,7 @@ const TrailerEmbed = (props) => {
         console.log('[TrailerImbed]');
         let url = 'https://www.googleapis.com/youtube/v3/search'
         let params = {
-            key: config_3.KEY,
+            key: youtube.KEY,
             q: props.titleName + ' trailer',
             type: "video",
             order: 'relevance',
@@ -28,7 +28,7 @@ const TrailerEmbed = (props) => {
             })
             .catch(err => console.error(err))
 
-    }, [])
+    }, [props.titleName])
 
     return (!trailerId) ? <Spinner /> : (
             <div className="YoutubeEmbedded">

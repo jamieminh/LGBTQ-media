@@ -4,13 +4,19 @@ import * as actionCreators from '../../../../../store/actions/index'
 import './LogoutBtn.css'
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Cookies from 'universal-cookie';
+
 
 const LogoutButton = () => {
     const dispatch = useDispatch()
     const history = useHistory()
+    const cookie = new Cookies()
 
     const logoutHandler = () => {
-        axios.get('entry/logout')
+        const token = cookie.get('token')
+        cookie.remove('token')        
+
+        axios.get('entry/logout/' + token)
         .then(_ => {
             dispatch(actionCreators.logout())
             history.go('/')

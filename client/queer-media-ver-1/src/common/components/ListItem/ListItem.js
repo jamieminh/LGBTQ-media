@@ -15,11 +15,14 @@ const ListItem = (props) => {
 
 
     const year = "(" + result.released + (result.year_end === 0 ? ")" : " - " + result.year_end + ")")
+    const score = (!result.score) ? '' :
+        <p className="ListItemScore">{(result.score === 'N/A') ? '__' : result.score}</p>
+
 
     return (
         <div className="ListItem" key={result.media_id}>
             <Link to={"/media/" + result.media_id}>
-                <p className="ListItemScore">{(result.score === 'N/A') ? '__' : result.score}</p>
+                {score}
                 <img className="ListItemImg"
                     src={result.poster}
                     onError={(e) => {

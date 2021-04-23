@@ -1,12 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
-import axios from '../../axios';
-import { config_1 } from '../../config'
+import React, { useEffect, useState } from 'react';
+import customAxios from '../../axios';
+import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom'
-
 import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
 import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
-import blank_user from '../../assets/images/blank_user.png'
 import Error from '../ErrorPage/Error'
 import AlsoLike from './AlsoLike/AlsoLike';
 import Comments from './Comments/Comments'
@@ -20,13 +18,7 @@ import {
 import './SingleTitle.css'
 import { useSelector } from 'react-redux';
 import UserVote from './UserVote/UserVote';
-
-
-
-// let proxyurl = "https://cors-anywhere.herokuapp.com/";
-// proxyurl = ""
-// const url = proxyurl + "https://serpapi.com/search.json?"
-// const API_KEY = config_1.KEY
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 
 
 const SingleTitle = (props) => {
@@ -62,27 +54,47 @@ const SingleTitle = (props) => {
 
     useEffect(() => {
         let isSubscribed = true     // cleanup unmounted component
-        axios.get('media/full/' + media_id)
+        let artists = null
+        let title_info = null
+        let exist = false
+        customAxios.get('media/full/' + media_id)
             .then(res => {
                 if (isSubscribed) {
-                    if (res.data === "")
-                        setExist(false)
-                    else {
+                    if (res.data !== "") {
                         const media = res.data.media
+                        artists = res.data.artists
 
-                        setTitleDetails({
+                        title_info = {
                             media_id: media.media_id, title: media.title, runtime: media.runtime,
                             rated: media.rated, released: media.released, plot: media.plot,
                             poster_url: media.poster_url, type: media.type, year_end: media.year_end,
                             languages: media.languages, imdb_url: media.imdb_url, genres: res.data.genres,
                             artists: res.data.artists, reviewers: res.data.reviewers, directors: res.data.directors
-                        })
-                        setExist(true)
-
+                        }
+                        exist = true
                     }
                 }
 
             })
+
+            // get artists images
+            .then(_ => {
+                if (exist) {
+                    let requests = artists.map(artist => {
+                        return axios.get('http://localhost:4000/artist/image', { params: { name: artist.name, id: artist.artist_id } })
+                    })
+
+                    axios.all(requests)
+                        .then(responses => {
+                            let artists = responses.map(r => r.data)
+                            setTitleDetails({ ...title_info, artists: artists })
+                            setExist(exist)
+                        })
+                        .catch(err => console.log(err))
+                }
+
+            })
+            .then(_ => console.log(titleDetails))
             .catch(err => {
                 if (isSubscribed)
                     console.error(err)
@@ -178,11 +190,11 @@ const SingleTitle = (props) => {
 
                         <div className="SingleTitleArtists">
                             {titleDetails.artists.map(artist =>
-                                <div className="SingleTitleArtist" key={artist.name}>
+                                <div className="SingleTitleArtist" key={artist[0]}>
                                     {/* <img src={artist.img_url} alt={artist.name + " profile picture"}></img> */}
-                                    <Link to={'/artist/' + artist.artist_id}>
-                                        <img src={blank_user} alt={artist.name + " profile picture"}></img>
-                                        <p>{artist.name}</p>
+                                    <Link to={'/artist/' + artist[0]}>
+                                        <img src={artist[2]} alt={artist[1] + " profile picture"}></img>
+                                        <p>{artist[1]}</p>
                                     </Link>
                                 </div>
                             )}
@@ -221,6 +233,7 @@ const SingleTitle = (props) => {
         <Spinner />
     ) : (
         <React.Fragment>
+            <PageTitle title={titleDetails.title} />
             {getContent()}
         </React.Fragment>
     );
