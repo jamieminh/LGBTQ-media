@@ -1,5 +1,6 @@
 .SingleTitle {
-    margin: 0 8%
+    margin: 0 8%;
+    text-align: left;
 }
 
 .GeneralInfo {
@@ -246,6 +247,13 @@ i.fas.fa-exclamation-triangle {
 
     .SingleTitleReviewer p {
         margin: 0;
+    }
+}
+
+@media(min-width: 900px) {
+
+    .TitleMainContent .RelatedTitles {
+        margin-top: 30px;
     }
 }
 

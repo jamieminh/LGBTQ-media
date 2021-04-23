@@ -4,6 +4,7 @@ import './AdminPages.css'
 import UpsertForm from './UpsertForm/UpsertForm'
 import { useHistory } from 'react-router-dom';
 import CustomModal from '../../common/components/UI/Modal/Modal'
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 
 
 const UpsertTitle = (props) => {
@@ -93,7 +94,7 @@ const UpsertTitle = (props) => {
                     setSuccessInfo({count: 0})
                 }
             })
-            .catch(err => {
+            .catch(_ => {
                 setErrorInfo({
                     count: errorInfo.count + 1,
                     message: 'There has been some error, Login and try again.'
@@ -130,6 +131,7 @@ const UpsertTitle = (props) => {
 
     return (
         <div className="AdminPageMain">
+            <PageTitle title={type + " media"} cap="true"/>
             <h1 style={{textTransform: 'capitalize'}}>{type} Media</h1>
             <div className="AdminForm">
                 <UpsertForm titleDetails={titleDetails} submitHandler={submitHandler} type={type}/>

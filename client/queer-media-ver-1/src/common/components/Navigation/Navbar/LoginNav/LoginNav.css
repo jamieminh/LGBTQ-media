@@ -5,6 +5,7 @@
     border-radius: 3px;
     color: black;
     margin: 10px auto;
+    transition: 0.2s all ease;
 }
 
 .NavItemLink.LoginNavItem {

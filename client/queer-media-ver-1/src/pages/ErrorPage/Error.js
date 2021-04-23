@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-// import errorImg from '../../assets/images/radar.png';
 import errorImg from '../../assets/images/error.png';
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 import './Error.css';
 
 const Error = () => {
     return (
         <div className="container Error">
+            <PageTitle title="Error" />
             <div className="row ">
                 <div className="col-12 col-md-6 Error-Img">
-                    <img src={errorImg} alt="a radar"/>
+                    <img src={errorImg} alt="a radar" />
                 </div>
 
                 <div className="col-12 col-md-6 Error-Des">
@@ -23,5 +24,5 @@ const Error = () => {
         </div>
     );
 }
- 
+
 export default Error;

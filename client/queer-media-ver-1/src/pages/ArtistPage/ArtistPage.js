@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ListPaginate from '../../common/components/ListPaginate/ListPaginate'
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 import Spinner from '../../common/components/UI/Spinner/Spinner' 
 import './ArtistPage.css'
 
@@ -24,6 +25,7 @@ const ArtistPage = (props) => {
 
     return ( !(name && titles) ) ? (<Spinner />) : (
         <div className="ArtistPage">
+            <PageTitle title={name} />
             <h2>Movies staring <strong>{name}</strong></h2>
             <ListPaginate titles={titles} />
         </div>

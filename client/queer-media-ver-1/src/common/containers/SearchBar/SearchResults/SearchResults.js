@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Spinner from '../../../components/UI/Spinner/Spinner'
-import ListItem from '../../../components/ListItem/ListItem'
 import axios from '../../../../axios';
 import './SearchResults.css'
+import ListPaginate from '../../../components/ListPaginate/ListPaginate';
+import PageTitle from '../../../components/PageTitle/PageTitle';
 
 const SearchResults = (props) => {
 
@@ -32,9 +33,7 @@ const SearchResults = (props) => {
     let searchStatus = <p>Sorry, we couldn't find anything looking on "<strong>{query}</strong>"</p>
     if (results && results.length !== 0) {
         searchStatus = <p>Search Results for "<strong>{query}</strong>"</p>
-        displayTitles = results.map(item => {
-            return <ListItem key={item.media_id} mediaInfo={item} />
-        })
+        displayTitles =  <ListPaginate titles={results} />
     }
 
 
@@ -42,16 +41,17 @@ const SearchResults = (props) => {
         <Spinner />
     ) : (
             <div>
+                <PageTitle title={"Search Results for " + query} />
                 <div className="SearchedFor">
                     {searchStatus}
                 </div>
                 <div className="SearchResults">
                     {/* <h1>Params = {this.state.search_results}</h1> */}
                     {displayTitles}
+                    {/* <div className="EmptySpaceFill"></div>
                     <div className="EmptySpaceFill"></div>
                     <div className="EmptySpaceFill"></div>
-                    <div className="EmptySpaceFill"></div>
-                    <div className="EmptySpaceFill"></div>
+                    <div className="EmptySpaceFill"></div> */}
                 </div>
             </div>
         );

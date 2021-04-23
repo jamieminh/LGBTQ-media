@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CustomModal from '../../common/components/UI/Modal/Modal';
 import * as actionCreators from '../../store/actions/index'
 import './UserProfile.css'
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 
 const UserProfile = () => {
 
@@ -77,6 +78,7 @@ const UserProfile = () => {
 
     return (
         <div className="UserProfile">
+            <PageTitle title={displayName} />
             <h1>User Profile</h1>
 
             <div className="UserDetails">

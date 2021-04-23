@@ -137,7 +137,7 @@ router.get('/logout/:token', (req, res) => {
 // login using cookie or session
 router.get('/login/:cookie', (req, res) => {
     const token = req.params.cookie
-    if (token) {
+    if (token !== "undefined") {
         const selector = token.substr(0, 24)
         const validator = token.substr(24, token.length - 1)
 

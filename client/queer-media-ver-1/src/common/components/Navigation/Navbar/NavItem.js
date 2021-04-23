@@ -1,5 +1,0 @@
-const NavItems = [
-    {
-        title: 'Home'
-    }
-]

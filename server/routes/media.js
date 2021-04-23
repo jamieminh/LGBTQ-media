@@ -66,7 +66,7 @@ router.get("/search/:words", async (req, res) => {
     const special_chars = ["\"", "\'", "\\"]
 
     // if orCount > 0, prefix OR querries with an OR
-    const orCount = 0
+    let orCount = 0
     for (let i = 0; i < words.length; i++) {
         const escaped_word = words[i].replace(/'/g, '\\\'').replace(/"/g, '\\"')
         console.log(escaped_word);
@@ -80,6 +80,7 @@ router.get("/search/:words", async (req, res) => {
             // where_or += "`Media`.`title` LIKE '%" + words[i] + "%'"
             where_or += (orCount == 0) ? "" : " OR "
             where_or += "`Media`.`title` REGEXP '\\\\b" + escaped_word + "\\\\b'"
+            orCount++
         }
     }
 

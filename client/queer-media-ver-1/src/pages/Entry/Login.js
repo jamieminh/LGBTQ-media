@@ -5,6 +5,7 @@ import * as actionCreators from '../../store/actions/index'
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
 import Cookies from 'universal-cookie'
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 
 
 axios.defaults.withCredentials = true
@@ -16,7 +17,7 @@ const Login = (props) => {
     const [message, setMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     let isRemember = false
-    const cookies = new Cookies() 
+    const cookies = new Cookies()
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -67,6 +68,7 @@ const Login = (props) => {
 
     return (isLoading) ? <Spinner /> : (
         <div className="LoginForm">
+            <PageTitle title="Login" />
             <form onSubmit={login}>
                 <h2>Member Login</h2>
                 <p className="ErrorMessage">{message}</p>

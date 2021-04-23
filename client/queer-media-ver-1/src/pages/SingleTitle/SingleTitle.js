@@ -18,6 +18,7 @@ import {
 import './SingleTitle.css'
 import { useSelector } from 'react-redux';
 import UserVote from './UserVote/UserVote';
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 
 
 const SingleTitle = (props) => {
@@ -232,6 +233,7 @@ const SingleTitle = (props) => {
         <Spinner />
     ) : (
         <React.Fragment>
+            <PageTitle title={titleDetails.title} />
             {getContent()}
         </React.Fragment>
     );

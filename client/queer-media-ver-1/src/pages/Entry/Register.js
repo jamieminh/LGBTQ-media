@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from '../../axios';
 import Spinner from '../../common/components/UI/Spinner/Spinner'
 import { Link, useHistory } from 'react-router-dom'
+import PageTitle from '../../common/components/PageTitle/PageTitle';
 
 const Register = (props) => {
 
@@ -46,6 +47,7 @@ const Register = (props) => {
 
     return (isLoading) ? <Spinner /> : (
         <div className="RegisterForm">
+            <PageTitle title="Register" />
             <form onSubmit={register}>
                 <h2>Signup to be a Member</h2>
                 {message ? <p className="ErrorMessage">{message}</p> : ''}

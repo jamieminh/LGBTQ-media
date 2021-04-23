@@ -1,7 +1,14 @@
-.Random {
-    overflow: auto;
-    height: 100vh;
-    margin-top: 17px;
+
+.Random{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.Random > div {
+    width: 70%;
+    height: 230px;
 }
 
 .Random p {
@@ -13,6 +20,10 @@
     margin-bottom: 20px;
     color: white;
     opacity: 0.9;
+}
+
+p.RandomTitle {
+    margin-top: 0 !important;
 }
 
 .RandomMedia > a:hover {
@@ -35,8 +46,8 @@
 
 .RandomImage{
     display: block;
-    height: 150px;
-    width: 100px;
+    height: 200px;
+    width: 140px;
     object-fit: cover;
     border-radius: 3px;
     margin-right: 20px;
@@ -63,4 +74,38 @@
     height: 20px;
     border-radius: 3px;
     background-color: lightgrey;
+}
+
+
+@media(min-width: 630px) {
+    .Random{
+        justify-content: space-between;
+    }
+
+    .Random > div {
+        width: 47%;
+    }
+}
+
+
+@media(min-width: 992px) {
+    .RandomImage{
+        height: 150px;
+        width: 100px;
+    }
+
+    .Random {
+        display: block;
+        overflow: auto;
+        height: 100vh;
+        margin-top: 17px;
+    }
+
+    .RandomeSmall {
+        display: none;
+    }
+
+    .RandomLarge{
+        display: inline-block;
+    }
 }

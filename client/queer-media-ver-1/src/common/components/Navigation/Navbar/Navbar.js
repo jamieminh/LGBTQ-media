@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Logo from '../../Logo/Logo';
 import { NavLink } from 'react-router-dom'
-
-import './Navbar.css'
-import BurgerMenu from './BugerMenu/BurgerMenu';
 import LoggedinNav from './LoggedInNav/LoggedInNavItem';
 import { useSelector } from 'react-redux';
 import LoginNav from './LoginNav/LoginNav';
+
+import './Navbar.css'
+import './BurgerMenu.css'
+
 
 const Navbar = () => {
 
@@ -25,6 +26,10 @@ const Navbar = () => {
         setClicked(!clicked)
     }
 
+    const closeOnClickItem = () => {
+        setClicked(false)
+    }
+
     return (
         <nav className="Navbar" >
             <Logo />
@@ -41,10 +46,16 @@ const Navbar = () => {
                 <span id="queer-10">A</span>
             </NavLink>
 
-            <BurgerMenu onClickHandler={burgerMenuToggleHandler} />
+            {/* Burger Menu  */}
+            <div className={clicked ? "BurgerMenu open" : "BurgerMenu"} onClick={burgerMenuToggleHandler}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
             <ul className={clicked ? 'NavItems active' : 'NavItems noactive'}>
                 {pages.map(page =>
-                    <li key={'nav-' + page.name}><NavLink
+                    <li key={'nav-' + page.name} onClick={closeOnClickItem}><NavLink
                         className="NavItemLink"
                         to={page.link}
                         exact

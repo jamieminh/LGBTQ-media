@@ -4,8 +4,9 @@
 }
 
 .RandomTitles {
+    width: 90%;
+    margin: 0 auto;
     margin-top: 25px;
-    display: none;
 }
 
 
@@ -18,7 +19,6 @@
         width: 75%;
     }
     .RandomTitles {
-        display: inline;
         width: 25%;
     }
 }

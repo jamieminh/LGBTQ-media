@@ -42,13 +42,10 @@ const App = () => {
 
 
   useEffect(() => {
-    console.log("App use Effect");
-    console.log(isLoggedIn);
     if (!isLoggedIn) {
       axios.get('http://localhost:4000/entry/login/' + userCookie)
         .then(res => {
           const isLoggedIn = res.data.isLoggedIn
-          console.log('LoginFromCookie - ' + res.data.fromCookie);
           if (isLoggedIn) {
             dispatch(actionCreators.login(res.data.user))
           }

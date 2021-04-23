@@ -17,11 +17,6 @@
     flex-flow: wrap;
 }
 
-.EmptySpaceFill {
-    width: 65%;
-}
-
-
 @media (min-width: 1024px) {
     .SearchResults{
         width: 80%;
