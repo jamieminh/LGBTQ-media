@@ -3,15 +3,19 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import Spinner from "../../../common/components/UI/Spinner/Spinner";
 import notFound from "../../../assets/images/notfound.jpg";
+import Cookies from 'universal-cookie'
 
 import "./Random.css";
 
 const Random = () => {
     const [titles, setTitles] = useState(null)
+    const cookies = new Cookies()
+
 
     useEffect(() => {
-        let randomTitles = sessionStorage.getItem("randomTitles");
-        if (randomTitles === null) {
+        let randomTitles = cookies.get('randomTitles')
+        console.log(randomTitles);
+        if (!randomTitles) {
             // generate a list of 14 random ids
             let ids = Array.from({ length: 14 }, () =>
                 Math.floor(Math.random() * 5000 + 1)
@@ -29,7 +33,6 @@ const Random = () => {
                     responses.forEach((res) => {
                         const data = res.data;
                         const genres = [];
-                        // const title = {id: data.media_id, title: data.title, poster: data.poster_url, year: data.released}
                         const genresAll = data.genres;
                         if (genresAll.length >= 2)
                             genres.push(genresAll[0], genresAll[genresAll.length - 1]);
@@ -41,12 +44,18 @@ const Random = () => {
                     });
                 })
                 .then(_ => {
-                    sessionStorage.setItem('randomTitles', JSON.stringify(tts))
+                    const today = new Date().getTime()
+                    const endOfDay = new Date().setHours(23, 59, 59)
+
+                    cookies.set('randomTitles', JSON.stringify(tts), {
+                        path: '/',
+                        maxAge: endOfDay - today        // end at the end of local today
+                    })
                     setTitles(tts)
                 });
         }
         else {
-            setTitles(JSON.parse(randomTitles))
+            setTitles(randomTitles)
         }
     }, [])
 
@@ -80,7 +89,7 @@ const Random = () => {
                         </div>
                     </Link>
                 </div>
-            )) }
+            ))}
         </div>
     );
 }

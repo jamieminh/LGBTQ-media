@@ -76,40 +76,6 @@
     left: 60px;
 }
 
-.SingleTitleArtists {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.SingleTitleArtist {
-    width: 50%;
-    height: 190px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.SingleTitleArtist a {
-    color: white;
-}
-
-.SingleTitleArtist a:hover {
-    text-decoration: none;
-    opacity: 0.9;
-}
-
-.SingleTitleArtist a:hover p {
-    color: white;
-}
-
-.SingleTitleArtist img {
-    width: 100px;
-    height: 140px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
 .SingleTitlePlot p {
     text-align: justify;
 }
@@ -174,9 +140,6 @@ i.fas.fa-exclamation-triangle {
     .GeneralInfoText {
         width: 380px;
     }
-    .SingleTitleArtist {
-        width: 33%;
-    }
     .MediaTitle {
         width: 400px;
     }
@@ -185,15 +148,6 @@ i.fas.fa-exclamation-triangle {
 @media(min-width: 576px) {
     .GeneralInfoText {
         width: 350px;
-    }
-    .SingleTitleArtist {
-        width: 33%;
-    }
-}
-
-@media (min-width: 660px) {
-    .SingleTitleArtist {
-        width: 25%;
     }
 }
 
@@ -217,20 +171,6 @@ i.fas.fa-exclamation-triangle {
         margin-left: 40px;
         width: 45%;
         height: 370px;
-    }
-
-    .SingleTitleArtists {
-        margin-top: 40px;
-        justify-content: space-between;
-    }
-
-    .SingleTitleArtist {
-        width: 130px;
-    }
-
-    .SingleTitleArtist img {
-        width: 90px;
-        height: 130px;
     }
 
     .MediaTitleSm {
@@ -274,11 +214,6 @@ i.fas.fa-exclamation-triangle {
         width: 450px;
     }
 
-    .SingleTitleArtist {
-        width: 20%;
-        margin-top: 5vh;
-    }
-
     .TitleMainContent {
         margin-left: 5%;
     }
@@ -307,9 +242,6 @@ i.fas.fa-exclamation-triangle {
         margin: 0 8%;
     }
 
-    .SingleTitleArtist {
-        width: 15%;
-    }
     .RelatedTitles {
         width: 300px;
     }
@@ -330,10 +262,6 @@ i.fas.fa-exclamation-triangle {
 
     .SingleTitle {
         padding-left: 0;
-    }
-
-    .SingleTitleArtist {
-        width: 13%;
     }
 
     .SingleTitleTrailer > div {
