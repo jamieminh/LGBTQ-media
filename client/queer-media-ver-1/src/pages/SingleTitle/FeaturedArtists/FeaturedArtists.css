@@ -1,0 +1,89 @@
+
+.SingleTitleArtists {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.SingleArtist {
+    width: 50%;
+    height: 190px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.SingleArtist a {
+    color: white;
+}
+
+.SingleArtist a:hover {
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+.SingleArtist a:hover p {
+    color: white;
+}
+
+.SingleArtist img {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+
+@media(min-width: 576px) {
+
+    .SingleArtist {
+        width: 30%;
+    }
+}
+
+@media (min-width: 660px) {
+    .SingleArtist {
+        width: 25%;
+    }
+}
+
+@media(min-width: 768px) {
+    .SingleTitleArtists {
+        justify-content: start;
+    }
+
+    .SingleArtist {
+        width: 150px;
+    }
+
+    .SingleArtist img {
+        width: 100px;
+        height: 150px;
+    }
+}
+
+@media(min-width: 1024px) {
+
+    .SingleArtist {
+        width: 25%;
+        margin-top: 1vh;
+    }
+
+}
+
+
+@media(min-width: 1281px) {
+
+    .SingleArtist {
+        width: 23%;
+    }
+
+}
+
+@media(min-width: 1601px) {
+
+    .SingleArtist {
+        width: 20%;
+    }
+
+}

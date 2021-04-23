@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import customAxios from '../../axios';
-import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom'
+import axios from '../../axios';
+import { useHistory } from 'react-router-dom'
 import TrailerEmbed from './TrailerEmbed/TrailerEmbed'
 import notFound from '../../assets/images/notfound.jpg'
 import Spinner from '../../common/components/UI/Spinner/Spinner'
@@ -19,6 +18,7 @@ import './SingleTitle.css'
 import { useSelector } from 'react-redux';
 import UserVote from './UserVote/UserVote';
 import PageTitle from '../../common/components/PageTitle/PageTitle';
+import FeaturedArtists from './FeaturedArtists/FeaturedArtists';
 
 
 const SingleTitle = (props) => {
@@ -57,7 +57,7 @@ const SingleTitle = (props) => {
         let artists = null
         let title_info = null
         let exist = false
-        customAxios.get('media/full/' + media_id)
+        axios.get('media/full/' + media_id)
             .then(res => {
                 if (isSubscribed) {
                     if (res.data !== "") {
@@ -72,28 +72,31 @@ const SingleTitle = (props) => {
                             artists: res.data.artists, reviewers: res.data.reviewers, directors: res.data.directors
                         }
                         exist = true
+
+                        setTitleDetails(title_info)
+                        setExist(true)
                     }
                 }
 
             })
 
             // get artists images
-            .then(_ => {
-                if (exist) {
-                    let requests = artists.map(artist => {
-                        return axios.get('http://localhost:4000/artist/image', { params: { name: artist.name, id: artist.artist_id } })
-                    })
+            // .then(_ => {
+            //     if (exist) {
+            //         let requests = artists.map(artist => {
+            //             return axios.get('http://localhost:4000/artist/image', { params: { name: artist.name, id: artist.artist_id } })
+            //         })
 
-                    axios.all(requests)
-                        .then(responses => {
-                            let artists = responses.map(r => r.data)
-                            setTitleDetails({ ...title_info, artists: artists })
-                            setExist(exist)
-                        })
-                        .catch(err => console.log(err))
-                }
+            //         axios.all(requests)
+            //             .then(responses => {
+            //                 let artists = responses.map(r => r.data)
+            //                 setTitleDetails({ ...title_info, artists: artists })
+            //                 setExist(exist)
+            //             })
+            //             .catch(err => console.log(err))
+            //     }
 
-            })
+            // })
             .then(_ => console.log(titleDetails))
             .catch(err => {
                 if (isSubscribed)
@@ -133,7 +136,7 @@ const SingleTitle = (props) => {
             return <Error />
         else {
             let directors = titleDetails.directors.map(director => director.name)     // get directors' names
-            let review_scores = titleDetails.reviewers.map(review => {        // format the ratings
+            let review_scores = titleDetails.reviewers.map(review => {                // format the ratings
                 let review_img = (review.name === "imdb") ? imdb : (review.name === "metacritic") ? metacritic : tomato
                 let img = (review.name === "imdb") ?
                     <a href={titleDetails.imdb_url} target="_blank" rel="noreferrer">
@@ -187,18 +190,21 @@ const SingleTitle = (props) => {
                     {AdminBtns()}
 
                     <div className="TitleMainContent">
+                        <div className="FeaturedArtists">
+                            <h2>Featured artists</h2>
+                            <FeaturedArtists artists={titleDetails.artists} />
+                        </div>
 
-                        <div className="SingleTitleArtists">
+                        {/* <div className="SingleTitleArtists">
                             {titleDetails.artists.map(artist =>
                                 <div className="SingleTitleArtist" key={artist[0]}>
-                                    {/* <img src={artist.img_url} alt={artist.name + " profile picture"}></img> */}
                                     <Link to={'/artist/' + artist[0]}>
                                         <img src={artist[2]} alt={artist[1] + " profile picture"}></img>
                                         <p>{artist[1]}</p>
                                     </Link>
                                 </div>
                             )}
-                        </div>
+                        </div> */}
 
                         <div className="SingleTitlePlot">
                             <h2>Plot Summary</h2>
