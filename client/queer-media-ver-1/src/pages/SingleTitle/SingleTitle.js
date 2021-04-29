@@ -54,15 +54,12 @@ const SingleTitle = (props) => {
 
     useEffect(() => {
         let isSubscribed = true     // cleanup unmounted component
-        let artists = null
         let title_info = null
-        let exist = false
         axios.get('media/full/' + media_id)
             .then(res => {
                 if (isSubscribed) {
                     if (res.data !== "") {
                         const media = res.data.media
-                        artists = res.data.artists
 
                         title_info = {
                             media_id: media.media_id, title: media.title, runtime: media.runtime,
@@ -71,7 +68,6 @@ const SingleTitle = (props) => {
                             languages: media.languages, imdb_url: media.imdb_url, genres: res.data.genres,
                             artists: res.data.artists, reviewers: res.data.reviewers, directors: res.data.directors
                         }
-                        exist = true
 
                         setTitleDetails(title_info)
                         setExist(true)
@@ -79,25 +75,6 @@ const SingleTitle = (props) => {
                 }
 
             })
-
-            // get artists images
-            // .then(_ => {
-            //     if (exist) {
-            //         let requests = artists.map(artist => {
-            //             return axios.get('http://localhost:4000/artist/image', { params: { name: artist.name, id: artist.artist_id } })
-            //         })
-
-            //         axios.all(requests)
-            //             .then(responses => {
-            //                 let artists = responses.map(r => r.data)
-            //                 setTitleDetails({ ...title_info, artists: artists })
-            //                 setExist(exist)
-            //             })
-            //             .catch(err => console.log(err))
-            //     }
-
-            // })
-            .then(_ => console.log(titleDetails))
             .catch(err => {
                 if (isSubscribed)
                     console.error(err)
@@ -195,26 +172,15 @@ const SingleTitle = (props) => {
                             <FeaturedArtists artists={titleDetails.artists} />
                         </div>
 
-                        {/* <div className="SingleTitleArtists">
-                            {titleDetails.artists.map(artist =>
-                                <div className="SingleTitleArtist" key={artist[0]}>
-                                    <Link to={'/artist/' + artist[0]}>
-                                        <img src={artist[2]} alt={artist[1] + " profile picture"}></img>
-                                        <p>{artist[1]}</p>
-                                    </Link>
-                                </div>
-                            )}
-                        </div> */}
-
                         <div className="SingleTitlePlot">
                             <h2>Plot Summary</h2>
                             <p>{titleDetails.plot}</p>
                         </div>
 
-                        {/* <div className="SingleTitleTrailer">
+                        <div className="SingleTitleTrailer">
                             <h2>Trailer</h2>
                             <TrailerEmbed titleName={titleDetails.title} />
-                        </div> */}
+                        </div>
 
 
                         <div className="RelatedTitles">

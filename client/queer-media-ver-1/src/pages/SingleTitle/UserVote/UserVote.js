@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import axios from '../../../axios';
-// import axios from 'axios'
 import CustomModal from '../../../common/components/UI/Modal/Modal';
 import './UserVote.css'
 
@@ -12,8 +11,7 @@ const UserVote = (props) => {
 
     const media_id = props.media_id
     const user_id = useSelector(state => state.auth.user_id)
-    const [currentRating, setCurrentRating] = useState(0)
-    const [newRating, setNewRating] = useState(null)
+    const [currentRating, setCurrentRating] = useState('N/A')
     const [modal, setModal] = useState({ count: 0 })
 
     useEffect(() => {
@@ -49,9 +47,10 @@ const UserVote = (props) => {
         // if there's a user logged in
         else {
             const scoreVal = e.target.value
-            console.log(media_id, user_id, scoreVal);
+            setCurrentRating(scoreVal)
+
+            // update the database and the display
             axios.post('/user/add-rating', { params: { media_id: media_id, user_id: user_id, score: scoreVal } })
-                .then(_ => setNewRating(scoreVal))
                 .catch(_ => {
                     setModal({
                         count: modal.count + 1, type: 'error', title: 'Rating error',
@@ -68,7 +67,7 @@ const UserVote = (props) => {
 
     return (
         <div className="UserRating">
-            <p>You</p>
+            <p>Your Rating</p>
             <div className="UserRatingOptions">
                 <input type="radio" id="rating10" name="rating" value="10" onClick={updateRating} />
                 <label htmlFor="rating10" title="5 stars"></label>
@@ -103,7 +102,7 @@ const UserVote = (props) => {
                 <input type="radio" id="rating0" name="rating" value="0" onClick={updateRating} style={{ display: 'none' }} />
 
             </div>
-            <p className="CurrentUserRating">{user_id ? (currentRating || 'N/A') : (newRating || 'N/A')}</p>
+            <p className="CurrentUserRating">{currentRating}</p>
             {(modal.count) ?
                 <CustomModal key={modal.count} title={modal.title} type={modal.type}
                     body={modal.message} proceedHandler={modal.type === 'warning' ? loginProceedHandler: ''}

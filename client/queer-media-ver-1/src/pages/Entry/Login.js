@@ -65,6 +65,11 @@ const Login = (props) => {
 
     }
 
+    const rememberLabelClickHandler = () => {
+        isRemember = !isRemember
+        document.getElementById('remember-me').checked = isRemember
+    }
+
 
     return (isLoading) ? <Spinner /> : (
         <div className="LoginForm">
@@ -96,7 +101,7 @@ const Login = (props) => {
                 </div>
                 <div className="FormInput RememberMe">
                     <input type="checkbox" name="remember" id="remember-me" onChange={() => isRemember = !isRemember} />
-                    <label htmlFor="remember">Remember Me</label>
+                    <label htmlFor="remember" onClick={rememberLabelClickHandler}>Remember Me</label>
                 </div>
                 <button value="login">Login</button>
             </form>

@@ -4,8 +4,6 @@ import Helmet from 'react-helmet';
 const PageTitle = (props) => {
     let title = props.title
 
-    console.log(props.cap);
-
     // if specified that the title should be capitalized (cap = true)
     if (props.cap) {
         const words = title.toLowerCase().split(' ')

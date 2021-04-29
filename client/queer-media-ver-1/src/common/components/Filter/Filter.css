@@ -1,6 +1,8 @@
 .TitlesFilter {
-    width: 100%;
-    /* border-left: 2px solid whitesmoke; */
+    background: #0e334a;
+    border-radius: 15px;
+    padding: 2%;
+    margin-bottom: 20px;
 }
 
 .TitlesFilter>div {
@@ -165,8 +167,8 @@
 @media(min-width: 769px) {
     .TitlesFilter {
         width: 200px;
-        margin-left: 5%;
-        margin-top: 60px;
+        margin-left: 2%;
+        margin-top: 75px;
     }
 
     .FilterToggler + #FilterByGenre.show {

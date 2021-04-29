@@ -21,16 +21,35 @@ const UserProfile = () => {
     const btnOnClickHandler = () => {
         // if current button text is cancel
         if (!isEditBtn) {
-            setModalWarning({
-                count: modalWarning.count + 1,
-                proceedHandler: cancelProceedHandler,
-                message: 'If you cancel now, all changes will be lost.'
-            })
+            const userChanged = document.getElementById('display-name-input').value
+
+            if (userChanged !== nameHead) {
+                setModalWarning({
+                    count: modalWarning.count + 1,
+                    proceedHandler: cancelProceedHandler,
+                    title: 'Are you sure?',
+                    message: 'If you cancel now, all changes will be lost.'
+                })
+            }
+            else {
+                noChangesMade()
+            }
+
         }
         else {
             setIsEditBtn(!isEditBtn)
             document.getElementById('UserSaveChanges').classList.toggle('show')
         }
+    }
+
+    const noChangesMade = () => {
+        setModalWarning({
+            count: modalWarning.count + 1,
+            title: "No Change",
+            message: 'You have made no change.'
+        })
+        setIsEditBtn(true)
+        document.getElementById('UserSaveChanges').classList.toggle('show')
     }
 
     const cancelProceedHandler = () => {
@@ -41,11 +60,21 @@ const UserProfile = () => {
 
 
     const saveChangesHandler = () => {
-        setModalWarning({
-            count: modalWarning.count + 1,
-            proceedHandler: saveChangesProceedHandler,
-            message: 'Your display name will be changed, this action is irreversible'
-        })
+        const userChanged = document.getElementById('display-name-input').value
+
+        if (userChanged !== nameHead) {
+            setModalWarning({
+                count: modalWarning.count + 1,
+                title: 'Are you sure?',
+                proceedHandler: saveChangesProceedHandler,
+                message: 'Your display name will be changed, this action is irreversible'
+            })
+        }
+        else {
+            noChangesMade()
+        }
+
+
     }
 
     const saveChangesProceedHandler = () => {
@@ -55,6 +84,10 @@ const UserProfile = () => {
             title: 'Error',
             message: 'There has been some error, try again later or use another name'
         }
+
+        setIsEditBtn(true)
+        document.getElementById('UserSaveChanges').classList.toggle('show')
+
 
         axios.post('/user/change', { email: email, newName: userChanged })
             .then(res => {
@@ -66,7 +99,7 @@ const UserProfile = () => {
                     })
                     dispatch(actionCreators.changeDisplayName(res.data.changedName))
                 }
-                else 
+                else
                     setModalResult(modalFailed)
             })
             .catch(err => {
@@ -107,7 +140,7 @@ const UserProfile = () => {
 
             {modalWarning.count ?
                 <CustomModal
-                    type='warning' title='Are you sure?'
+                    type='warning' title={modalWarning.title}
                     key={'continue' + modalWarning.count}
                     body={modalWarning.message}
                     proceedHandler={modalWarning.proceedHandler}

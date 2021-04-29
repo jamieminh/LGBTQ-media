@@ -1,14 +1,21 @@
 .UserRating {
     position: relative;
+    border: 3px solid #FFC107;
+    border-radius: 2px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 290px;
 }
-/* Ratings widget */
+/* Ratings widget
 .UserRatingOptions {
     display: inline-block;
     border: 0;
     position: absolute;
     top: 2px;
     left: 60px;
-}
+} */
 /* Hide radio */
 .UserRatingOptions > input {
     display: none;
@@ -48,11 +55,6 @@
 .UserRating input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
 .UserRating label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #c99807;  } 
 
-.CurrentUserRating {
-    position: absolute;
-    top: -15px;
-    left: 200px;
-}
 
 @media(min-width: 768px) {
     .CurrentUserRating {

@@ -80,11 +80,11 @@ const Filter = (props) => {
 
             {/* Sort Titles by Release Date (asc/desc) or IMDB score (asc/desc) */}
             <div className="FilterToggler" onClick={() => toggleHandler('sort')}>
-                <h3 id="SortRotateSibling">Sort by</h3>
-                <i className="fas fa-caret-right icon-rotates" id="SortTogglerIcon"></i>
+                <h3 id="SortRotateSibling" className="on">Sort by</h3>
+                <i className="fas fa-caret-right icon-rotates rotate" id="SortTogglerIcon"></i>
             </div>
 
-            <div id="SortBy">
+            <div id="SortBy" className="show">
                 <div>
                     <input type="radio" name="sort" id="date_desc" onClick={updateSelectedRadio}
                         checked={(sortBy.type === 'date' && sortBy.order === 'desc')} readOnly />

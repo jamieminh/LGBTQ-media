@@ -13,11 +13,10 @@ const Comments = (props) => {
 
     const user_id = useSelector(state => state.auth.user_id)    // to display the Comment button and post comments
     const displayName = useSelector(state => state.auth.display_name)   // to display a user icon next to the cmt box
-
+    const [isTooLong, setIsTooLong] = useState(false) 
     const [comments, setComments] = useState(useSelector(state => state.user.comments))
     const [userComment, setUserComment] = useState('')        // userComment, updated onChange
     const [commentAdded, setCommentAdded] = useState(null)      // state to re-render Comments everytime user leave a comment
-    const [charLeft, setCharLeft] = useState(3000)              // to keep track of characters left in the comment box
     const [modal, setModal] = useState({ count: 0, message: null }) // state to display modal
 
     useEffect(() => {
@@ -32,7 +31,6 @@ const Comments = (props) => {
     // handle posting comments
     const addCommentHandler = (event) => {
         event.preventDefault()
-        console.log('add comment form submitted');
         setModal({
             count: modal.count + 1, type: 'warning', title: 'Are you sure?', proceed: true,
             message: 'Are you sure you want to add this comment, this action is irreversible.',
@@ -42,7 +40,6 @@ const Comments = (props) => {
     // when user is sure they want to leave the comment
     const addCommentProceedHandler = () => {
         setUserComment('')
-        setCharLeft(3000)
         axios.post('/user/add-comment', {
             comment: userComment,
             media_id: media_id,
@@ -67,10 +64,15 @@ const Comments = (props) => {
             })
     }
 
-    // whenever use type in the comment area, calculate characters left and update userComment
+    // whenever use type in the comment area, check if exceed characters limit
     const onChangeHandler = (e) => {
-        setUserComment(e.target.value)
-        setCharLeft(charLeft - 1)
+        if (e.target.value.length >= 3000) {
+            setIsTooLong(true)
+        }
+        else {
+            setIsTooLong(false)
+            setUserComment(e.target.value)
+        }
     }
 
 
@@ -87,7 +89,7 @@ const Comments = (props) => {
                         placeholder="Leave a Comment, maximum 3000 characters"
                         id="comment-ta" required></textarea>
                     <span className="focus-border"></span>
-                    <small><em id="char-left">{charLeft} characters left</em></small>
+                    {isTooLong ? <small><em id="char-left">You have reached 3000 characters limit</em></small> : ''}
                     {!user_id ?
                         <small style={{ float: 'right' }}><em>* You need to login to leave a comment</em></small> :
                         <button className='notShown' id='comment-submit'>Comment</button>}

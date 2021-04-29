@@ -111,8 +111,12 @@ main#EntryMain {
 
 .FormInput.RememberMe label {
     font-weight: 500;
+    cursor: pointer;
 }
 
+.FormInput.RememberMe label:hover {
+    color: black;
+}
 
 
 .EntryForm .InputSymbol {

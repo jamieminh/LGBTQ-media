@@ -172,3 +172,33 @@
         left: -100%;
     }
 }
+
+
+@media(min-width: 1440px) {
+    .Navbar {
+        padding-left: 14%;
+        padding-right: 10%;
+    }
+
+    .NavbarText {
+        left: 17%;
+    }
+
+    @keyframes textGoMiddle {
+        from {
+            left: 17%;
+        }
+        to {
+            left: 50%;
+        }
+    }
+    
+    @keyframes textGoLeft {
+        from {
+            left: 50%;
+        }
+        to {
+            left: 17%;
+        }
+    }
+}
