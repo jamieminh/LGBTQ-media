@@ -34,9 +34,9 @@ router.get('/latest/:type/:limit', (req, res) => {
         order: [['released', 'DESC'], ['createdAt', 'DESC']],
     }
 
-    if (limit !== 'all') 
+    if (limit !== 'all')
         findParams.limit = parseInt(limit)
-    
+
     Media.findAll(findParams)
         .then(medias => {
             const titles = medias.map(item => {
@@ -62,42 +62,58 @@ router.get("/search/:words", async (req, res) => {
     let where_and = ""
     let where_or = ""
 
-    const omit_words = ["i", "am", "is", "are", "a", "an", "the", "this", "that", "these", "those"]
+    const omit_words = ["am", "is", "are", "a", "an", "the", "this", "that", "these", "those"]
     const special_chars = ["\"", "\'", "\\"]
 
-    // if orCount > 0, prefix OR querries with an OR
-    let orCount = 0
-    for (let i = 0; i < words.length; i++) {
-        const escaped_word = words[i].replace(/'/g, '\\\'').replace(/"/g, '\\"')
-        console.log(escaped_word);
-        // use word boundaries to avoid result where word is part of another word
-        // e.g. 'me' can be part of 'merry'
-        // \\bword\\b : since \ is recognized as ecape char, \\\\b instead (4 slashes)
-        where_and += "`Media`.`title` REGEXP '\\\\b" + escaped_word + "\\\\b'"    // word boundaries
-        where_and += (i == words.length - 1) ? "" : " AND "
+    let filtered = []
 
-        if (!omit_words.includes(words[i])) {
-            // where_or += "`Media`.`title` LIKE '%" + words[i] + "%'"
-            where_or += (orCount == 0) ? "" : " OR "
+    // remove auxiliary words
+    words.forEach(w => {
+        // if word is not found in omit_words array
+        if (omit_words.indexOf(w) === -1)
+            filtered.push(w)
+    })
+
+
+    if (filtered.length === 0) {
+        res.send({ isAllAux: true })
+    }
+    else {
+        // if orCount > 0, prefix OR querries with an OR
+        for (let i = 0; i < filtered.length; i++) {
+            const escaped_word = filtered[i].replace(/'/g, '\\\'').replace(/"/g, '\\"')
+            // use word boundaries to avoid result where word is part of another word
+            // e.g. 'me' can be part of 'merry'
+            // \\bword\\b : since \ is recognized as ecape char, \\\\b instead (4 slashes)
+            where_and += "`Media`.`title` REGEXP '\\\\b" + escaped_word + "\\\\b'"    // word boundaries
+            where_and += (i == filtered.length - 1) ? "" : " AND "
+
             where_or += "`Media`.`title` REGEXP '\\\\b" + escaped_word + "\\\\b'"
-            orCount++
+            where_or += (i == filtered.length - 1) ? "" : " OR "
+
         }
+
+        let query_and = "SELECT `media_id`, `title`, `released`, `poster_url`, `year_end` FROM `Media` AS `Media` WHERE (" + where_and + ")"
+        let query_or = "SELECT `media_id`, `title`, `released`, `poster_url`, `year_end` FROM `Media` AS `Media` WHERE (" + where_or + ")"
+
+        // res.send(query_or)
+
+        const results_and = await sequelize.query(query_and, { type: QueryTypes.SELECT });  // contains all search words
+        const results_or = await sequelize.query(query_or, { type: QueryTypes.SELECT });    // contains each search words
+
+        const uniqueAND = new Map([
+            ...results_and.map(tt => [tt.media_id, tt]),
+        ])
+
+        const uniqueOR = new Map([
+            ...results_or.map(tt => [tt.media_id, tt]),
+        ])
+
+        // so the result for AND will be shown first
+        res.send(Array.from(uniqueAND.values()).concat(Array.from(uniqueOR.values())));
     }
 
-    let query_and = "SELECT `media_id`, `title`, `released`, `poster_url`, `year_end` FROM `Media` AS `Media` WHERE (" + where_and + ")"
-    let query_or = "SELECT `media_id`, `title`, `released`, `poster_url`, `year_end` FROM `Media` AS `Media` WHERE (" + where_or + ")"
 
-    // res.send(query_or)
-
-    const results_and = await sequelize.query(query_and, { type: QueryTypes.SELECT });  // contains all search words
-    const results_or = await sequelize.query(query_or, { type: QueryTypes.SELECT });    // contains each search words
-
-    const unique = new Map([
-        ...results_and.map(tt => [tt.media_id, tt]),
-        ...results_or.map(tt => [tt.media_id, tt])
-    ])
-
-    res.send(Array.from(unique.values()));
 
 })
 

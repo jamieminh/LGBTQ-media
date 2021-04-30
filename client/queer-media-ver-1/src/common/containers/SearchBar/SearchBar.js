@@ -11,7 +11,7 @@ const SearchBar = (props) => {
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
-        const escaped_url = escape(searchVal);
+        const escaped_url = escape(searchVal.toLowerCase());
         console.log(escaped_url);
 
         props.history.push('/search/' + escaped_url)

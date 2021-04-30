@@ -9,6 +9,7 @@ const SearchResults = (props) => {
 
     const [query, setQuery] = useState('')
     const [results, setResults] = useState(null)
+    const [isAllAux, setIsAllAux] = useState(false)
     
     useEffect(() => {
         let passed_query = props.match.params.query
@@ -20,9 +21,16 @@ const SearchResults = (props) => {
 
         axios.get(search_url)
             .then(res => {
-                titles = res.data;
+                const data = res.data;
+                console.log(data);
                 setQuery(passed_query)
-                setResults(titles)
+                if (data.isAllAux) {
+                    setIsAllAux(true)
+                    setResults([])
+                }
+                else {
+                    setResults(titles)
+                }
             })
             .catch(err => console.log(err))
     }, [props.match.params.query])
@@ -31,6 +39,9 @@ const SearchResults = (props) => {
 
     let displayTitles = ""
     let searchStatus = <p>Sorry, we couldn't find anything looking on "<strong>{query}</strong>"</p>
+    if (isAllAux) {
+        searchStatus = <p>Please be more specific with your search</p>
+    }
     if (results && results.length !== 0) {
         searchStatus = <p>Search Results for "<strong>{query}</strong>"</p>
         displayTitles =  <ListPaginate titles={results} />
@@ -46,12 +57,7 @@ const SearchResults = (props) => {
                     {searchStatus}
                 </div>
                 <div className="SearchResults">
-                    {/* <h1>Params = {this.state.search_results}</h1> */}
                     {displayTitles}
-                    {/* <div className="EmptySpaceFill"></div>
-                    <div className="EmptySpaceFill"></div>
-                    <div className="EmptySpaceFill"></div>
-                    <div className="EmptySpaceFill"></div> */}
                 </div>
             </div>
         );
