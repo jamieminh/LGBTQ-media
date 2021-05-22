@@ -1,6 +1,6 @@
 const express = require('express');
 const Media = require('../models/Media');
-const { Users } = require('../models/Users')
+const { Users, Users_Comments } = require('../models/Users')
 const { Artist, Media_Artist } = require('../models/Artist')
 const { Director, Media_Director } = require('../models/Director')
 const { Genre, Media_Genre } = require('../models/Genre')
@@ -33,6 +33,20 @@ const adminAuthCheck = (req, res, next) => {
         })
     }
 }
+
+// admin commenting on a title will have brackets showing they're an admin
+router.post('/add-comment', adminAuthCheck, (req, res) => {
+    const comment = encodeURIComponent("[ADMIN] " + req.body.comment)
+    const media_id = req.body.media_id
+    const user_id = req.body.user_id
+
+    Users_Comments.create({ media_id: media_id, user_id: user_id, comment: comment })
+        .then(_ => {
+            res.send({ isSuccess: true })
+        })
+        .catch(err => console.error(err))
+})
+
 
 
 router.get('/:email', adminAuthCheck, (req, res) => {

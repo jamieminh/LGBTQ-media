@@ -18,6 +18,7 @@ const UserProfile = () => {
     const [modalWarning, setModalWarning] = useState({ count: 0 })
     const dispatch = useDispatch()
 
+
     const btnOnClickHandler = () => {
         // if current button text is cancel
         if (!isEditBtn) {
@@ -62,6 +63,7 @@ const UserProfile = () => {
     const saveChangesHandler = () => {
         const userChanged = document.getElementById('display-name-input').value
 
+        // if there's a change in display name
         if (userChanged !== nameHead) {
             setModalWarning({
                 count: modalWarning.count + 1,
@@ -97,6 +99,7 @@ const UserProfile = () => {
                         title: 'Successul',
                         message: 'Your display name has been changed successfully',
                     })
+                    console.log(res.data.changedName);
                     dispatch(actionCreators.changeDisplayName(res.data.changedName))
                 }
                 else
@@ -128,7 +131,7 @@ const UserProfile = () => {
                         disabled={isEditBtn} pattern="\w{1,20}"
                         title="Can not exceed 20 characters containing letters, numbers and underscore"
                         required />
-                    <input defaultValue={nameTail} disabled />
+                    <input value={nameTail} disabled />
                 </div>
             </div>
 

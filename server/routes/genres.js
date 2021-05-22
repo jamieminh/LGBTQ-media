@@ -19,10 +19,13 @@ router.get('/', (req, res) => {
 
 // get titles through genres
 router.get('/:genre', (req, res) => {
-    let genre = req.params.genre;
+    let genre = [req.params.genre];
+    if (genre[0] === "others") {
+        genre = ["n/a", "film-noir"]
+    }
     Media.findAll({
         include: [
-            { model: Genre, where: { name: genre } },
+            { model: Genre, where: { name: {[Op.in]: genre} } },
             { model: Reviewer, where: { name: 'imdb' } }
         ],
         order: [
@@ -47,7 +50,7 @@ router.get('/:genre', (req, res) => {
 
 // get title with multiple genres (also like features)
 router.get('/multiple/:genres', (req, res) => {
-    const genres = req.params.genres.split("+")
+    let genres = req.params.genres.split("+")
     let len = genres.length
     let limit = len * 100       // get 100 titles for each genre
     let offset = Math.round(Math.random() * 500)
@@ -60,6 +63,10 @@ router.get('/multiple/:genres', (req, res) => {
     if (len == 1)
         limit = suggestionNums
 
+    if (genres[0] === 'others') {
+        genres = ['na', "film-noir"]
+        offset = Math.round(Math.random() * 60)
+    }
     query_in = genres.map(genre => ({ genre_id: genre_ids[genre.replace('-', '_')] }))
 
     Media_Genre.findAll({

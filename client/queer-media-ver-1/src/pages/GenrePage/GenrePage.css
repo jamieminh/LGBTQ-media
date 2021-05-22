@@ -12,7 +12,7 @@
 .GenrePageContent > .TitlesFilter { order: 1 } 
 
 .GenrePageContent > .TitlesFilter {
-    margin: 0 10%;
+    margin: 0 auto 30px;
     width: 90%;
 }
 

@@ -50,11 +50,11 @@
 }
 
 
-.EmptySpaceFill {
+/* .EmptySpaceFill {
     width: 25%;
     margin: 0 auto;
     height: 0;
-}
+} */
 
 @media (min-width: 481px) {
     .ListItem {
@@ -63,6 +63,8 @@
     
     .EmptySpaceFill {
         width: 45%;
+        margin: 0 auto;
+        height: 0;
     }
 }
 

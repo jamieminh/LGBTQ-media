@@ -66,9 +66,8 @@ router.post('/add-comment', userAuthCheck, (req, res) => {
     const user_id = req.body.user_id
 
     Users_Comments.create({ media_id: media_id, user_id: user_id, comment: comment })
-        .then(response => {
+        .then(_ => {
             res.send({ isSuccess: true })
-            console.log(response)
         })
         .catch(err => console.error(err))
 })

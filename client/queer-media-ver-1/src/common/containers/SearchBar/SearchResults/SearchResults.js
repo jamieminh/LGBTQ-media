@@ -29,13 +29,14 @@ const SearchResults = (props) => {
                     setResults([])
                 }
                 else {
-                    setResults(titles)
+                    setResults(data)
                 }
             })
             .catch(err => console.log(err))
     }, [props.match.params.query])
 
 
+    console.log(results);
 
     let displayTitles = ""
     let searchStatus = <p>Sorry, we couldn't find anything looking on "<strong>{query}</strong>"</p>

@@ -18,7 +18,6 @@ const ListPaginate = (props) => {
         setCurrentPage(selectedPage)
         const selectPage = document.getElementById("JumpPageSelect")
         selectPage.options[selectedPage].selected = true   
-
     }
 
 
@@ -33,7 +32,7 @@ const ListPaginate = (props) => {
 
     const goToPage = () => {
         const selectPage = document.getElementById("JumpPageSelect")
-        handlePageClick({selected: selectPage.value})
+        setCurrentPage(parseInt(selectPage.value))
     }
 
 
@@ -70,6 +69,7 @@ const ListPaginate = (props) => {
                 containerClassName={'pagination'}
                 subContainerClassName={'pages pagination'}
                 activeClassName={'active'}
+                forcePage={currentPage}
             />
         </div>
     );

@@ -10,6 +10,7 @@ import './Filter.css'
 
 const Filter = (props) => {
     const sortBy = useSelector(state => state.media.sortBy)
+    var currentRating = "all"
     const dispatch = useDispatch()
 
     // function to handle genres filter by dispatching actions to the store
@@ -34,8 +35,11 @@ const Filter = (props) => {
         }
         // filter by rating
         else {
-            const score = id.split("_")[2]
-            dispatch(actionCreators.setRatingFilter(score))
+            const score = id.split("_")[2]      // get the number of star (0 to 4)
+            if (score !== currentRating) {
+                dispatch(actionCreators.setRatingFilter(score))
+                currentRating = score
+            }
         }
     }
 
@@ -113,7 +117,7 @@ const Filter = (props) => {
 
             <div id="FilterByRating">
                 <div className="RatingStars">
-                    <input type="radio" value="all" name="rating" id="filter_rating_all" onClick={updateSelectedRadio} />
+                    <input type="radio" value="all" name="rating" defaultChecked="true" id="filter_rating_all" onClick={updateSelectedRadio} />
                     <label for="filter_rating_all">All </label>
                 </div>
                 <div className="RatingStars">

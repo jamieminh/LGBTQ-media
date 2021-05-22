@@ -11,6 +11,7 @@ const Comments = (props) => {
     const media_id = props.media_id
     const dispatch = useDispatch()
 
+    const role = useSelector(state => state.auth.role)
     const user_id = useSelector(state => state.auth.user_id)    // to display the Comment button and post comments
     const displayName = useSelector(state => state.auth.display_name)   // to display a user icon next to the cmt box
     const [isTooLong, setIsTooLong] = useState(false) 
@@ -40,7 +41,10 @@ const Comments = (props) => {
     // when user is sure they want to leave the comment
     const addCommentProceedHandler = () => {
         setUserComment('')
-        axios.post('/user/add-comment', {
+
+        const url = role === 'admin' ? '/admin' : '/user'
+
+        axios.post(url + '/add-comment', {
             comment: userComment,
             media_id: media_id,
             user_id: user_id

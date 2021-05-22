@@ -11,6 +11,7 @@ const UserVote = (props) => {
 
     const media_id = props.media_id
     const user_id = useSelector(state => state.auth.user_id)
+    const user_role = useSelector(state => state.auth.role)
     const [currentRating, setCurrentRating] = useState('N/A')
     const [modal, setModal] = useState({ count: 0 })
 
@@ -40,11 +41,19 @@ const UserVote = (props) => {
         if (!user_id) {
             document.getElementById(e.target.id).checked = false    // uncheck stars
             setModal({
-                count: modal.count + 1, type: 'warning', title: 'Login required',
+                count: modal.count + 1, type: 'warning', title: 'Login Required',
                 message: 'You have to login to rate this media. Do you want to login?',
             })
         }
-        // if there's a user logged in
+        // if an admin is logged in
+        else if (user_id && user_role === "admin") {
+            document.getElementById(e.target.id).checked = false    // uncheck stars
+            setModal({
+                count: modal.count + 1, type: 'error', title: 'Admin Restricted',
+                message: 'An admin cannot rate on a title.',
+            })
+        }
+        // if a user is logged in
         else {
             const scoreVal = e.target.value
             setCurrentRating(scoreVal)

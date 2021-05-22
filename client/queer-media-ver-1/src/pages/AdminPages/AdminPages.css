@@ -10,15 +10,12 @@
 
 .AdminInput {
     margin-bottom: 10px;
-    min-height: 55px;
+    min-height: 70px;
 }
 
-.AdminInput select,
-.AdminInput input,
-.AdminInput textarea {
+.AdminInput select, .AdminInput input, .AdminInput textarea {
     font-family: 'Maven Pro';
     font-size: 15px;
-    margin-bottom: 20px;
     box-sizing: border-box;
 }
 
@@ -72,7 +69,7 @@
 }
 
 .AdminBtn.ClearAllBtn button {
-    background-color: #F24C4D;    
+    background-color: #F24C4D;
 }
 
 .AdminBtn.ConfirmBtn button {
@@ -102,8 +99,7 @@
     padding: 0;
 }
 
-.AdminInput option,
-.AdminInput select {
+.AdminInput option, .AdminInput select {
     text-transform: capitalize;
 }
 
@@ -116,9 +112,7 @@
     text-transform: capitalize;
 }
 
-
-.AdminInput.AddableInputs input,
-.AdminInput.AddableInputs select {
+.AdminInput.AddableInputs input, .AdminInput.AddableInputs select {
     padding: 0 10px;
     width: 200px;
 }
@@ -159,14 +153,14 @@ button:focus {
     color: lightgrey;
 }
 
-.AdminInput > .ReviewersRatings {
+.AdminInput>.ReviewersRatings {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.AdminInput > .ReviewersRatings > input{
+.AdminInput>.ReviewersRatings>input {
     width: 45%;
 }
 
@@ -174,28 +168,29 @@ button:focus {
     .AdminForm {
         width: 600px;
     }
-
     .AdminInput {
+        min-height: 60px;
         display: flex;
+        align-items: center;
     }
-
     .AdminInput * {
         display: inline-block;
     }
     .AdminInput label {
         width: 30%;
+        margin-bottom: 0;
     }
     .AdminInput *:not(label, button) {
         width: 70%;
     }
-
     .AdminInput.AddableInputs input, .AdminInput.AddableInputs select {
         width: 250px;
     }
     button.AddableBtn {
         right: 80px;
-        top: 25px;
+        top: 16px;
     }
+
 }
 
 @media (min-width: 1024px) {
@@ -218,15 +213,12 @@ button:focus {
     .AdminInput select {
         width: 70%;
     }
-
     .AdminInput label {
         width: 38%;
     }
-
     .AdminInput *:not(label, button) {
         width: 62%;
     }
-
     .FormButtons {
         position: absolute;
         width: 500px;
@@ -234,12 +226,10 @@ button:focus {
         left: 50%;
         transform: translateX(-50%);
     }
-
     button.AddableBtn {
         right: 50px;
     }
-
-    .AdminInput.AddableInputs ul li > * {
+    .AdminInput.AddableInputs ul li>* {
         width: 160px;
     }
 }
@@ -248,7 +238,6 @@ button:focus {
     .AdminForm {
         width: 1100px;
     }
-
     .AdminInput {
         width: 45%;
     }

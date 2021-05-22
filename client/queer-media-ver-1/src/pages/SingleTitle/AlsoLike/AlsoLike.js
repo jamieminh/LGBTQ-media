@@ -11,7 +11,10 @@ const AlsoLike = (props) => {
 
     useEffect(() => {
         console.log('[ALSO LIKE]');
-        const genres = props.genres.join('+')
+        let genres = props.genres.join('+')
+        if (props.genres.includes("n/a") || props.genres.includes("film-noir")) {
+            genres = "others"
+        }
         axios.get('genres/multiple/' + genres)
             .then(res => {
                 const titles = res.data;
@@ -36,7 +39,7 @@ const AlsoLike = (props) => {
                                 e.target.src = notFound
                             }}
                             alt={item.title + "-poster"} />
-                        <p className="title">{item.title + "(" + year + ")"}</p>
+                        <p className="title">{item.title + " (" + year + ")"}</p>
                     </Link>
                 </div>)
         })

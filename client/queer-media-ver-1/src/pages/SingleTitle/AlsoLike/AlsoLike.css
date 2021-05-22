@@ -73,7 +73,7 @@ p.AlsoLikeScore {
     }
 }
 
-@media(min-width: 900px) {
+@media(min-width: 1024px) {
 
     .AlsoLike {
         flex-flow: column;

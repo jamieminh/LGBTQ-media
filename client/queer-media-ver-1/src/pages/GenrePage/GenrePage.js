@@ -18,17 +18,13 @@ const Genre = (props) => {
         const genre = props.genre
         let titles = []
         const search_url = 'genres/' + genre;
+        console.log(genre);
         // reset store titles because when this function fires, user likely came from another page
         dispatch(actionCreators.resetTitles())  
 
         axios.get(search_url)
             .then(res => {
                 titles = res.data;
-                // since the first titles are always animation w/ any genre -> viewer can be confused
-                // => swap first 5 for the next 5
-                const first_5 = titles.slice(0, 5)
-                const next_5 = titles.slice(5, 10)
-                titles = next_5.concat(first_5).concat(titles.slice(10))
                 setGenre(genre)
                 dispatch(actionCreators.setTitles(titles))
 

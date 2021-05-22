@@ -135,6 +135,8 @@ const SingleTitle = (props) => {
 
             return (
                 <div className="SingleTitle">
+                    {AdminBtns()}
+
                     <div className="GeneralInfo">
                         <div className="GeneralInfoImg">
                             <img
@@ -164,11 +166,10 @@ const SingleTitle = (props) => {
                         </div>
                     </div>
 
-                    {AdminBtns()}
 
                     <div className="TitleMainContent">
                         <div className="FeaturedArtists">
-                            <h2>Featured artists</h2>
+                            <h2>Cast</h2>
                             <FeaturedArtists artists={titleDetails.artists} />
                         </div>
 

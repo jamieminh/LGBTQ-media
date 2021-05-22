@@ -96,24 +96,14 @@ router.get("/search/:words", async (req, res) => {
         let query_and = "SELECT `media_id`, `title`, `released`, `poster_url`, `year_end` FROM `Media` AS `Media` WHERE (" + where_and + ")"
         let query_or = "SELECT `media_id`, `title`, `released`, `poster_url`, `year_end` FROM `Media` AS `Media` WHERE (" + where_or + ")"
 
-        // res.send(query_or)
-
         const results_and = await sequelize.query(query_and, { type: QueryTypes.SELECT });  // contains all search words
         const results_or = await sequelize.query(query_or, { type: QueryTypes.SELECT });    // contains each search words
 
-        const uniqueAND = new Map([
-            ...results_and.map(tt => [tt.media_id, tt]),
-        ])
+        const allResults = results_and.concat(results_or)
+        const allResultUnique = new Map( [...allResults.map(tt => [tt.media_id, tt])] )
 
-        const uniqueOR = new Map([
-            ...results_or.map(tt => [tt.media_id, tt]),
-        ])
-
-        // so the result for AND will be shown first
-        res.send(Array.from(uniqueAND.values()).concat(Array.from(uniqueOR.values())));
+        res.send(Array.from(allResultUnique.values()))
     }
-
-
 
 })
 

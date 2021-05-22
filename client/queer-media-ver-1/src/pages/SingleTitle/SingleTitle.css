@@ -77,7 +77,8 @@
 }
 
 .SingleTitlePlot p {
-    text-align: justify;
+    /* text-align: justify; */
+    line-height: 1.5rem;
 }
 
 .SingleTitleTrailer > div {
@@ -98,12 +99,14 @@
 }
 
 .AdminBtns {
-    margin-top: 70px;
     text-align: center;
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+    margin: 0 auto 20px;    
 }
 
 .AdminBtns button {
-    margin-right: 50px;
     outline: none;
     border: none;
     color: white;
@@ -112,6 +115,7 @@
     padding: 5px 30px;
     transition: all 0.1s ease-in-out;
     font-weight: 500;
+    font-size: 1rem;
 }
 
 i.fas.fa-exclamation-triangle {
@@ -165,12 +169,13 @@ i.fas.fa-exclamation-triangle {
         flex-flow: row;
         margin-top: 20px;
         justify-content: center;
+        align-items: flex-start;
     }
 
     .GeneralInfoText {
         margin-left: 40px;
         width: 45%;
-        height: 370px;
+        height: fit-content;
     }
 
     .MediaTitleSm {
